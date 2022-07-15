@@ -15,6 +15,10 @@ bytes = "1.1.0"
 git = "ssh://git@github.com/ABMatrix/snarkOS.git"
 branch = "testnet3"
 
+[dependencies.tokio]
+version = "1"
+features = ["sync"]
+
 [dependencies.snarkvm]
 git = "ssh://git@github.com/ABMatrix/snarkVM.git"
 branch = "testnet2"

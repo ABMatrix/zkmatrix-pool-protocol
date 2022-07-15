@@ -2893,5 +2893,6 @@ dependencies = [
  "serde_json",
  "snarkos",
  "snarkvm",
+ "tokio",
  "tokio-util",
 ]

@@ -1,11 +1,11 @@
 use std::io;
 use bytes::BytesMut;
-use json_rpc_types::{Error, Id, Request, Response, Version};
+use json_rpc_types::{Error, ErrorCode, Id, Request, Response, Version};
+use json_rpc_types::Id::Num;
 use serde_json::Value;
 use tokio_util::codec::{AnyDelimiterCodec, Decoder, Encoder};
 use super::response::ResponseMessage;
 use serde::{Serialize, Deserialize};
-
 
 pub enum StratumMessage {
     /// This first version doesn't support vhosts.
@@ -272,4 +272,71 @@ impl Decoder for StratumCodec {
         };
         Ok(Some(result))
     }
+}
+
+#[test]
+fn test_encode_decode() {
+    let mut codec = StratumCodec::default();
+    //Subscribe
+    let msg = StratumMessage::Subscribe(Num(0), "ABMatrix_Aleo_Miner".to_string(), "ABMatrix_Aleo_Miner_4".to_string(), Some("session".to_string()));
+    let mut buf1 = BytesMut::new();
+    codec.encode(msg, &mut buf1).unwrap();
+    let res = codec.decode(&mut buf1.clone()).unwrap().unwrap();
+    let mut buf2 = BytesMut::new();
+    codec.encode(res, &mut buf2).unwrap();
+    assert_eq!(buf1, buf2);
+
+
+    //Authorize
+    let msg = StratumMessage::Authorize(Num(0), "account_name".to_string(), "worker_name".to_string(), "password".to_string());
+    let mut buf1 = BytesMut::new();
+    codec.encode(msg, &mut buf1).unwrap();
+    let res = codec.decode(&mut buf1.clone()).unwrap().unwrap();
+    let mut buf2 = BytesMut::new();
+    codec.encode(res, &mut buf2).unwrap();
+    assert_eq!(buf1, buf2);
+
+    // SetTarget
+    let msg = StratumMessage::SetTarget(100);
+    let mut buf1 = BytesMut::new();
+    codec.encode(msg, &mut buf1).unwrap();
+    let res = codec.decode(&mut buf1.clone()).unwrap().unwrap();
+    let mut buf2 = BytesMut::new();
+    codec.encode(res, &mut buf2).unwrap();
+    assert_eq!(buf1, buf2);
+
+    //Notify
+    let msg = StratumMessage::Notify(
+        "job_id".to_string(),
+        "block_header_root".to_string(),
+        "hashed_leaves_1".to_string(),
+        "hashed_leaves_2".to_string(),
+        "hashed_leaves_3".to_string(),
+        "hashed_leaves_4".to_string(),
+        false,
+    );
+    let mut buf1 = BytesMut::new();
+    codec.encode(msg, &mut buf1).unwrap();
+    let res = codec.decode(&mut buf1.clone()).unwrap().unwrap();
+    let mut buf2 = BytesMut::new();
+    codec.encode(res, &mut buf2).unwrap();
+    assert_eq!(buf1, buf2);
+
+    // Submit
+    let msg = StratumMessage::Submit(Num(2), "account_name".to_string(), "worker_name".to_string(), "job_id".to_string(), "nonce".to_string(), "proof".to_string());
+    let mut buf1 = BytesMut::new();
+    codec.encode(msg, &mut buf1).unwrap();
+    let res = codec.decode(&mut buf1.clone()).unwrap().unwrap();
+    let mut buf2 = BytesMut::new();
+    codec.encode(res, &mut buf2).unwrap();
+    assert_eq!(buf1, buf2);
+
+    // Response(Id, Option<ResponseMessage>, Option<Error<()>>),
+    let msg = StratumMessage::Response(Num(3), None, Some(Error::with_custom_msg(ErrorCode::InvalidParams, "test error")));
+    let mut buf1 = BytesMut::new();
+    codec.encode(msg, &mut buf1).unwrap();
+    let res = codec.decode(&mut buf1.clone()).unwrap().unwrap();
+    let mut buf2 = BytesMut::new();
+    codec.encode(res, &mut buf2).unwrap();
+    assert_eq!(buf1, buf2);
 }
