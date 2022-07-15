@@ -197,7 +197,7 @@ impl Decoder for StratumCodec {
                     )
                 }
                 "mining.authorize" => {
-                    if params.len() != 2 {
+                    if params.len() != 3 {
                         return Err(io::Error::new(io::ErrorKind::InvalidData, "Invalid params"));
                     }
                     let account_name = params[0].as_str().unwrap_or_default();
@@ -239,7 +239,7 @@ impl Decoder for StratumCodec {
                     )
                 }
                 "mining.submit" => {
-                    if params.len() != 4 {
+                    if params.len() != 5 {
                         return Err(io::Error::new(io::ErrorKind::InvalidData, "Invalid params"));
                     }
 
