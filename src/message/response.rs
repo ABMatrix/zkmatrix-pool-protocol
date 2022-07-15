@@ -10,7 +10,7 @@ pub enum ResponseMessage {
 }
 
 impl Serialize for ResponseMessage {
-    fn serialize<S>(&self, serializer: S) -> Result<serde::ser::Ok, S::Error> where S: Serializer {
+    fn serialize<S>(&self, serializer: S) -> Result<S::Ok, S::Error> where S: Serializer {
         match self {
             ResponseMessage::Bool(ok) => serializer.serialize_bool(*ok),
             ResponseMessage::Array(v) => {
@@ -47,3 +47,4 @@ impl<'de> Deserialize<'de> for ResponseMessage {
         }
     }
 }
+

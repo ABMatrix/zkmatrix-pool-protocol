@@ -1068,6 +1068,16 @@ dependencies = [
 ]
 
 [[package]]
+name = "json-rpc-types"
+version = "1.0.3"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "543f54304c4e48524e11cfa5134178eccce769ca376eb26aecf49f08202bf77d"
+dependencies = [
+ "serde",
+ "str-buf",
+]
+
+[[package]]
 name = "jsonrpsee"
 version = "0.14.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -2281,6 +2291,15 @@ dependencies = [
 ]
 
 [[package]]
+name = "str-buf"
+version = "2.0.5"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "0873cb29201126440dcc78d0b1f5a13d917e78831778429a7920ca9c7f3dae1e"
+dependencies = [
+ "serde",
+]
+
+[[package]]
 name = "strsim"
 version = "0.10.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -2866,9 +2885,12 @@ dependencies = [
 name = "zkwork-pool-protocol"
 version = "0.1.0"
 dependencies = [
+ "bytes",
  "erased-serde",
+ "json-rpc-types",
  "serde",
  "serde_json",
  "snarkos",
  "snarkvm",
+ "tokio-util",
 ]

@@ -8,7 +8,8 @@ edition = "2021"
 serde = "1.0.138"
 serde_json = "1.0.82"
 erased-serde = "0.3.21"
-
+json-rpc-types = "1.0.3"
+bytes = "1.1.0"
 
 [dependencies.snarkos]
 git = "ssh://git@github.com/ABMatrix/snarkOS.git"
@@ -17,3 +18,7 @@ branch = "testnet3"
 [dependencies.snarkvm]
 git = "ssh://git@github.com/ABMatrix/snarkVM.git"
 branch = "testnet2"
+
+[dependencies.tokio-util]
+version = "0.7.3"
+features = ["codec"]
