@@ -1,6 +1,6 @@
-use std::marker::PhantomData;
 use snarkvm::dpc::Network;
 use snarkos::environment::{Environment, helpers::NodeType};
+use std::marker::PhantomData;
 
 #[derive(Clone, Debug, Default)]
 pub struct ABMatrixPoolMiner<N: Network>(PhantomData<N>);

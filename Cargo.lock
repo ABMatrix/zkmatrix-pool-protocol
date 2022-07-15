@@ -1469,14 +1469,6 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "1df8c4ec4b0627e53bdf214615ad287367e482558cf84b109250b37464dc03ae"
 
 [[package]]
-name = "pool-environment"
-version = "0.1.0"
-dependencies = [
- "snarkos",
- "snarkvm 0.8.0 (git+ssh://git@github.com/ABMatrix/snarkVM.git?branch=pool-0.8.0)",
-]
-
-[[package]]
 name = "ppv-lite86"
 version = "0.2.16"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -1925,7 +1917,7 @@ checksum = "2fd0db749597d91ff862fd1d55ea87f7855a744a8425a64695b6fca237d1dad1"
 [[package]]
 name = "snarkos"
 version = "2.0.2"
-source = "git+ssh://git@github.com/ABMatrix/snarkOS.git?branch=testnet3-pool#dceae6131f117c6109cf34f37d8e432e5844b325"
+source = "git+ssh://git@github.com/ABMatrix/snarkOS.git?branch=testnet3#6d9182435ee863309462db4ee42d2311cb12f83a"
 dependencies = [
  "aleo-std",
  "anyhow",
@@ -1940,7 +1932,7 @@ dependencies = [
  "snarkos-network",
  "snarkos-rpc",
  "snarkos-storage",
- "snarkvm 0.8.0 (registry+https://github.com/rust-lang/crates.io-index)",
+ "snarkvm",
  "thiserror",
  "tokio",
  "tracing",
@@ -1952,7 +1944,7 @@ dependencies = [
 [[package]]
 name = "snarkos-environment"
 version = "2.0.2"
-source = "git+ssh://git@github.com/ABMatrix/snarkOS.git?branch=testnet3-pool#dceae6131f117c6109cf34f37d8e432e5844b325"
+source = "git+ssh://git@github.com/ABMatrix/snarkOS.git?branch=testnet3#6d9182435ee863309462db4ee42d2311cb12f83a"
 dependencies = [
  "anyhow",
  "bincode",
@@ -1962,7 +1954,7 @@ dependencies = [
  "rayon",
  "serde",
  "serde_json",
- "snarkvm 0.8.0 (registry+https://github.com/rust-lang/crates.io-index)",
+ "snarkvm",
  "tokio",
  "tokio-util",
  "tracing",
@@ -1971,7 +1963,7 @@ dependencies = [
 [[package]]
 name = "snarkos-network"
 version = "2.0.2"
-source = "git+ssh://git@github.com/ABMatrix/snarkOS.git?branch=testnet3-pool#dceae6131f117c6109cf34f37d8e432e5844b325"
+source = "git+ssh://git@github.com/ABMatrix/snarkOS.git?branch=testnet3#6d9182435ee863309462db4ee42d2311cb12f83a"
 dependencies = [
  "anyhow",
  "bincode",
@@ -1983,7 +1975,7 @@ dependencies = [
  "serde",
  "snarkos-environment",
  "snarkos-storage",
- "snarkvm 0.8.0 (registry+https://github.com/rust-lang/crates.io-index)",
+ "snarkvm",
  "time",
  "tokio",
  "tokio-stream",
@@ -1994,7 +1986,7 @@ dependencies = [
 [[package]]
 name = "snarkos-rpc"
 version = "2.0.2"
-source = "git+ssh://git@github.com/ABMatrix/snarkOS.git?branch=testnet3-pool#dceae6131f117c6109cf34f37d8e432e5844b325"
+source = "git+ssh://git@github.com/ABMatrix/snarkOS.git?branch=testnet3#6d9182435ee863309462db4ee42d2311cb12f83a"
 dependencies = [
  "anyhow",
  "async-trait",
@@ -2005,7 +1997,7 @@ dependencies = [
  "serde_json",
  "snarkos-environment",
  "snarkos-network",
- "snarkvm 0.8.0 (registry+https://github.com/rust-lang/crates.io-index)",
+ "snarkvm",
  "thiserror",
  "time",
  "tokio",
@@ -2015,7 +2007,7 @@ dependencies = [
 [[package]]
 name = "snarkos-storage"
 version = "2.0.2"
-source = "git+ssh://git@github.com/ABMatrix/snarkOS.git?branch=testnet3-pool#dceae6131f117c6109cf34f37d8e432e5844b325"
+source = "git+ssh://git@github.com/ABMatrix/snarkOS.git?branch=testnet3#6d9182435ee863309462db4ee42d2311cb12f83a"
 dependencies = [
  "anyhow",
  "bincode",
@@ -2027,7 +2019,7 @@ dependencies = [
  "rocksdb",
  "serde",
  "snarkos-environment",
- "snarkvm 0.8.0 (registry+https://github.com/rust-lang/crates.io-index)",
+ "snarkvm",
  "time",
  "tokio",
  "tracing",
@@ -2036,27 +2028,16 @@ dependencies = [
 [[package]]
 name = "snarkvm"
 version = "0.8.0"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "948ce49836271197420b4c776e22e54fd277fd59a05b52ac424d04f00d391d53"
+source = "git+ssh://git@github.com/ABMatrix/snarkVM.git?branch=testnet2#481c17a4ec2cbb773179af932a6d6fe9ccb222a2"
 dependencies = [
- "snarkvm-dpc 0.8.0 (registry+https://github.com/rust-lang/crates.io-index)",
- "snarkvm-utilities 0.8.0 (registry+https://github.com/rust-lang/crates.io-index)",
-]
-
-[[package]]
-name = "snarkvm"
-version = "0.8.0"
-source = "git+ssh://git@github.com/ABMatrix/snarkVM.git?branch=pool-0.8.0#b3b3dc965a6103bc9667c44431b1550ced598469"
-dependencies = [
- "snarkvm-dpc 0.8.0 (git+ssh://git@github.com/ABMatrix/snarkVM.git?branch=pool-0.8.0)",
- "snarkvm-utilities 0.8.0 (git+ssh://git@github.com/ABMatrix/snarkVM.git?branch=pool-0.8.0)",
+ "snarkvm-dpc",
+ "snarkvm-utilities",
 ]
 
 [[package]]
 name = "snarkvm-algorithms"
 version = "0.8.0"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "294c96a9031aac94ff4143abb1cab1f7e85fcd2a69892b0ad563f11c3ee7432c"
+source = "git+ssh://git@github.com/ABMatrix/snarkVM.git?branch=testnet2#481c17a4ec2cbb773179af932a6d6fe9ccb222a2"
 dependencies = [
  "aleo-std",
  "anyhow",
@@ -2076,91 +2057,32 @@ dependencies = [
  "serde",
  "sha2",
  "smallvec",
- "snarkvm-curves 0.8.0 (registry+https://github.com/rust-lang/crates.io-index)",
- "snarkvm-fields 0.8.0 (registry+https://github.com/rust-lang/crates.io-index)",
- "snarkvm-profiler 0.8.0 (registry+https://github.com/rust-lang/crates.io-index)",
- "snarkvm-r1cs 0.8.0 (registry+https://github.com/rust-lang/crates.io-index)",
- "snarkvm-utilities 0.8.0 (registry+https://github.com/rust-lang/crates.io-index)",
- "thiserror",
-]
-
-[[package]]
-name = "snarkvm-algorithms"
-version = "0.8.0"
-source = "git+ssh://git@github.com/ABMatrix/snarkVM.git?branch=pool-0.8.0#b3b3dc965a6103bc9667c44431b1550ced598469"
-dependencies = [
- "aleo-std",
- "anyhow",
- "blake2",
- "blake2s_simd",
- "crossbeam-channel",
- "derivative",
- "digest 0.9.0",
- "hex",
- "itertools",
- "lazy_static",
- "num_cpus",
- "once_cell",
- "rand",
- "rand_chacha",
- "rayon",
- "serde",
- "sha2",
- "smallvec",
- "snarkvm-curves 0.8.0 (git+ssh://git@github.com/ABMatrix/snarkVM.git?branch=pool-0.8.0)",
- "snarkvm-fields 0.8.0 (git+ssh://git@github.com/ABMatrix/snarkVM.git?branch=pool-0.8.0)",
- "snarkvm-profiler 0.8.0 (git+ssh://git@github.com/ABMatrix/snarkVM.git?branch=pool-0.8.0)",
- "snarkvm-r1cs 0.8.0 (git+ssh://git@github.com/ABMatrix/snarkVM.git?branch=pool-0.8.0)",
- "snarkvm-utilities 0.8.0 (git+ssh://git@github.com/ABMatrix/snarkVM.git?branch=pool-0.8.0)",
+ "snarkvm-curves",
+ "snarkvm-fields",
+ "snarkvm-profiler",
+ "snarkvm-r1cs",
+ "snarkvm-utilities",
  "thiserror",
 ]
 
 [[package]]
 name = "snarkvm-curves"
 version = "0.8.0"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "e6d66ac6d020e3bbe28e6317ba68a77c01f5f33d20a085fc9a2047d1e209fba1"
+source = "git+ssh://git@github.com/ABMatrix/snarkVM.git?branch=testnet2#481c17a4ec2cbb773179af932a6d6fe9ccb222a2"
 dependencies = [
  "derivative",
  "rand",
  "rustc_version",
  "serde",
- "snarkvm-fields 0.8.0 (registry+https://github.com/rust-lang/crates.io-index)",
- "snarkvm-utilities 0.8.0 (registry+https://github.com/rust-lang/crates.io-index)",
- "thiserror",
-]
-
-[[package]]
-name = "snarkvm-curves"
-version = "0.8.0"
-source = "git+ssh://git@github.com/ABMatrix/snarkVM.git?branch=pool-0.8.0#b3b3dc965a6103bc9667c44431b1550ced598469"
-dependencies = [
- "derivative",
- "rand",
- "rustc_version",
- "serde",
- "snarkvm-fields 0.8.0 (git+ssh://git@github.com/ABMatrix/snarkVM.git?branch=pool-0.8.0)",
- "snarkvm-utilities 0.8.0 (git+ssh://git@github.com/ABMatrix/snarkVM.git?branch=pool-0.8.0)",
+ "snarkvm-fields",
+ "snarkvm-utilities",
  "thiserror",
 ]
 
 [[package]]
 name = "snarkvm-derives"
 version = "0.8.0"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "ac5370287d7a59a916b66cb4c5d3fc83884834930cc4dbf066e9741e276f2fd6"
-dependencies = [
- "proc-macro-crate",
- "proc-macro-error",
- "proc-macro2 1.0.40",
- "quote 1.0.20",
- "syn 1.0.98",
-]
-
-[[package]]
-name = "snarkvm-derives"
-version = "0.8.0"
-source = "git+ssh://git@github.com/ABMatrix/snarkVM.git?branch=pool-0.8.0#b3b3dc965a6103bc9667c44431b1550ced598469"
+source = "git+ssh://git@github.com/ABMatrix/snarkVM.git?branch=testnet2#481c17a4ec2cbb773179af932a6d6fe9ccb222a2"
 dependencies = [
  "proc-macro-crate",
  "proc-macro-error",
@@ -2172,8 +2094,7 @@ dependencies = [
 [[package]]
 name = "snarkvm-dpc"
 version = "0.8.0"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "1fbef7e754a5bb232c4fd21b0701541e35ea24818d694cc836e1bdee7f4fc9b3"
+source = "git+ssh://git@github.com/ABMatrix/snarkVM.git?branch=testnet2#481c17a4ec2cbb773179af932a6d6fe9ccb222a2"
 dependencies = [
  "anyhow",
  "base58",
@@ -2189,85 +2110,37 @@ dependencies = [
  "rayon",
  "serde",
  "serde_json",
- "snarkvm-algorithms 0.8.0 (registry+https://github.com/rust-lang/crates.io-index)",
- "snarkvm-curves 0.8.0 (registry+https://github.com/rust-lang/crates.io-index)",
- "snarkvm-fields 0.8.0 (registry+https://github.com/rust-lang/crates.io-index)",
- "snarkvm-gadgets 0.8.0 (registry+https://github.com/rust-lang/crates.io-index)",
- "snarkvm-marlin 0.8.0 (registry+https://github.com/rust-lang/crates.io-index)",
- "snarkvm-parameters 0.8.0 (registry+https://github.com/rust-lang/crates.io-index)",
- "snarkvm-polycommit 0.8.0 (registry+https://github.com/rust-lang/crates.io-index)",
- "snarkvm-profiler 0.8.0 (registry+https://github.com/rust-lang/crates.io-index)",
- "snarkvm-r1cs 0.8.0 (registry+https://github.com/rust-lang/crates.io-index)",
- "snarkvm-utilities 0.8.0 (registry+https://github.com/rust-lang/crates.io-index)",
- "thiserror",
-]
-
-[[package]]
-name = "snarkvm-dpc"
-version = "0.8.0"
-source = "git+ssh://git@github.com/ABMatrix/snarkVM.git?branch=pool-0.8.0#b3b3dc965a6103bc9667c44431b1550ced598469"
-dependencies = [
- "anyhow",
- "base58",
- "bech32",
- "bincode",
- "blake2",
- "chrono",
- "derivative",
- "hex",
- "itertools",
- "once_cell",
- "rand",
- "rayon",
- "serde",
- "serde_json",
- "snarkvm-algorithms 0.8.0 (git+ssh://git@github.com/ABMatrix/snarkVM.git?branch=pool-0.8.0)",
- "snarkvm-curves 0.8.0 (git+ssh://git@github.com/ABMatrix/snarkVM.git?branch=pool-0.8.0)",
- "snarkvm-fields 0.8.0 (git+ssh://git@github.com/ABMatrix/snarkVM.git?branch=pool-0.8.0)",
- "snarkvm-gadgets 0.8.0 (git+ssh://git@github.com/ABMatrix/snarkVM.git?branch=pool-0.8.0)",
- "snarkvm-marlin 0.8.0 (git+ssh://git@github.com/ABMatrix/snarkVM.git?branch=pool-0.8.0)",
- "snarkvm-parameters 0.8.0 (git+ssh://git@github.com/ABMatrix/snarkVM.git?branch=pool-0.8.0)",
- "snarkvm-polycommit 0.8.0 (git+ssh://git@github.com/ABMatrix/snarkVM.git?branch=pool-0.8.0)",
- "snarkvm-profiler 0.8.0 (git+ssh://git@github.com/ABMatrix/snarkVM.git?branch=pool-0.8.0)",
- "snarkvm-r1cs 0.8.0 (git+ssh://git@github.com/ABMatrix/snarkVM.git?branch=pool-0.8.0)",
- "snarkvm-utilities 0.8.0 (git+ssh://git@github.com/ABMatrix/snarkVM.git?branch=pool-0.8.0)",
+ "snarkvm-algorithms",
+ "snarkvm-curves",
+ "snarkvm-fields",
+ "snarkvm-gadgets",
+ "snarkvm-marlin",
+ "snarkvm-parameters",
+ "snarkvm-polycommit",
+ "snarkvm-profiler",
+ "snarkvm-r1cs",
+ "snarkvm-utilities",
  "thiserror",
 ]
 
 [[package]]
 name = "snarkvm-fields"
 version = "0.8.0"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "cdf49b9b2c862fe9ec45aacbc7bac02408b9333e4d450375de76f84c39a3e7dc"
+source = "git+ssh://git@github.com/ABMatrix/snarkVM.git?branch=testnet2#481c17a4ec2cbb773179af932a6d6fe9ccb222a2"
 dependencies = [
  "anyhow",
  "derivative",
  "rand",
  "rayon",
  "serde",
- "snarkvm-utilities 0.8.0 (registry+https://github.com/rust-lang/crates.io-index)",
- "thiserror",
-]
-
-[[package]]
-name = "snarkvm-fields"
-version = "0.8.0"
-source = "git+ssh://git@github.com/ABMatrix/snarkVM.git?branch=pool-0.8.0#b3b3dc965a6103bc9667c44431b1550ced598469"
-dependencies = [
- "anyhow",
- "derivative",
- "rand",
- "rayon",
- "serde",
- "snarkvm-utilities 0.8.0 (git+ssh://git@github.com/ABMatrix/snarkVM.git?branch=pool-0.8.0)",
+ "snarkvm-utilities",
  "thiserror",
 ]
 
 [[package]]
 name = "snarkvm-gadgets"
 version = "0.8.0"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "0e6bd37ab7da8db9186a0dd5205b9175224141dbabff89074d4bfe70545f92de"
+source = "git+ssh://git@github.com/ABMatrix/snarkVM.git?branch=testnet2#481c17a4ec2cbb773179af932a6d6fe9ccb222a2"
 dependencies = [
  "anyhow",
  "derivative",
@@ -2276,92 +2149,45 @@ dependencies = [
  "num-bigint",
  "num-integer",
  "num-traits",
- "snarkvm-algorithms 0.8.0 (registry+https://github.com/rust-lang/crates.io-index)",
- "snarkvm-curves 0.8.0 (registry+https://github.com/rust-lang/crates.io-index)",
- "snarkvm-fields 0.8.0 (registry+https://github.com/rust-lang/crates.io-index)",
- "snarkvm-r1cs 0.8.0 (registry+https://github.com/rust-lang/crates.io-index)",
- "snarkvm-utilities 0.8.0 (registry+https://github.com/rust-lang/crates.io-index)",
+ "snarkvm-algorithms",
+ "snarkvm-curves",
+ "snarkvm-fields",
+ "snarkvm-r1cs",
+ "snarkvm-utilities",
  "thiserror",
 ]
 
 [[package]]
-name = "snarkvm-gadgets"
+name = "snarkvm-marlin"
 version = "0.8.0"
-source = "git+ssh://git@github.com/ABMatrix/snarkVM.git?branch=pool-0.8.0#b3b3dc965a6103bc9667c44431b1550ced598469"
+source = "git+ssh://git@github.com/ABMatrix/snarkVM.git?branch=testnet2#481c17a4ec2cbb773179af932a6d6fe9ccb222a2"
 dependencies = [
- "anyhow",
+ "bincode",
+ "blake2",
  "derivative",
  "digest 0.9.0",
+ "hashbrown 0.11.2",
  "itertools",
- "num-bigint",
- "num-integer",
- "num-traits",
- "snarkvm-algorithms 0.8.0 (git+ssh://git@github.com/ABMatrix/snarkVM.git?branch=pool-0.8.0)",
- "snarkvm-curves 0.8.0 (git+ssh://git@github.com/ABMatrix/snarkVM.git?branch=pool-0.8.0)",
- "snarkvm-fields 0.8.0 (git+ssh://git@github.com/ABMatrix/snarkVM.git?branch=pool-0.8.0)",
- "snarkvm-r1cs 0.8.0 (git+ssh://git@github.com/ABMatrix/snarkVM.git?branch=pool-0.8.0)",
- "snarkvm-utilities 0.8.0 (git+ssh://git@github.com/ABMatrix/snarkVM.git?branch=pool-0.8.0)",
- "thiserror",
-]
-
-[[package]]
-name = "snarkvm-marlin"
-version = "0.8.0"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "d1785d3bb010fa938b40bc5e3fc9b21a06b1d7512927c32977a56fdde63a3f47"
-dependencies = [
- "bincode",
- "blake2",
- "derivative",
- "digest 0.9.0",
- "hashbrown 0.11.2",
  "rand",
  "rand_chacha",
  "rand_core",
  "rayon",
  "serde",
  "smallvec",
- "snarkvm-algorithms 0.8.0 (registry+https://github.com/rust-lang/crates.io-index)",
- "snarkvm-curves 0.8.0 (registry+https://github.com/rust-lang/crates.io-index)",
- "snarkvm-fields 0.8.0 (registry+https://github.com/rust-lang/crates.io-index)",
- "snarkvm-gadgets 0.8.0 (registry+https://github.com/rust-lang/crates.io-index)",
- "snarkvm-polycommit 0.8.0 (registry+https://github.com/rust-lang/crates.io-index)",
- "snarkvm-profiler 0.8.0 (registry+https://github.com/rust-lang/crates.io-index)",
- "snarkvm-r1cs 0.8.0 (registry+https://github.com/rust-lang/crates.io-index)",
- "snarkvm-utilities 0.8.0 (registry+https://github.com/rust-lang/crates.io-index)",
-]
-
-[[package]]
-name = "snarkvm-marlin"
-version = "0.8.0"
-source = "git+ssh://git@github.com/ABMatrix/snarkVM.git?branch=pool-0.8.0#b3b3dc965a6103bc9667c44431b1550ced598469"
-dependencies = [
- "bincode",
- "blake2",
- "derivative",
- "digest 0.9.0",
- "hashbrown 0.11.2",
- "rand",
- "rand_chacha",
- "rand_core",
- "rayon",
- "serde",
- "smallvec",
- "snarkvm-algorithms 0.8.0 (git+ssh://git@github.com/ABMatrix/snarkVM.git?branch=pool-0.8.0)",
- "snarkvm-curves 0.8.0 (git+ssh://git@github.com/ABMatrix/snarkVM.git?branch=pool-0.8.0)",
- "snarkvm-fields 0.8.0 (git+ssh://git@github.com/ABMatrix/snarkVM.git?branch=pool-0.8.0)",
- "snarkvm-gadgets 0.8.0 (git+ssh://git@github.com/ABMatrix/snarkVM.git?branch=pool-0.8.0)",
- "snarkvm-polycommit 0.8.0 (git+ssh://git@github.com/ABMatrix/snarkVM.git?branch=pool-0.8.0)",
- "snarkvm-profiler 0.8.0 (git+ssh://git@github.com/ABMatrix/snarkVM.git?branch=pool-0.8.0)",
- "snarkvm-r1cs 0.8.0 (git+ssh://git@github.com/ABMatrix/snarkVM.git?branch=pool-0.8.0)",
- "snarkvm-utilities 0.8.0 (git+ssh://git@github.com/ABMatrix/snarkVM.git?branch=pool-0.8.0)",
+ "snarkvm-algorithms",
+ "snarkvm-curves",
+ "snarkvm-fields",
+ "snarkvm-gadgets",
+ "snarkvm-polycommit",
+ "snarkvm-profiler",
+ "snarkvm-r1cs",
+ "snarkvm-utilities",
 ]
 
 [[package]]
 name = "snarkvm-parameters"
 version = "0.8.0"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "5b257ce7dded263c31fb61c2402a9c9dd7a0621919d7cdc0da7e8c0e79796697"
+source = "git+ssh://git@github.com/ABMatrix/snarkVM.git?branch=testnet2#481c17a4ec2cbb773179af932a6d6fe9ccb222a2"
 dependencies = [
  "aleo-std",
  "anyhow",
@@ -2370,33 +2196,15 @@ dependencies = [
  "hex",
  "paste",
  "serde_json",
- "snarkvm-algorithms 0.8.0 (registry+https://github.com/rust-lang/crates.io-index)",
- "snarkvm-utilities 0.8.0 (registry+https://github.com/rust-lang/crates.io-index)",
- "thiserror",
-]
-
-[[package]]
-name = "snarkvm-parameters"
-version = "0.8.0"
-source = "git+ssh://git@github.com/ABMatrix/snarkVM.git?branch=pool-0.8.0#b3b3dc965a6103bc9667c44431b1550ced598469"
-dependencies = [
- "aleo-std",
- "anyhow",
- "cfg-if",
- "curl",
- "hex",
- "paste",
- "serde_json",
- "snarkvm-algorithms 0.8.0 (git+ssh://git@github.com/ABMatrix/snarkVM.git?branch=pool-0.8.0)",
- "snarkvm-utilities 0.8.0 (git+ssh://git@github.com/ABMatrix/snarkVM.git?branch=pool-0.8.0)",
+ "snarkvm-algorithms",
+ "snarkvm-utilities",
  "thiserror",
 ]
 
 [[package]]
 name = "snarkvm-polycommit"
 version = "0.8.0"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "4f5057785ea5eb9c8eb243a14149cd4b4cc646457716c0ec386a6326c17e8fd5"
+source = "git+ssh://git@github.com/ABMatrix/snarkVM.git?branch=testnet2#481c17a4ec2cbb773179af932a6d6fe9ccb222a2"
 dependencies = [
  "derivative",
  "digest 0.9.0",
@@ -2405,85 +2213,40 @@ dependencies = [
  "rand",
  "rand_core",
  "rayon",
- "snarkvm-algorithms 0.8.0 (registry+https://github.com/rust-lang/crates.io-index)",
- "snarkvm-curves 0.8.0 (registry+https://github.com/rust-lang/crates.io-index)",
- "snarkvm-fields 0.8.0 (registry+https://github.com/rust-lang/crates.io-index)",
- "snarkvm-gadgets 0.8.0 (registry+https://github.com/rust-lang/crates.io-index)",
- "snarkvm-profiler 0.8.0 (registry+https://github.com/rust-lang/crates.io-index)",
- "snarkvm-r1cs 0.8.0 (registry+https://github.com/rust-lang/crates.io-index)",
- "snarkvm-utilities 0.8.0 (registry+https://github.com/rust-lang/crates.io-index)",
-]
-
-[[package]]
-name = "snarkvm-polycommit"
-version = "0.8.0"
-source = "git+ssh://git@github.com/ABMatrix/snarkVM.git?branch=pool-0.8.0#b3b3dc965a6103bc9667c44431b1550ced598469"
-dependencies = [
- "derivative",
- "digest 0.9.0",
- "hashbrown 0.11.2",
- "itertools",
- "rand",
- "rand_core",
- "rayon",
- "snarkvm-algorithms 0.8.0 (git+ssh://git@github.com/ABMatrix/snarkVM.git?branch=pool-0.8.0)",
- "snarkvm-curves 0.8.0 (git+ssh://git@github.com/ABMatrix/snarkVM.git?branch=pool-0.8.0)",
- "snarkvm-fields 0.8.0 (git+ssh://git@github.com/ABMatrix/snarkVM.git?branch=pool-0.8.0)",
- "snarkvm-gadgets 0.8.0 (git+ssh://git@github.com/ABMatrix/snarkVM.git?branch=pool-0.8.0)",
- "snarkvm-profiler 0.8.0 (git+ssh://git@github.com/ABMatrix/snarkVM.git?branch=pool-0.8.0)",
- "snarkvm-r1cs 0.8.0 (git+ssh://git@github.com/ABMatrix/snarkVM.git?branch=pool-0.8.0)",
- "snarkvm-utilities 0.8.0 (git+ssh://git@github.com/ABMatrix/snarkVM.git?branch=pool-0.8.0)",
+ "snarkvm-algorithms",
+ "snarkvm-curves",
+ "snarkvm-fields",
+ "snarkvm-gadgets",
+ "snarkvm-profiler",
+ "snarkvm-r1cs",
+ "snarkvm-utilities",
 ]
 
 [[package]]
 name = "snarkvm-profiler"
 version = "0.8.0"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "e767e15b3d3b09b043859fc6ba0be38dae0adff0ed3e8e6649d662a79578c6c2"
-
-[[package]]
-name = "snarkvm-profiler"
-version = "0.8.0"
-source = "git+ssh://git@github.com/ABMatrix/snarkVM.git?branch=pool-0.8.0#b3b3dc965a6103bc9667c44431b1550ced598469"
+source = "git+ssh://git@github.com/ABMatrix/snarkVM.git?branch=testnet2#481c17a4ec2cbb773179af932a6d6fe9ccb222a2"
 
 [[package]]
 name = "snarkvm-r1cs"
 version = "0.8.0"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "e16d23844f7d774ac45c41ec266d4c73f272f9d72f79b20376c071fa058a47b8"
+source = "git+ssh://git@github.com/ABMatrix/snarkVM.git?branch=testnet2#481c17a4ec2cbb773179af932a6d6fe9ccb222a2"
 dependencies = [
  "anyhow",
  "cfg-if",
  "fxhash",
  "indexmap",
  "itertools",
- "snarkvm-curves 0.8.0 (registry+https://github.com/rust-lang/crates.io-index)",
- "snarkvm-fields 0.8.0 (registry+https://github.com/rust-lang/crates.io-index)",
- "snarkvm-utilities 0.8.0 (registry+https://github.com/rust-lang/crates.io-index)",
- "thiserror",
-]
-
-[[package]]
-name = "snarkvm-r1cs"
-version = "0.8.0"
-source = "git+ssh://git@github.com/ABMatrix/snarkVM.git?branch=pool-0.8.0#b3b3dc965a6103bc9667c44431b1550ced598469"
-dependencies = [
- "anyhow",
- "cfg-if",
- "fxhash",
- "indexmap",
- "itertools",
- "snarkvm-curves 0.8.0 (git+ssh://git@github.com/ABMatrix/snarkVM.git?branch=pool-0.8.0)",
- "snarkvm-fields 0.8.0 (git+ssh://git@github.com/ABMatrix/snarkVM.git?branch=pool-0.8.0)",
- "snarkvm-utilities 0.8.0 (git+ssh://git@github.com/ABMatrix/snarkVM.git?branch=pool-0.8.0)",
+ "snarkvm-curves",
+ "snarkvm-fields",
+ "snarkvm-utilities",
  "thiserror",
 ]
 
 [[package]]
 name = "snarkvm-utilities"
 version = "0.8.0"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "4b9227fad4a6e04fb717eae2ae128e3168dc52666af27672f5c74a9b718aed9e"
+source = "git+ssh://git@github.com/ABMatrix/snarkVM.git?branch=testnet2#481c17a4ec2cbb773179af932a6d6fe9ccb222a2"
 dependencies = [
  "aleo-std",
  "anyhow",
@@ -2494,25 +2257,7 @@ dependencies = [
  "rand",
  "rayon",
  "serde",
- "snarkvm-derives 0.8.0 (registry+https://github.com/rust-lang/crates.io-index)",
- "thiserror",
-]
-
-[[package]]
-name = "snarkvm-utilities"
-version = "0.8.0"
-source = "git+ssh://git@github.com/ABMatrix/snarkVM.git?branch=pool-0.8.0#b3b3dc965a6103bc9667c44431b1550ced598469"
-dependencies = [
- "aleo-std",
- "anyhow",
- "bincode",
- "itertools",
- "num-bigint",
- "num_cpus",
- "rand",
- "rayon",
- "serde",
- "snarkvm-derives 0.8.0 (git+ssh://git@github.com/ABMatrix/snarkVM.git?branch=pool-0.8.0)",
+ "snarkvm-derives",
  "thiserror",
 ]
 
@@ -3112,5 +2857,6 @@ dependencies = [
 name = "zkwork-pool-protocol"
 version = "0.1.0"
 dependencies = [
- "pool-environment",
+ "snarkos",
+ "snarkvm",
 ]

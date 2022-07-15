@@ -4,5 +4,12 @@ version = "0.1.0"
 edition = "2021"
 
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
-
 [dependencies]
+
+[dependencies.snarkos]
+git = "ssh://git@github.com/ABMatrix/snarkOS.git"
+branch = "testnet3"
+
+[dependencies.snarkvm]
+git = "ssh://git@github.com/ABMatrix/snarkVM.git"
+branch = "testnet2"
