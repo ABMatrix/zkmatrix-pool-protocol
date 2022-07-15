@@ -21,9 +21,9 @@ pub enum StratumMessage {
 
     /// New job from the mining pool.
     /// See protocol specification for details about the fields.
-    /// (job_id, block_header_root, hashed_leaves_1, hashed_leaves_2, hashed_leaves_3,
+    /// (job_id, previous_block_hash, block_header_root, hashed_leaves_1, hashed_leaves_2, hashed_leaves_3,
     ///  hashed_leaves_4, clean_jobs)
-    Notify(String, String, String, String, String, String, bool),
+    Notify(String, String, String, String, String, String, String, bool),
 
     /// Submit shares to the pool.
     /// See protocol specification for details about the fields.
@@ -61,7 +61,7 @@ impl Default for StratumCodec {
 }
 
 #[derive(Serialize, Deserialize)]
-struct NotifyParams(String, String, String, String, String, String, bool);
+struct NotifyParams(String, String, String, String, String, String, String, bool);
 
 #[derive(Serialize, Deserialize)]
 struct SubscribeParams(String, String, Option<String>);
@@ -100,6 +100,7 @@ impl Encoder<StratumMessage> for StratumCodec {
             }
             StratumMessage::Notify(
                 job_id,
+                previous_block_hash,
                 block_header_root,
                 hashed_leaves_1,
                 hashed_leaves_2,
@@ -112,6 +113,7 @@ impl Encoder<StratumMessage> for StratumCodec {
                     method: "mining.notify",
                     params: Some(NotifyParams(
                         job_id,
+                        previous_block_hash,
                         block_header_root,
                         hashed_leaves_1,
                         hashed_leaves_2,
@@ -218,18 +220,20 @@ impl Decoder for StratumCodec {
                     StratumMessage::SetTarget(difficulty_target)
                 }
                 "mining.notify" => {
-                    if params.len() != 7 {
+                    if params.len() != 8 {
                         return Err(io::Error::new(io::ErrorKind::InvalidData, "Invalid params"));
                     }
                     let job_id = params[0].as_str().unwrap_or_default();
-                    let block_header_root = params[1].as_str().unwrap_or_default();
-                    let hashed_leaves_1 = params[2].as_str().unwrap_or_default();
-                    let hashed_leaves_2 = params[3].as_str().unwrap_or_default();
-                    let hashed_leaves_3 = params[4].as_str().unwrap_or_default();
-                    let hashed_leaves_4 = params[5].as_str().unwrap_or_default();
-                    let clean_jobs = params[6].as_bool().unwrap_or(true);
+                    let previous_block_hash = params[1].as_str().unwrap_or_default();
+                    let block_header_root = params[2].as_str().unwrap_or_default();
+                    let hashed_leaves_1 = params[3].as_str().unwrap_or_default();
+                    let hashed_leaves_2 = params[4].as_str().unwrap_or_default();
+                    let hashed_leaves_3 = params[5].as_str().unwrap_or_default();
+                    let hashed_leaves_4 = params[6].as_str().unwrap_or_default();
+                    let clean_jobs = params[7].as_bool().unwrap_or(true);
                     StratumMessage::Notify(
                         job_id.to_string(),
+                        previous_block_hash.to_string(),
                         block_header_root.to_string(),
                         hashed_leaves_1.to_string(),
                         hashed_leaves_2.to_string(),
@@ -308,6 +312,7 @@ fn test_encode_decode() {
     //Notify
     let msg = StratumMessage::Notify(
         "job_id".to_string(),
+        "previous_block_hash".to_string(),
         "block_header_root".to_string(),
         "hashed_leaves_1".to_string(),
         "hashed_leaves_2".to_string(),
