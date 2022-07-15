@@ -4,7 +4,7 @@ use json_rpc_types::{Error, Id, Request, Response, Version};
 use serde_json::Value;
 use tokio_util::codec::{AnyDelimiterCodec, Decoder, Encoder};
 use super::response::ResponseMessage;
-use serde::{Serialize,Deserialize};
+use serde::{Serialize, Deserialize};
 
 
 pub enum StratumMessage {
@@ -12,8 +12,8 @@ pub enum StratumMessage {
     /// (id, user_agent, protocol_version, session_id)
     Subscribe(Id, String, String, Option<String>),
 
-    /// (id, worker_name, worker_password)
-    Authorize(Id, String, String),
+    /// (id, account_name, worker_name, worker_password)
+    Authorize(Id, String, String, String),
 
     /// This is the difficulty target for the next job.
     /// (difficulty_target)
@@ -80,11 +80,11 @@ impl Encoder<StratumMessage> for StratumCodec {
                 };
                 serde_json::to_vec(&request).unwrap_or_default()
             }
-            StratumMessage::Authorize(id, worker_name, worker_password) => {
+            StratumMessage::Authorize(id, account_name, worker_name, worker_password) => {
                 let request = Request {
                     jsonrpc: Version::V2,
                     method: "mining.authorize",
-                    params: Some(vec![worker_name, worker_password]),
+                    params: Some(vec![account_name, worker_name, worker_password]),
                     id: Some(id),
                 };
                 serde_json::to_vec(&request).unwrap_or_default()
@@ -200,10 +200,12 @@ impl Decoder for StratumCodec {
                     if params.len() != 2 {
                         return Err(io::Error::new(io::ErrorKind::InvalidData, "Invalid params"));
                     }
-                    let worker_name = params[0].as_str().unwrap_or_default();
-                    let worker_password = params[1].as_str().unwrap_or_default();
+                    let account_name = params[0].as_str().unwrap_or_default();
+                    let worker_name = params[1].as_str().unwrap_or_default();
+                    let worker_password = params[2].as_str().unwrap_or_default();
                     StratumMessage::Authorize(
                         id.unwrap_or(Id::Num(0)),
+                        account_name.to_string(),
                         worker_name.to_string(),
                         worker_password.to_string(),
                     )
