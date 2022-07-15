@@ -1936,7 +1936,7 @@ checksum = "2fd0db749597d91ff862fd1d55ea87f7855a744a8425a64695b6fca237d1dad1"
 [[package]]
 name = "snarkos"
 version = "2.0.2"
-source = "git+ssh://git@github.com/ABMatrix/snarkOS.git?branch=testnet3#6d9182435ee863309462db4ee42d2311cb12f83a"
+source = "git+ssh://git@github.com/ABMatrix/snarkOS.git?branch=testnet3#491d7530facf9f4567b03dce3b1df0fa36b6f6cd"
 dependencies = [
  "aleo-std",
  "anyhow",
@@ -1963,7 +1963,7 @@ dependencies = [
 [[package]]
 name = "snarkos-environment"
 version = "2.0.2"
-source = "git+ssh://git@github.com/ABMatrix/snarkOS.git?branch=testnet3#6d9182435ee863309462db4ee42d2311cb12f83a"
+source = "git+ssh://git@github.com/ABMatrix/snarkOS.git?branch=testnet3#491d7530facf9f4567b03dce3b1df0fa36b6f6cd"
 dependencies = [
  "anyhow",
  "bincode",
@@ -1982,13 +1982,14 @@ dependencies = [
 [[package]]
 name = "snarkos-network"
 version = "2.0.2"
-source = "git+ssh://git@github.com/ABMatrix/snarkOS.git?branch=testnet3#6d9182435ee863309462db4ee42d2311cb12f83a"
+source = "git+ssh://git@github.com/ABMatrix/snarkOS.git?branch=testnet3#491d7530facf9f4567b03dce3b1df0fa36b6f6cd"
 dependencies = [
  "anyhow",
  "bincode",
  "bytes",
  "circular-queue",
  "futures",
+ "hex",
  "once_cell",
  "rand",
  "serde",
@@ -2005,7 +2006,7 @@ dependencies = [
 [[package]]
 name = "snarkos-rpc"
 version = "2.0.2"
-source = "git+ssh://git@github.com/ABMatrix/snarkOS.git?branch=testnet3#6d9182435ee863309462db4ee42d2311cb12f83a"
+source = "git+ssh://git@github.com/ABMatrix/snarkOS.git?branch=testnet3#491d7530facf9f4567b03dce3b1df0fa36b6f6cd"
 dependencies = [
  "anyhow",
  "async-trait",
@@ -2026,7 +2027,7 @@ dependencies = [
 [[package]]
 name = "snarkos-storage"
 version = "2.0.2"
-source = "git+ssh://git@github.com/ABMatrix/snarkOS.git?branch=testnet3#6d9182435ee863309462db4ee42d2311cb12f83a"
+source = "git+ssh://git@github.com/ABMatrix/snarkOS.git?branch=testnet3#491d7530facf9f4567b03dce3b1df0fa36b6f6cd"
 dependencies = [
  "anyhow",
  "bincode",

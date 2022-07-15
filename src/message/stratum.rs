@@ -153,8 +153,8 @@ impl Encoder<StratumMessage> for StratumCodec {
 }
 
 impl Decoder for StratumCodec {
-    type Error = io::Error;
     type Item = StratumMessage;
+    type Error = io::Error;
 
     fn decode(&mut self, src: &mut BytesMut) -> Result<Option<Self::Item>, Self::Error> {
         let string = self
