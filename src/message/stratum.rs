@@ -12,8 +12,8 @@ pub enum StratumMessage {
     /// (id, user_agent, protocol_version, session_id)
     Subscribe(Id, String, String, Option<String>),
 
-    /// (id, account_name, worker_name, worker_password)
-    Authorize(Id, String, String, String),
+    /// (id, account_name, miner_name, worker_password)
+    Authorize(Id, String, Option<String>, Option<String>),
 
     /// This is the difficulty target for the next job.
     /// (difficulty_target)
@@ -66,6 +66,9 @@ struct NotifyParams(String, String, String, String, String, String, String, bool
 #[derive(Serialize, Deserialize)]
 struct SubscribeParams(String, String, Option<String>);
 
+#[derive(Serialize, Deserialize)]
+struct AuthorizeParams(String, Option<String>, Option<String>);
+
 impl Encoder<StratumMessage> for StratumCodec {
     type Error = io::Error;
 
@@ -84,7 +87,7 @@ impl Encoder<StratumMessage> for StratumCodec {
                 let request = Request {
                     jsonrpc: Version::V2,
                     method: "mining.authorize",
-                    params: Some(vec![account_name, worker_name, worker_password]),
+                    params: Some(AuthorizeParams(account_name, worker_name, worker_password)),
                     id: Some(id),
                 };
                 serde_json::to_vec(&request).unwrap_or_default()
@@ -125,11 +128,11 @@ impl Encoder<StratumMessage> for StratumCodec {
                 };
                 serde_json::to_vec(&request).unwrap_or_default()
             }
-            StratumMessage::Submit(id, account_name, worker_name, job_id, nonce, proof) => {
+            StratumMessage::Submit(id, account_name, miner_name, job_id, nonce, proof) => {
                 let request = Request {
                     jsonrpc: Version::V2,
                     method: "mining.submit",
-                    params: Some(vec![account_name, worker_name, job_id, nonce, proof]),
+                    params: Some(vec![account_name, miner_name, job_id, nonce, proof]),
                     id: Some(id),
                 };
                 serde_json::to_vec(&request).unwrap_or_default()
@@ -203,13 +206,21 @@ impl Decoder for StratumCodec {
                         return Err(io::Error::new(io::ErrorKind::InvalidData, "Invalid params"));
                     }
                     let account_name = params[0].as_str().unwrap_or_default();
-                    let worker_name = params[1].as_str().unwrap_or_default();
-                    let worker_password = params[2].as_str().unwrap_or_default();
+                    let miner_name = match &params[1] {
+                        Value::String(s) => Some(s),
+                        Value::Null => None,
+                        _ => return Err(io::Error::new(io::ErrorKind::InvalidData, "Invalid params")),
+                    };
+                    let worker_password = match &params[2] {
+                        Value::String(s) => Some(s),
+                        Value::Null => None,
+                        _ => return Err(io::Error::new(io::ErrorKind::InvalidData, "Invalid params")),
+                    };
                     StratumMessage::Authorize(
                         id.unwrap_or(Id::Num(0)),
                         account_name.to_string(),
-                        worker_name.to_string(),
-                        worker_password.to_string(),
+                        miner_name.cloned(),
+                        worker_password.cloned(),
                     )
                 }
                 "mining.set_target" => {
@@ -292,7 +303,7 @@ fn test_encode_decode() {
 
 
     //Authorize
-    let msg = StratumMessage::Authorize(Num(0), "account_name".to_string(), "worker_name".to_string(), "password".to_string());
+    let msg = StratumMessage::Authorize(Num(0), "account_name".to_string(), Some("worker_name".to_string()), None);
     let mut buf1 = BytesMut::new();
     codec.encode(msg, &mut buf1).unwrap();
     let res = codec.decode(&mut buf1.clone()).unwrap().unwrap();
