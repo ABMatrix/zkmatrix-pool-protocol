@@ -2889,6 +2889,7 @@ dependencies = [
  "bytes",
  "erased-serde",
  "json-rpc-types",
+ "semver",
  "serde",
  "serde_json",
  "snarkos",
