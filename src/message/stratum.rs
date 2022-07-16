@@ -27,8 +27,8 @@ pub enum StratumMessage {
 
     /// Submit shares to the pool.
     /// See protocol specification for details about the fields.
-    /// (id, account_name, worker_name, job_id, nonce, proof)
-    Submit(Id, String, String, String, String, String),
+    /// (id, job_id, nonce, proof)
+    Submit(Id, String, String, String),
 
     /// (id, result, error)
     Response(Id, Option<ResponseMessage>, Option<Error<()>>),
@@ -128,11 +128,11 @@ impl Encoder<StratumMessage> for StratumCodec {
                 };
                 serde_json::to_vec(&request).unwrap_or_default()
             }
-            StratumMessage::Submit(id, account_name, miner_name, job_id, nonce, proof) => {
+            StratumMessage::Submit(id, job_id, nonce, proof) => {
                 let request = Request {
                     jsonrpc: Version::V2,
                     method: "mining.submit",
-                    params: Some(vec![account_name, miner_name, job_id, nonce, proof]),
+                    params: Some(vec![job_id, nonce, proof]),
                     id: Some(id),
                 };
                 serde_json::to_vec(&request).unwrap_or_default()
@@ -250,19 +250,15 @@ impl Decoder for StratumCodec {
                     )
                 }
                 "mining.submit" => {
-                    if params.len() != 5 {
+                    if params.len() != 3 {
                         return Err(io::Error::new(io::ErrorKind::InvalidData, "Invalid params"));
                     }
 
-                    let account_name = params[0].as_str().unwrap_or_default();
-                    let worker_name = params[1].as_str().unwrap_or_default();
-                    let job_id = params[2].as_str().unwrap_or_default();
-                    let nonce = params[3].as_str().unwrap_or_default();
-                    let proof = params[4].as_str().unwrap_or_default();
+                    let job_id = params[0].as_str().unwrap_or_default();
+                    let nonce = params[1].as_str().unwrap_or_default();
+                    let proof = params[2].as_str().unwrap_or_default();
                     StratumMessage::Submit(
                         id.unwrap_or(Id::Num(0)),
-                        account_name.to_string(),
-                        worker_name.to_string(),
                         job_id.to_string(),
                         nonce.to_string(),
                         proof.to_string(),
@@ -335,7 +331,7 @@ fn test_encode_decode() {
     assert_eq!(buf1, buf2);
 
     // Submit
-    let msg = StratumMessage::Submit(Num(2), "account_name".to_string(), "worker_name".to_string(), "job_id".to_string(), "nonce".to_string(), "proof".to_string());
+    let msg = StratumMessage::Submit(Num(2),"job_id".to_string(), "nonce".to_string(), "proof".to_string());
     let mut buf1 = BytesMut::new();
     codec.encode(msg, &mut buf1).unwrap();
     let res = codec.decode(&mut buf1.clone()).unwrap().unwrap();
