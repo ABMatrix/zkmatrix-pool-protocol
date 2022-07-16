@@ -13,7 +13,7 @@ pub enum StratumMessage {
     Subscribe(Id, String, String, Option<String>),
 
     /// (id, account_name, miner_name, worker_password)
-    Authorize(Id, String, Option<String>, Option<String>),
+    Authorize(Id, String, String, Option<String>),
 
     /// This is the difficulty target for the next job.
     /// (difficulty_target)
@@ -67,7 +67,7 @@ struct NotifyParams(String, String, String, String, String, String, String, bool
 struct SubscribeParams(String, String, Option<String>);
 
 #[derive(Serialize, Deserialize)]
-struct AuthorizeParams(String, Option<String>, Option<String>);
+struct AuthorizeParams(String, String, Option<String>);
 
 impl Encoder<StratumMessage> for StratumCodec {
     type Error = io::Error;
@@ -206,11 +206,7 @@ impl Decoder for StratumCodec {
                         return Err(io::Error::new(io::ErrorKind::InvalidData, "Invalid params"));
                     }
                     let account_name = params[0].as_str().unwrap_or_default();
-                    let miner_name = match &params[1] {
-                        Value::String(s) => Some(s),
-                        Value::Null => None,
-                        _ => return Err(io::Error::new(io::ErrorKind::InvalidData, "Invalid params")),
-                    };
+                    let miner_name = params[1].as_str().unwrap_or_default();
                     let worker_password = match &params[2] {
                         Value::String(s) => Some(s),
                         Value::Null => None,
@@ -219,7 +215,7 @@ impl Decoder for StratumCodec {
                     StratumMessage::Authorize(
                         id.unwrap_or(Id::Num(0)),
                         account_name.to_string(),
-                        miner_name.cloned(),
+                        miner_name.to_string(),
                         worker_password.cloned(),
                     )
                 }
@@ -303,7 +299,7 @@ fn test_encode_decode() {
 
 
     //Authorize
-    let msg = StratumMessage::Authorize(Num(0), "account_name".to_string(), Some("worker_name".to_string()), None);
+    let msg = StratumMessage::Authorize(Num(0), "account_name".to_string(), "worker_name".to_string(), None);
     let mut buf1 = BytesMut::new();
     codec.encode(msg, &mut buf1).unwrap();
     let res = codec.decode(&mut buf1.clone()).unwrap().unwrap();
