@@ -53,12 +53,21 @@ impl FromStr for PoolError {
 }
 
 impl PoolError {
+    pub fn id(&self) -> i64 {
+        match self {
+            PoolError::StaleProof => 1,
+            PoolError::InvalidProof(..) => 2,
+            PoolError::ServerNotReady => 3,
+            PoolError::InternalServerError => 100
+        }
+    }
+
     pub fn name(&self) -> String {
         match self {
             PoolError::StaleProof => "StaleProof".to_string(),
             PoolError::InvalidProof(..) => "InvalidProof".to_string(),
-            PoolError::InternalServerError => "InternalServerError".to_string(),
             PoolError::ServerNotReady => "ServerNotReady".to_string(),
+            PoolError::InternalServerError => "InternalServerError".to_string(),
         }
     }
 }
