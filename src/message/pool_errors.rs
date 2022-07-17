@@ -5,6 +5,7 @@ use anyhow::anyhow;
 pub enum PoolError {
     StaleProof,
     InvalidProof(Option<String>),
+    ServerNotReady,
     InternalServerError,
 }
 
@@ -19,6 +20,7 @@ impl ToString for PoolError {
                     format!("InvalidProof{}", reason.clone().unwrap())
                 }
             }
+            PoolError::ServerNotReady => "ServerNotReady".to_string(),
             PoolError::InternalServerError => "InternalServerError".to_string(),
         }
     }
@@ -34,7 +36,7 @@ impl FromStr for PoolError {
             if let Some(msg) = s.strip_prefix(&Self::InvalidProof(None).name()) {
                 if msg.is_empty() {
                     Ok(Self::InvalidProof(None))
-                }else {
+                } else {
                     Ok(Self::InvalidProof(Some(msg.to_string())))
                 }
             } else {
@@ -42,6 +44,8 @@ impl FromStr for PoolError {
             }
         } else if s.starts_with(&Self::InternalServerError.name()) {
             Ok(Self::InternalServerError)
+        } else if s.starts_with(&Self::ServerNotReady.name()) {
+            Ok(Self::ServerNotReady)
         } else {
             Err(anyhow!(format!("Unsupported message: {}",s)))
         }
@@ -54,6 +58,7 @@ impl PoolError {
             PoolError::StaleProof => "StaleProof".to_string(),
             PoolError::InvalidProof(..) => "InvalidProof".to_string(),
             PoolError::InternalServerError => "InternalServerError".to_string(),
+            PoolError::ServerNotReady => "ServerNotReady".to_string(),
         }
     }
 }
@@ -79,6 +84,11 @@ fn test_pool_errors() {
     let m4 = e4.to_string();
     let e4_r = PoolError::from_str(&m4).unwrap();
     assert_eq!(e4, e4_r);
+
+    let e5 = PoolError::ServerNotReady;
+    let m5 = e5.to_string();
+    let e5_r = PoolError::from_str(&m5).unwrap();
+    assert_eq!(e5, e5_r);
 
     let res = PoolError::from_str("test");
     assert!(res.is_err())
