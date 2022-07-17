@@ -11,6 +11,7 @@ erased-serde = "0.3.21"
 json-rpc-types = "1.0.3"
 bytes = "1.1.0"
 semver = "1.0.12"
+anyhow = "1"
 
 [dependencies.snarkos]
 git = "ssh://git@github.com/ABMatrix/snarkOS.git"
