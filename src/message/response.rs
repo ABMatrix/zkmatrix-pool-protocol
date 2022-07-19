@@ -9,6 +9,16 @@ pub enum ResponseMessage {
     Null,
 }
 
+impl ResponseMessage {
+    pub fn name(&self) -> &'static str {
+        match self {
+            ResponseMessage::Bool(_) => "Bool",
+            ResponseMessage::Array(_) => "Array",
+            ResponseMessage::Null => "Null",
+        }
+    }
+}
+
 impl Serialize for ResponseMessage {
     fn serialize<S>(&self, serializer: S) -> Result<S::Ok, S::Error> where S: Serializer {
         match self {
