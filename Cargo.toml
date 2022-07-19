@@ -15,8 +15,7 @@ anyhow = "1"
 
 [dependencies.snarkos]
 git = "ssh://git@github.com/ABMatrix/snarkOS.git"
-#branch = "testnet3"
-rev = "df3a23ad"
+branch = "testnet3"
 
 [dependencies.tokio]
 version = "1"
