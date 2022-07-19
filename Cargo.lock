@@ -543,9 +543,9 @@ dependencies = [
 
 [[package]]
 name = "crypto-common"
-version = "0.1.5"
+version = "0.1.6"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "2ccfd8c0ee4cce11e45b3fd6f9d5e69e0cc62912aa6a0cb1bf4617b0eba5a12f"
+checksum = "1bfb12502f3fc46cca1bb51ac28df9d618d813cdc3d2f25b9fe775a34af26bb3"
 dependencies = [
  "generic-array",
  "typenum",
@@ -890,9 +890,9 @@ dependencies = [
 
 [[package]]
 name = "hashbrown"
-version = "0.12.2"
+version = "0.12.3"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "607c8a29735385251a339424dd462993c0fed8fa09d378f259377df08c126022"
+checksum = "8a9ee70c43aaf417c914396645a0fa852624801b24ebb7ae78fe8272889ac888"
 
 [[package]]
 name = "heck"
@@ -1004,7 +1004,7 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "10a35a97730320ffe8e2d410b5d3b69279b98d2c14bdb8b70ea89ecf7888d41e"
 dependencies = [
  "autocfg",
- "hashbrown 0.12.2",
+ "hashbrown 0.12.3",
 ]
 
 [[package]]
@@ -1424,9 +1424,9 @@ dependencies = [
 
 [[package]]
 name = "os_str_bytes"
-version = "6.1.0"
+version = "6.2.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "21326818e99cfe6ce1e524c2a805c189a99b5ae555a35d19f9a284b427d86afa"
+checksum = "648001efe5d5c0102d8cea768e348da85d90af8ba91f0bea908f157951493cd4"
 
 [[package]]
 name = "parking_lot"
@@ -1936,7 +1936,7 @@ checksum = "2fd0db749597d91ff862fd1d55ea87f7855a744a8425a64695b6fca237d1dad1"
 [[package]]
 name = "snarkos"
 version = "2.0.2"
-source = "git+ssh://git@github.com/ABMatrix/snarkOS.git?branch=testnet3#491d7530facf9f4567b03dce3b1df0fa36b6f6cd"
+source = "git+ssh://git@github.com/ABMatrix/snarkOS.git?branch=testnet3#7466cc36bfa8b75cc1e60a23ad2695cdbdd4a10f"
 dependencies = [
  "aleo-std",
  "anyhow",
@@ -1963,7 +1963,7 @@ dependencies = [
 [[package]]
 name = "snarkos-environment"
 version = "2.0.2"
-source = "git+ssh://git@github.com/ABMatrix/snarkOS.git?branch=testnet3#491d7530facf9f4567b03dce3b1df0fa36b6f6cd"
+source = "git+ssh://git@github.com/ABMatrix/snarkOS.git?branch=testnet3#7466cc36bfa8b75cc1e60a23ad2695cdbdd4a10f"
 dependencies = [
  "anyhow",
  "bincode",
@@ -1982,7 +1982,7 @@ dependencies = [
 [[package]]
 name = "snarkos-network"
 version = "2.0.2"
-source = "git+ssh://git@github.com/ABMatrix/snarkOS.git?branch=testnet3#491d7530facf9f4567b03dce3b1df0fa36b6f6cd"
+source = "git+ssh://git@github.com/ABMatrix/snarkOS.git?branch=testnet3#7466cc36bfa8b75cc1e60a23ad2695cdbdd4a10f"
 dependencies = [
  "anyhow",
  "bincode",
@@ -2006,7 +2006,7 @@ dependencies = [
 [[package]]
 name = "snarkos-rpc"
 version = "2.0.2"
-source = "git+ssh://git@github.com/ABMatrix/snarkOS.git?branch=testnet3#491d7530facf9f4567b03dce3b1df0fa36b6f6cd"
+source = "git+ssh://git@github.com/ABMatrix/snarkOS.git?branch=testnet3#7466cc36bfa8b75cc1e60a23ad2695cdbdd4a10f"
 dependencies = [
  "anyhow",
  "async-trait",
@@ -2027,7 +2027,7 @@ dependencies = [
 [[package]]
 name = "snarkos-storage"
 version = "2.0.2"
-source = "git+ssh://git@github.com/ABMatrix/snarkOS.git?branch=testnet3#491d7530facf9f4567b03dce3b1df0fa36b6f6cd"
+source = "git+ssh://git@github.com/ABMatrix/snarkOS.git?branch=testnet3#7466cc36bfa8b75cc1e60a23ad2695cdbdd4a10f"
 dependencies = [
  "anyhow",
  "bincode",
@@ -2048,7 +2048,7 @@ dependencies = [
 [[package]]
 name = "snarkvm"
 version = "0.8.0"
-source = "git+ssh://git@github.com/ABMatrix/snarkVM.git?branch=testnet2#481c17a4ec2cbb773179af932a6d6fe9ccb222a2"
+source = "git+ssh://git@github.com/ABMatrix/snarkVM.git?branch=testnet2#ac02953bacf6507388a37247b3888a13a4deb54f"
 dependencies = [
  "snarkvm-dpc",
  "snarkvm-utilities",
@@ -2057,7 +2057,7 @@ dependencies = [
 [[package]]
 name = "snarkvm-algorithms"
 version = "0.8.0"
-source = "git+ssh://git@github.com/ABMatrix/snarkVM.git?branch=testnet2#481c17a4ec2cbb773179af932a6d6fe9ccb222a2"
+source = "git+ssh://git@github.com/ABMatrix/snarkVM.git?branch=testnet2#ac02953bacf6507388a37247b3888a13a4deb54f"
 dependencies = [
  "aleo-std",
  "anyhow",
@@ -2088,7 +2088,7 @@ dependencies = [
 [[package]]
 name = "snarkvm-curves"
 version = "0.8.0"
-source = "git+ssh://git@github.com/ABMatrix/snarkVM.git?branch=testnet2#481c17a4ec2cbb773179af932a6d6fe9ccb222a2"
+source = "git+ssh://git@github.com/ABMatrix/snarkVM.git?branch=testnet2#ac02953bacf6507388a37247b3888a13a4deb54f"
 dependencies = [
  "derivative",
  "rand",
@@ -2102,7 +2102,7 @@ dependencies = [
 [[package]]
 name = "snarkvm-derives"
 version = "0.8.0"
-source = "git+ssh://git@github.com/ABMatrix/snarkVM.git?branch=testnet2#481c17a4ec2cbb773179af932a6d6fe9ccb222a2"
+source = "git+ssh://git@github.com/ABMatrix/snarkVM.git?branch=testnet2#ac02953bacf6507388a37247b3888a13a4deb54f"
 dependencies = [
  "proc-macro-crate",
  "proc-macro-error",
@@ -2114,7 +2114,7 @@ dependencies = [
 [[package]]
 name = "snarkvm-dpc"
 version = "0.8.0"
-source = "git+ssh://git@github.com/ABMatrix/snarkVM.git?branch=testnet2#481c17a4ec2cbb773179af932a6d6fe9ccb222a2"
+source = "git+ssh://git@github.com/ABMatrix/snarkVM.git?branch=testnet2#ac02953bacf6507388a37247b3888a13a4deb54f"
 dependencies = [
  "anyhow",
  "base58",
@@ -2146,7 +2146,7 @@ dependencies = [
 [[package]]
 name = "snarkvm-fields"
 version = "0.8.0"
-source = "git+ssh://git@github.com/ABMatrix/snarkVM.git?branch=testnet2#481c17a4ec2cbb773179af932a6d6fe9ccb222a2"
+source = "git+ssh://git@github.com/ABMatrix/snarkVM.git?branch=testnet2#ac02953bacf6507388a37247b3888a13a4deb54f"
 dependencies = [
  "anyhow",
  "derivative",
@@ -2160,7 +2160,7 @@ dependencies = [
 [[package]]
 name = "snarkvm-gadgets"
 version = "0.8.0"
-source = "git+ssh://git@github.com/ABMatrix/snarkVM.git?branch=testnet2#481c17a4ec2cbb773179af932a6d6fe9ccb222a2"
+source = "git+ssh://git@github.com/ABMatrix/snarkVM.git?branch=testnet2#ac02953bacf6507388a37247b3888a13a4deb54f"
 dependencies = [
  "anyhow",
  "derivative",
@@ -2180,7 +2180,7 @@ dependencies = [
 [[package]]
 name = "snarkvm-marlin"
 version = "0.8.0"
-source = "git+ssh://git@github.com/ABMatrix/snarkVM.git?branch=testnet2#481c17a4ec2cbb773179af932a6d6fe9ccb222a2"
+source = "git+ssh://git@github.com/ABMatrix/snarkVM.git?branch=testnet2#ac02953bacf6507388a37247b3888a13a4deb54f"
 dependencies = [
  "bincode",
  "blake2",
@@ -2207,7 +2207,7 @@ dependencies = [
 [[package]]
 name = "snarkvm-parameters"
 version = "0.8.0"
-source = "git+ssh://git@github.com/ABMatrix/snarkVM.git?branch=testnet2#481c17a4ec2cbb773179af932a6d6fe9ccb222a2"
+source = "git+ssh://git@github.com/ABMatrix/snarkVM.git?branch=testnet2#ac02953bacf6507388a37247b3888a13a4deb54f"
 dependencies = [
  "aleo-std",
  "anyhow",
@@ -2224,7 +2224,7 @@ dependencies = [
 [[package]]
 name = "snarkvm-polycommit"
 version = "0.8.0"
-source = "git+ssh://git@github.com/ABMatrix/snarkVM.git?branch=testnet2#481c17a4ec2cbb773179af932a6d6fe9ccb222a2"
+source = "git+ssh://git@github.com/ABMatrix/snarkVM.git?branch=testnet2#ac02953bacf6507388a37247b3888a13a4deb54f"
 dependencies = [
  "derivative",
  "digest 0.9.0",
@@ -2245,12 +2245,12 @@ dependencies = [
 [[package]]
 name = "snarkvm-profiler"
 version = "0.8.0"
-source = "git+ssh://git@github.com/ABMatrix/snarkVM.git?branch=testnet2#481c17a4ec2cbb773179af932a6d6fe9ccb222a2"
+source = "git+ssh://git@github.com/ABMatrix/snarkVM.git?branch=testnet2#ac02953bacf6507388a37247b3888a13a4deb54f"
 
 [[package]]
 name = "snarkvm-r1cs"
 version = "0.8.0"
-source = "git+ssh://git@github.com/ABMatrix/snarkVM.git?branch=testnet2#481c17a4ec2cbb773179af932a6d6fe9ccb222a2"
+source = "git+ssh://git@github.com/ABMatrix/snarkVM.git?branch=testnet2#ac02953bacf6507388a37247b3888a13a4deb54f"
 dependencies = [
  "anyhow",
  "cfg-if",
@@ -2266,7 +2266,7 @@ dependencies = [
 [[package]]
 name = "snarkvm-utilities"
 version = "0.8.0"
-source = "git+ssh://git@github.com/ABMatrix/snarkVM.git?branch=testnet2#481c17a4ec2cbb773179af932a6d6fe9ccb222a2"
+source = "git+ssh://git@github.com/ABMatrix/snarkVM.git?branch=testnet2#ac02953bacf6507388a37247b3888a13a4deb54f"
 dependencies = [
  "aleo-std",
  "anyhow",
@@ -2621,9 +2621,9 @@ checksum = "099b7128301d285f79ddd55b9a83d5e6b9e97c92e0ea0daebee7263e932de992"
 
 [[package]]
 name = "unicode-ident"
-version = "1.0.1"
+version = "1.0.2"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "5bd2fe26506023ed7b5e1e315add59d6f584c621d037f9368fea9cfb988f368c"
+checksum = "15c61ba63f9235225a22310255a29b806b907c9b8c964bcbd0a2c70f3f2deea7"
 
 [[package]]
 name = "unicode-normalization"
