@@ -193,12 +193,14 @@ impl Decoder for StratumCodec {
                         Value::Null => None,
                         _ => return Err(io::Error::new(io::ErrorKind::InvalidData, "Invalid params")),
                     };
-                    StratumMessage::Subscribe(
+                    let msg = StratumMessage::Subscribe(
                         id.unwrap_or(Id::Num(0)),
                         user_agent.to_string(),
                         protocol_version.to_string(),
                         session_id.cloned(),
-                    )
+                    );
+                    drop(params);
+                    msg
                 }
                 "mining.authorize" => {
                     if params.len() != 3 {
@@ -211,18 +213,21 @@ impl Decoder for StratumCodec {
                         Value::Null => None,
                         _ => return Err(io::Error::new(io::ErrorKind::InvalidData, "Invalid params")),
                     };
-                    StratumMessage::Authorize(
+                    let msg = StratumMessage::Authorize(
                         id.unwrap_or(Id::Num(0)),
                         account_name.to_string(),
                         miner_name.to_string(),
                         worker_password.cloned(),
-                    )
+                    );
+                    drop(params);
+                    msg
                 }
                 "mining.set_target" => {
                     if params.len() != 1 {
                         return Err(io::Error::new(io::ErrorKind::InvalidData, "Invalid params"));
                     }
                     let difficulty_target = params[0].as_u64().unwrap_or_default();
+                    drop(params);
                     StratumMessage::SetTarget(difficulty_target)
                 }
                 "mining.notify" => {
@@ -236,7 +241,8 @@ impl Decoder for StratumCodec {
                     let hashed_leaves_3 = params[4].as_str().unwrap_or_default();
                     let hashed_leaves_4 = params[5].as_str().unwrap_or_default();
                     let clean_jobs = params[6].as_bool().unwrap_or(true);
-                    StratumMessage::Notify(
+
+                    let msg = StratumMessage::Notify(
                         job_id.to_string(),
                         block_header_root.to_string(),
                         hashed_leaves_1.to_string(),
@@ -244,7 +250,9 @@ impl Decoder for StratumCodec {
                         hashed_leaves_3.to_string(),
                         hashed_leaves_4.to_string(),
                         clean_jobs,
-                    )
+                    );
+                    drop(params);
+                    msg
                 }
                 "mining.submit" => {
                     if params.len() != 3 {
@@ -254,14 +262,18 @@ impl Decoder for StratumCodec {
                     let job_id = params[0].as_str().unwrap_or_default();
                     let nonce = params[1].as_str().unwrap_or_default();
                     let proof = params[2].as_str().unwrap_or_default();
-                    StratumMessage::Submit(
+
+                    let msg = StratumMessage::Submit(
                         id.unwrap_or(Id::Num(0)),
                         job_id.to_string(),
                         nonce.to_string(),
                         proof.to_string(),
-                    )
+                    );
+                    drop(params);
+                    msg
                 }
                 _ => {
+                    drop(params);
                     return Err(io::Error::new(io::ErrorKind::InvalidData, "Unknown method"));
                 }
             }
@@ -327,7 +339,7 @@ fn test_encode_decode() {
     assert_eq!(buf1, buf2);
 
     // Submit
-    let msg = StratumMessage::Submit(Id::Num(0),"job_id".to_string(), "nonce".to_string(), "proof".to_string());
+    let msg = StratumMessage::Submit(Id::Num(0), "job_id".to_string(), "nonce".to_string(), "proof".to_string());
     let mut buf1 = BytesMut::new();
     codec.encode(msg, &mut buf1).unwrap();
     let res = codec.decode(&mut buf1.clone()).unwrap().unwrap();
