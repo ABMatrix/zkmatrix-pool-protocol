@@ -7,6 +7,7 @@ use serde_json::Value;
 use tokio_util::codec::{AnyDelimiterCodec, Decoder, Encoder};
 use super::response::ResponseMessage;
 use serde::{Serialize, Deserialize};
+use crate::message::pool_errors::PoolError::{InvalidProof, StaleProof};
 
 pub enum StratumMessage {
     /// This first version doesn't support vhosts.
@@ -284,6 +285,29 @@ impl Decoder for StratumCodec {
     }
 }
 
+fn unwrap_str_value(value: &Value) -> Result<String, io::Error> {
+    match value {
+        Value::String(s) => Ok(s.clone()),
+        _ => Err(io::Error::new(io::ErrorKind::InvalidData, "Param is not str")),
+    }
+}
+
+fn unwrap_bool_value(value: &Value) -> Result<bool, io::Error> {
+    match value {
+        Value::Bool(b) => Ok(*b),
+        _ => Err(io::Error::new(io::ErrorKind::InvalidData, "Param is not bool")),
+    }
+}
+
+fn unwrap_u64_value(value: &Value) -> Result<u64, io::Error> {
+    match value {
+        Value::Number(n) => Ok(n
+            .as_u64()
+            .ok_or_else(|| io::Error::new(io::ErrorKind::InvalidData, "Param is not u64"))?),
+        _ => Err(io::Error::new(io::ErrorKind::InvalidData, "Param is not u64")),
+    }
+}
+
 #[test]
 fn test_encode_decode() {
     let mut codec = StratumCodec::default();
@@ -342,34 +366,13 @@ fn test_encode_decode() {
     assert_eq!(buf1, buf2);
 
     // Response(Id, Option<ResponseMessage>, Option<Error<()>>),
-    let msg = StratumMessage::Response(Id::Num(0), None, Some(Error::with_custom_msg(ErrorCode::InvalidParams, "test error")));
+    let error = Error::with_custom_msg(ErrorCode::InvalidParams, &InvalidProof(Some("test error".to_string())).to_string());
+    println!("{}", error.message);
+    let msg = StratumMessage::Response(Id::Num(0), None, Some(error));
     let mut buf1 = BytesMut::new();
     codec.encode(msg, &mut buf1).unwrap();
     let res = codec.decode(&mut buf1.clone()).unwrap().unwrap();
     let mut buf2 = BytesMut::new();
     codec.encode(res, &mut buf2).unwrap();
     assert_eq!(buf1, buf2);
-}
-
-fn unwrap_str_value(value: &Value) -> Result<String, io::Error> {
-    match value {
-        Value::String(s) => Ok(s.clone()),
-        _ => Err(io::Error::new(io::ErrorKind::InvalidData, "Param is not str")),
-    }
-}
-
-fn unwrap_bool_value(value: &Value) -> Result<bool, io::Error> {
-    match value {
-        Value::Bool(b) => Ok(*b),
-        _ => Err(io::Error::new(io::ErrorKind::InvalidData, "Param is not bool")),
-    }
-}
-
-fn unwrap_u64_value(value: &Value) -> Result<u64, io::Error> {
-    match value {
-        Value::Number(n) => Ok(n
-            .as_u64()
-            .ok_or_else(|| io::Error::new(io::ErrorKind::InvalidData, "Param is not u64"))?),
-        _ => Err(io::Error::new(io::ErrorKind::InvalidData, "Param is not u64")),
-    }
 }
