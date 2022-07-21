@@ -1,5 +1,4 @@
 use super::response::ResponseMessage;
-use crate::{MIN_SUPPORTED_PROTOCOL_VERSION, PROTOCOL_PREFIX};
 use bytes::BytesMut;
 use json_rpc_types::{Error, Id, Request, Response, Version};
 use serde::{Deserialize, Serialize};
@@ -412,6 +411,7 @@ fn test_encode_decode() {
 
 #[test]
 fn test_request() {
+    use crate::{MIN_SUPPORTED_PROTOCOL_VERSION, PROTOCOL_PREFIX};
     let request = Request {
         jsonrpc: Version::V2,
         method: "mining.subscribe",
