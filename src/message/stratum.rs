@@ -1,8 +1,6 @@
 use std::io;
 use bytes::BytesMut;
 use json_rpc_types::{Error, Id, Request, Response, Version};
-#[cfg(test)]
-use json_rpc_types::ErrorCode;
 use serde_json::Value;
 use tokio_util::codec::{AnyDelimiterCodec, Decoder, Encoder};
 use super::response::ResponseMessage;
@@ -311,6 +309,8 @@ fn unwrap_u64_value(value: &Value) -> Result<u64, io::Error> {
 #[test]
 fn test_encode_decode() {
     use crate::message::pool_errors::PoolError::{InvalidProof};
+    use json_rpc_types::ErrorCode;
+
     let mut codec = StratumCodec::default();
     //Subscribe
     let msg = StratumMessage::Subscribe(Id::Num(0), "ABMatrix_Aleo_Miner".to_string(), "ABMatrix_Aleo_Miner_4".to_string(), Some("session".to_string()));
@@ -368,7 +368,6 @@ fn test_encode_decode() {
 
     // Response(Id, Option<ResponseMessage>, Option<Error<()>>),
     let error = Error::with_custom_msg(ErrorCode::InvalidParams, &InvalidProof(Some("test error".to_string())).to_string());
-    println!("{}", error.message);
     let msg = StratumMessage::Response(Id::Num(0), None, Some(error));
     let mut buf1 = BytesMut::new();
     codec.encode(msg, &mut buf1).unwrap();
