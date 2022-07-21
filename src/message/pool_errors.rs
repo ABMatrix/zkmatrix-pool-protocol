@@ -3,8 +3,11 @@ use anyhow::anyhow;
 
 #[derive(Clone, Debug, PartialEq)]
 pub enum PoolError {
+    /// StaleProof usually occurs when the height is switched and the old proof is submitted
     StaleProof,
+    /// InvalidProof(reason_message)
     InvalidProof(Option<String>),
+    /// ServerNotReady usually occurs when the server is started
     ServerNotReady,
     InternalServerError,
 }

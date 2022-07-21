@@ -8,7 +8,6 @@ use serde::{Serialize, Deserialize};
 
 
 pub enum StratumMessage {
-    /// This first version doesn't support vhosts.
     /// (id, user_agent, protocol_version, session_id)
     Subscribe(Id, String, String, Option<String>),
 
@@ -20,13 +19,11 @@ pub enum StratumMessage {
     SetTarget(u64),
 
     /// New job from the mining pool.
-    /// See protocol specification for details about the fields.
     /// (job_id, block_header_root, hashed_leaves_1, hashed_leaves_2, hashed_leaves_3,
     ///  hashed_leaves_4, clean_jobs)
     Notify(String, String, String, String, String, String, bool),
 
     /// Submit shares to the pool.
-    /// See protocol specification for details about the fields.
     /// (id, job_id, nonce, proof)
     Submit(Id, String, String, String),
 
@@ -54,7 +51,6 @@ pub struct StratumCodec {
 impl Default for StratumCodec {
     fn default() -> Self {
         Self {
-            // Notify is ~400 bytes and submitt is about ~1750 bytes. 4096 should be enough for all messages.
             codec: AnyDelimiterCodec::new_with_max_length(vec![b'\n'], vec![b'\n'], 4096),
         }
     }
