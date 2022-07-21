@@ -7,7 +7,7 @@ use serde_json::Value;
 use tokio_util::codec::{AnyDelimiterCodec, Decoder, Encoder};
 use super::response::ResponseMessage;
 use serde::{Serialize, Deserialize};
-use crate::message::pool_errors::PoolError::{InvalidProof, StaleProof};
+
 
 pub enum StratumMessage {
     /// This first version doesn't support vhosts.
@@ -310,6 +310,7 @@ fn unwrap_u64_value(value: &Value) -> Result<u64, io::Error> {
 
 #[test]
 fn test_encode_decode() {
+    use crate::message::pool_errors::PoolError::{InvalidProof};
     let mut codec = StratumCodec::default();
     //Subscribe
     let msg = StratumMessage::Subscribe(Id::Num(0), "ABMatrix_Aleo_Miner".to_string(), "ABMatrix_Aleo_Miner_4".to_string(), Some("session".to_string()));

@@ -13,17 +13,9 @@ bytes = "1.1.0"
 semver = "1.0.12"
 anyhow = "1"
 
-[dependencies.snarkos]
-git = "ssh://git@github.com/ABMatrix/snarkOS.git"
-branch = "testnet3"
-
 [dependencies.tokio]
 version = "1"
 features = ["sync"]
-
-[dependencies.snarkvm]
-git = "ssh://git@github.com/ABMatrix/snarkVM.git"
-branch = "testnet2"
 
 [dependencies.tokio-util]
 version = "0.7.3"
