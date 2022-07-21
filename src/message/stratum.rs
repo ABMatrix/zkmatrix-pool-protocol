@@ -1,11 +1,11 @@
-use std::io;
+use super::response::ResponseMessage;
+use crate::{MIN_SUPPORTED_PROTOCOL_VERSION, PROTOCOL_PREFIX};
 use bytes::BytesMut;
 use json_rpc_types::{Error, Id, Request, Response, Version};
+use serde::{Deserialize, Serialize};
 use serde_json::Value;
+use std::io;
 use tokio_util::codec::{AnyDelimiterCodec, Decoder, Encoder};
-use super::response::ResponseMessage;
-use serde::{Serialize, Deserialize};
-
 
 pub enum StratumMessage {
     /// (id, user_agent, protocol_version, session_id)
@@ -45,7 +45,7 @@ impl StratumMessage {
 }
 
 pub struct StratumCodec {
-    codec: AnyDelimiterCodec,
+    pub codec: AnyDelimiterCodec,
 }
 
 impl Default for StratumCodec {
@@ -137,13 +137,17 @@ impl Encoder<StratumMessage> for StratumCodec {
                     serde_json::to_vec(&response).unwrap_or_default()
                 }
                 None => {
-                    let response = Response::<Option<ResponseMessage>, ()>::result(Version::V2, result, Some(id));
+                    let response = Response::<Option<ResponseMessage>, ()>::result(
+                        Version::V2,
+                        result,
+                        Some(id),
+                    );
                     serde_json::to_vec(&response).unwrap_or_default()
                 }
             },
         };
-        let string =
-            std::str::from_utf8(&bytes).map_err(|e| io::Error::new(io::ErrorKind::InvalidData, e.to_string()))?;
+        let string = std::str::from_utf8(&bytes)
+            .map_err(|e| io::Error::new(io::ErrorKind::InvalidData, e.to_string()))?;
         self.codec
             .encode(string, dst)
             .map_err(|e| io::Error::new(io::ErrorKind::InvalidData, e.to_string()))?;
@@ -190,7 +194,12 @@ impl Decoder for StratumCodec {
                     let session_id = match &params[2] {
                         Value::String(s) => Some(s),
                         Value::Null => None,
-                        _ => return Err(io::Error::new(io::ErrorKind::InvalidData, "Invalid params")),
+                        _ => {
+                            return Err(io::Error::new(
+                                io::ErrorKind::InvalidData,
+                                "Invalid params",
+                            ))
+                        }
                     };
                     StratumMessage::Subscribe(
                         id.unwrap_or(Id::Num(0)),
@@ -208,7 +217,12 @@ impl Decoder for StratumCodec {
                     let worker_password = match &params[2] {
                         Value::String(s) => Some(s),
                         Value::Null => None,
-                        _ => return Err(io::Error::new(io::ErrorKind::InvalidData, "Invalid params")),
+                        _ => {
+                            return Err(io::Error::new(
+                                io::ErrorKind::InvalidData,
+                                "Invalid params",
+                            ))
+                        }
                     };
                     StratumMessage::Authorize(
                         id.unwrap_or(Id::Num(0)),
@@ -255,12 +269,7 @@ impl Decoder for StratumCodec {
                     let nonce = unwrap_str_value(&params[1])?;
                     let proof = unwrap_str_value(&params[2])?;
 
-                    StratumMessage::Submit(
-                        id.unwrap_or(Id::Num(0)),
-                        job_id,
-                        nonce,
-                        proof,
-                    )
+                    StratumMessage::Submit(id.unwrap_or(Id::Num(0)), job_id, nonce, proof)
                 }
                 _ => {
                     return Err(io::Error::new(io::ErrorKind::InvalidData, "Unknown method"));
@@ -271,7 +280,9 @@ impl Decoder for StratumCodec {
                 .map_err(|e| io::Error::new(io::ErrorKind::InvalidData, e.to_string()))?;
             let id = response.id;
             match response.payload {
-                Ok(payload) => StratumMessage::Response(id.unwrap_or(Id::Num(0)), Some(payload), None),
+                Ok(payload) => {
+                    StratumMessage::Response(id.unwrap_or(Id::Num(0)), Some(payload), None)
+                }
                 Err(error) => StratumMessage::Response(id.unwrap_or(Id::Num(0)), None, Some(error)),
             }
         };
@@ -282,14 +293,20 @@ impl Decoder for StratumCodec {
 fn unwrap_str_value(value: &Value) -> Result<String, io::Error> {
     match value {
         Value::String(s) => Ok(s.clone()),
-        _ => Err(io::Error::new(io::ErrorKind::InvalidData, "Param is not str")),
+        _ => Err(io::Error::new(
+            io::ErrorKind::InvalidData,
+            "Param is not str",
+        )),
     }
 }
 
 fn unwrap_bool_value(value: &Value) -> Result<bool, io::Error> {
     match value {
         Value::Bool(b) => Ok(*b),
-        _ => Err(io::Error::new(io::ErrorKind::InvalidData, "Param is not bool")),
+        _ => Err(io::Error::new(
+            io::ErrorKind::InvalidData,
+            "Param is not bool",
+        )),
     }
 }
 
@@ -298,18 +315,26 @@ fn unwrap_u64_value(value: &Value) -> Result<u64, io::Error> {
         Value::Number(n) => Ok(n
             .as_u64()
             .ok_or_else(|| io::Error::new(io::ErrorKind::InvalidData, "Param is not u64"))?),
-        _ => Err(io::Error::new(io::ErrorKind::InvalidData, "Param is not u64")),
+        _ => Err(io::Error::new(
+            io::ErrorKind::InvalidData,
+            "Param is not u64",
+        )),
     }
 }
 
 #[test]
 fn test_encode_decode() {
-    use crate::message::pool_errors::PoolError::{InvalidProof};
+    use crate::message::pool_errors::PoolError::InvalidProof;
     use json_rpc_types::ErrorCode;
 
     let mut codec = StratumCodec::default();
     //Subscribe
-    let msg = StratumMessage::Subscribe(Id::Num(0), "ABMatrix_Aleo_Miner".to_string(), "ABMatrix_Aleo_Miner_4".to_string(), Some("session".to_string()));
+    let msg = StratumMessage::Subscribe(
+        Id::Num(0),
+        "ABMatrix_Aleo_Miner".to_string(),
+        "ABMatrix_Aleo_Miner_4".to_string(),
+        Some("session".to_string()),
+    );
     let mut buf1 = BytesMut::new();
     codec.encode(msg, &mut buf1).unwrap();
     let res = codec.decode(&mut buf1.clone()).unwrap().unwrap();
@@ -317,9 +342,13 @@ fn test_encode_decode() {
     codec.encode(res, &mut buf2).unwrap();
     assert_eq!(buf1, buf2);
 
-
     //Authorize
-    let msg = StratumMessage::Authorize(Id::Num(0), "account_name".to_string(), "worker_name".to_string(), None);
+    let msg = StratumMessage::Authorize(
+        Id::Num(0),
+        "account_name".to_string(),
+        "worker_name".to_string(),
+        None,
+    );
     let mut buf1 = BytesMut::new();
     codec.encode(msg, &mut buf1).unwrap();
     let res = codec.decode(&mut buf1.clone()).unwrap().unwrap();
@@ -354,7 +383,12 @@ fn test_encode_decode() {
     assert_eq!(buf1, buf2);
 
     // Submit
-    let msg = StratumMessage::Submit(Id::Num(0), "job_id".to_string(), "nonce".to_string(), "proof".to_string());
+    let msg = StratumMessage::Submit(
+        Id::Num(0),
+        "job_id".to_string(),
+        "nonce".to_string(),
+        "proof".to_string(),
+    );
     let mut buf1 = BytesMut::new();
     codec.encode(msg, &mut buf1).unwrap();
     let res = codec.decode(&mut buf1.clone()).unwrap().unwrap();
@@ -363,7 +397,10 @@ fn test_encode_decode() {
     assert_eq!(buf1, buf2);
 
     // Response(Id, Option<ResponseMessage>, Option<Error<()>>),
-    let error = Error::with_custom_msg(ErrorCode::InvalidParams, &InvalidProof(Some("test error".to_string())).to_string());
+    let error = Error::with_custom_msg(
+        ErrorCode::InvalidParams,
+        &InvalidProof(Some("test error".to_string())).to_string(),
+    );
     let msg = StratumMessage::Response(Id::Num(0), None, Some(error));
     let mut buf1 = BytesMut::new();
     codec.encode(msg, &mut buf1).unwrap();
@@ -371,4 +408,31 @@ fn test_encode_decode() {
     let mut buf2 = BytesMut::new();
     codec.encode(res, &mut buf2).unwrap();
     assert_eq!(buf1, buf2);
+}
+
+#[test]
+fn test_request() {
+    let request = Request {
+        jsonrpc: Version::V2,
+        method: "mining.subscribe",
+        params: Some(SubscribeParams(
+            "ABMatrix_ZKWork_Miner".to_string(),
+            format!("{}/{}", PROTOCOL_PREFIX, MIN_SUPPORTED_PROTOCOL_VERSION),
+            None,
+        )),
+        id: Some(Id::Num(0)),
+    };
+    let vec1 = serde_json::to_vec(&request).unwrap_or_default();
+
+    let string = std::str::from_utf8(&vec1)
+        .map_err(|e| io::Error::new(io::ErrorKind::InvalidData, e.to_string()))
+        .unwrap();
+    println!("{:?}", string);
+    let mut buf = bytes::BytesMut::new();
+    StratumCodec::default()
+        .codec
+        .encode(string, &mut buf)
+        .map_err(|e| io::Error::new(io::ErrorKind::InvalidData, e.to_string()))
+        .unwrap();
+    println!("{:?}", buf)
 }

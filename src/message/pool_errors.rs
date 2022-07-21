@@ -1,5 +1,5 @@
-use std::str::FromStr;
 use anyhow::anyhow;
+use std::str::FromStr;
 
 #[derive(Clone, Debug, PartialEq)]
 pub enum PoolError {
@@ -50,7 +50,7 @@ impl FromStr for PoolError {
         } else if s.starts_with(&Self::ServerNotReady.name()) {
             Ok(Self::ServerNotReady)
         } else {
-            Err(anyhow!(format!("Unsupported message: {}",s)))
+            Err(anyhow!(format!("Unsupported message: {}", s)))
         }
     }
 }
@@ -61,7 +61,7 @@ impl PoolError {
             PoolError::StaleProof => 1,
             PoolError::InvalidProof(..) => 2,
             PoolError::ServerNotReady => 3,
-            PoolError::InternalServerError => 100
+            PoolError::InternalServerError => 100,
         }
     }
 
@@ -81,31 +81,31 @@ fn test_pool_errors() {
     let m1 = e1.to_string();
     let e1_r = PoolError::from_str(&m1).unwrap();
     assert_eq!(e1, e1_r);
-    assert_eq!(&m1,e1.name());
+    assert_eq!(&m1, e1.name());
 
     let e2 = PoolError::InvalidProof(None);
     let m2 = e2.to_string();
     let e2_r = PoolError::from_str(&m2).unwrap();
     assert_eq!(e2, e2_r);
-    assert_eq!(&m2,e2.name());
+    assert_eq!(&m2, e2.name());
 
     let e3 = PoolError::InvalidProof(Some("test error".to_string()));
     let m3 = e3.to_string();
     let e3_r = PoolError::from_str(&m3).unwrap();
     assert_eq!(e3, e3_r);
-    assert_eq!(&m3,&format!("{}test error",e3.name()));
+    assert_eq!(&m3, &format!("{}test error", e3.name()));
 
     let e4 = PoolError::StaleProof;
     let m4 = e4.to_string();
     let e4_r = PoolError::from_str(&m4).unwrap();
     assert_eq!(e4, e4_r);
-    assert_eq!(&m4,e4.name());
+    assert_eq!(&m4, e4.name());
 
     let e5 = PoolError::ServerNotReady;
     let m5 = e5.to_string();
     let e5_r = PoolError::from_str(&m5).unwrap();
     assert_eq!(e5, e5_r);
-    assert_eq!(&m5,e5.name());
+    assert_eq!(&m5, e5.name());
 
     let res = PoolError::from_str("test");
     assert!(res.is_err())

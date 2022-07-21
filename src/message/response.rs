@@ -1,7 +1,7 @@
+use erased_serde::Serialize as ErasedSerialize;
 use serde::ser::{Serialize, SerializeSeq};
 use serde::{Deserialize, Deserializer, Serializer};
 use serde_json::Value;
-use erased_serde::Serialize as ErasedSerialize;
 
 pub enum ResponseMessage {
     Bool(bool),
@@ -20,7 +20,10 @@ impl ResponseMessage {
 }
 
 impl Serialize for ResponseMessage {
-    fn serialize<S>(&self, serializer: S) -> Result<S::Ok, S::Error> where S: Serializer {
+    fn serialize<S>(&self, serializer: S) -> Result<S::Ok, S::Error>
+    where
+        S: Serializer,
+    {
         match self {
             ResponseMessage::Bool(ok) => serializer.serialize_bool(*ok),
             ResponseMessage::Array(v) => {
@@ -37,8 +40,8 @@ impl Serialize for ResponseMessage {
 
 impl<'de> Deserialize<'de> for ResponseMessage {
     fn deserialize<D>(deserializer: D) -> Result<Self, D::Error>
-        where
-            D: Deserializer<'de>,
+    where
+        D: Deserializer<'de>,
     {
         let value = Value::deserialize(deserializer)?;
         match value {
@@ -57,4 +60,3 @@ impl<'de> Deserialize<'de> for ResponseMessage {
         }
     }
 }
-
