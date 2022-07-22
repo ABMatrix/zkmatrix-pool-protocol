@@ -35,4 +35,4 @@ features = ["codec"]
 
 [[example]]
 name = "connect"
-path = "src/examples/connect.rs"
+path = "./examples/connect.rs"

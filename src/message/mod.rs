@@ -1,3 +1,3 @@
-pub mod pool_errors;
+pub mod error;
 pub mod response;
 pub mod stratum;

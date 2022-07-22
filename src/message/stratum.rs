@@ -323,7 +323,7 @@ fn unwrap_u64_value(value: &Value) -> Result<u64, io::Error> {
 
 #[test]
 fn test_encode_decode() {
-    use crate::message::pool_errors::PoolError::InvalidProof;
+    use crate::message::error::PoolError::InvalidProof;
     use json_rpc_types::ErrorCode;
 
     let mut codec = StratumCodec::default();
