@@ -2939,7 +2939,7 @@ dependencies = [
 ]
 
 [[package]]
-name = "zkwork-pool-protocol"
+name = "zkmatrix-pool-protocol"
 version = "0.1.0"
 dependencies = [
  "anyhow",

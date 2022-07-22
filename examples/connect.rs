@@ -6,9 +6,9 @@ use tokio::sync::mpsc;
 use tokio::task;
 use tokio::time::sleep;
 use tokio_util::codec::Framed;
-use zkwork_pool_protocol::message::response::ResponseMessage;
-use zkwork_pool_protocol::message::stratum::{StratumCodec, StratumMessage};
-use zkwork_pool_protocol::CURRENT_PROTOCOL_VERSION;
+use zkmatrix_pool_protocol::message::response::ResponseMessage;
+use zkmatrix_pool_protocol::message::stratum::{StratumCodec, StratumMessage};
+use zkmatrix_pool_protocol::CURRENT_PROTOCOL_VERSION;
 
 #[tokio::main]
 async fn main() {
