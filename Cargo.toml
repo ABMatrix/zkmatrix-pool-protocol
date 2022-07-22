@@ -22,12 +22,12 @@ futures-util = "0.3"
 vergen = { version = "7.2.1", default-features = false, features = ["build"] }
 
 [dependencies.snarkos]
-git = "ssh://git@github.com/ABMatrix/snarkOS.git"
-branch = "testnet3"
+git = "https://github.com/ABMatrix/snarkOS.git"
+branch = "ABMatrix/testnet3"
 
 [dependencies.snarkvm]
-git = "ssh://git@github.com/ABMatrix/snarkVM.git"
-branch = "testnet2"
+git = "https://github.com/ABMatrix/snarkVM.git"
+branch = "ABMatrix/testnet2"
 
 [dependencies.tokio-util]
 version = "0.7.3"

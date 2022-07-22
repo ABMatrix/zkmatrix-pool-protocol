@@ -1977,7 +1977,7 @@ checksum = "2fd0db749597d91ff862fd1d55ea87f7855a744a8425a64695b6fca237d1dad1"
 [[package]]
 name = "snarkos"
 version = "2.0.2"
-source = "git+ssh://git@github.com/ABMatrix/snarkOS.git?branch=testnet3#6f79285cb967df9f57e277a76a0d90beb2d3b5dc"
+source = "git+https://github.com/ABMatrix/snarkOS.git?branch=ABMatrix/testnet3#48045088f34ff596ecbfca23e3a5a9f1a47d2eb5"
 dependencies = [
  "aleo-std",
  "anyhow",
@@ -2004,7 +2004,7 @@ dependencies = [
 [[package]]
 name = "snarkos-environment"
 version = "2.0.2"
-source = "git+ssh://git@github.com/ABMatrix/snarkOS.git?branch=testnet3#6f79285cb967df9f57e277a76a0d90beb2d3b5dc"
+source = "git+https://github.com/ABMatrix/snarkOS.git?branch=ABMatrix/testnet3#48045088f34ff596ecbfca23e3a5a9f1a47d2eb5"
 dependencies = [
  "anyhow",
  "bincode",
@@ -2023,7 +2023,7 @@ dependencies = [
 [[package]]
 name = "snarkos-network"
 version = "2.0.2"
-source = "git+ssh://git@github.com/ABMatrix/snarkOS.git?branch=testnet3#6f79285cb967df9f57e277a76a0d90beb2d3b5dc"
+source = "git+https://github.com/ABMatrix/snarkOS.git?branch=ABMatrix/testnet3#48045088f34ff596ecbfca23e3a5a9f1a47d2eb5"
 dependencies = [
  "anyhow",
  "bincode",
@@ -2047,7 +2047,7 @@ dependencies = [
 [[package]]
 name = "snarkos-rpc"
 version = "2.0.2"
-source = "git+ssh://git@github.com/ABMatrix/snarkOS.git?branch=testnet3#6f79285cb967df9f57e277a76a0d90beb2d3b5dc"
+source = "git+https://github.com/ABMatrix/snarkOS.git?branch=ABMatrix/testnet3#48045088f34ff596ecbfca23e3a5a9f1a47d2eb5"
 dependencies = [
  "anyhow",
  "async-trait",
@@ -2068,7 +2068,7 @@ dependencies = [
 [[package]]
 name = "snarkos-storage"
 version = "2.0.2"
-source = "git+ssh://git@github.com/ABMatrix/snarkOS.git?branch=testnet3#6f79285cb967df9f57e277a76a0d90beb2d3b5dc"
+source = "git+https://github.com/ABMatrix/snarkOS.git?branch=ABMatrix/testnet3#48045088f34ff596ecbfca23e3a5a9f1a47d2eb5"
 dependencies = [
  "anyhow",
  "bincode",
@@ -2089,7 +2089,7 @@ dependencies = [
 [[package]]
 name = "snarkvm"
 version = "0.8.0"
-source = "git+ssh://git@github.com/ABMatrix/snarkVM.git?branch=testnet2#ac02953bacf6507388a37247b3888a13a4deb54f"
+source = "git+https://github.com/ABMatrix/snarkVM.git?branch=ABMatrix/testnet2#ac02953bacf6507388a37247b3888a13a4deb54f"
 dependencies = [
  "snarkvm-dpc",
  "snarkvm-utilities",
@@ -2098,7 +2098,7 @@ dependencies = [
 [[package]]
 name = "snarkvm-algorithms"
 version = "0.8.0"
-source = "git+ssh://git@github.com/ABMatrix/snarkVM.git?branch=testnet2#ac02953bacf6507388a37247b3888a13a4deb54f"
+source = "git+https://github.com/ABMatrix/snarkVM.git?branch=ABMatrix/testnet2#ac02953bacf6507388a37247b3888a13a4deb54f"
 dependencies = [
  "aleo-std",
  "anyhow",
@@ -2129,7 +2129,7 @@ dependencies = [
 [[package]]
 name = "snarkvm-curves"
 version = "0.8.0"
-source = "git+ssh://git@github.com/ABMatrix/snarkVM.git?branch=testnet2#ac02953bacf6507388a37247b3888a13a4deb54f"
+source = "git+https://github.com/ABMatrix/snarkVM.git?branch=ABMatrix/testnet2#ac02953bacf6507388a37247b3888a13a4deb54f"
 dependencies = [
  "derivative",
  "rand",
@@ -2143,7 +2143,7 @@ dependencies = [
 [[package]]
 name = "snarkvm-derives"
 version = "0.8.0"
-source = "git+ssh://git@github.com/ABMatrix/snarkVM.git?branch=testnet2#ac02953bacf6507388a37247b3888a13a4deb54f"
+source = "git+https://github.com/ABMatrix/snarkVM.git?branch=ABMatrix/testnet2#ac02953bacf6507388a37247b3888a13a4deb54f"
 dependencies = [
  "proc-macro-crate",
  "proc-macro-error",
@@ -2155,7 +2155,7 @@ dependencies = [
 [[package]]
 name = "snarkvm-dpc"
 version = "0.8.0"
-source = "git+ssh://git@github.com/ABMatrix/snarkVM.git?branch=testnet2#ac02953bacf6507388a37247b3888a13a4deb54f"
+source = "git+https://github.com/ABMatrix/snarkVM.git?branch=ABMatrix/testnet2#ac02953bacf6507388a37247b3888a13a4deb54f"
 dependencies = [
  "anyhow",
  "base58",
@@ -2187,7 +2187,7 @@ dependencies = [
 [[package]]
 name = "snarkvm-fields"
 version = "0.8.0"
-source = "git+ssh://git@github.com/ABMatrix/snarkVM.git?branch=testnet2#ac02953bacf6507388a37247b3888a13a4deb54f"
+source = "git+https://github.com/ABMatrix/snarkVM.git?branch=ABMatrix/testnet2#ac02953bacf6507388a37247b3888a13a4deb54f"
 dependencies = [
  "anyhow",
  "derivative",
@@ -2201,7 +2201,7 @@ dependencies = [
 [[package]]
 name = "snarkvm-gadgets"
 version = "0.8.0"
-source = "git+ssh://git@github.com/ABMatrix/snarkVM.git?branch=testnet2#ac02953bacf6507388a37247b3888a13a4deb54f"
+source = "git+https://github.com/ABMatrix/snarkVM.git?branch=ABMatrix/testnet2#ac02953bacf6507388a37247b3888a13a4deb54f"
 dependencies = [
  "anyhow",
  "derivative",
@@ -2221,7 +2221,7 @@ dependencies = [
 [[package]]
 name = "snarkvm-marlin"
 version = "0.8.0"
-source = "git+ssh://git@github.com/ABMatrix/snarkVM.git?branch=testnet2#ac02953bacf6507388a37247b3888a13a4deb54f"
+source = "git+https://github.com/ABMatrix/snarkVM.git?branch=ABMatrix/testnet2#ac02953bacf6507388a37247b3888a13a4deb54f"
 dependencies = [
  "bincode",
  "blake2",
@@ -2248,7 +2248,7 @@ dependencies = [
 [[package]]
 name = "snarkvm-parameters"
 version = "0.8.0"
-source = "git+ssh://git@github.com/ABMatrix/snarkVM.git?branch=testnet2#ac02953bacf6507388a37247b3888a13a4deb54f"
+source = "git+https://github.com/ABMatrix/snarkVM.git?branch=ABMatrix/testnet2#ac02953bacf6507388a37247b3888a13a4deb54f"
 dependencies = [
  "aleo-std",
  "anyhow",
@@ -2265,7 +2265,7 @@ dependencies = [
 [[package]]
 name = "snarkvm-polycommit"
 version = "0.8.0"
-source = "git+ssh://git@github.com/ABMatrix/snarkVM.git?branch=testnet2#ac02953bacf6507388a37247b3888a13a4deb54f"
+source = "git+https://github.com/ABMatrix/snarkVM.git?branch=ABMatrix/testnet2#ac02953bacf6507388a37247b3888a13a4deb54f"
 dependencies = [
  "derivative",
  "digest 0.9.0",
@@ -2286,12 +2286,12 @@ dependencies = [
 [[package]]
 name = "snarkvm-profiler"
 version = "0.8.0"
-source = "git+ssh://git@github.com/ABMatrix/snarkVM.git?branch=testnet2#ac02953bacf6507388a37247b3888a13a4deb54f"
+source = "git+https://github.com/ABMatrix/snarkVM.git?branch=ABMatrix/testnet2#ac02953bacf6507388a37247b3888a13a4deb54f"
 
 [[package]]
 name = "snarkvm-r1cs"
 version = "0.8.0"
-source = "git+ssh://git@github.com/ABMatrix/snarkVM.git?branch=testnet2#ac02953bacf6507388a37247b3888a13a4deb54f"
+source = "git+https://github.com/ABMatrix/snarkVM.git?branch=ABMatrix/testnet2#ac02953bacf6507388a37247b3888a13a4deb54f"
 dependencies = [
  "anyhow",
  "cfg-if",
@@ -2307,7 +2307,7 @@ dependencies = [
 [[package]]
 name = "snarkvm-utilities"
 version = "0.8.0"
-source = "git+ssh://git@github.com/ABMatrix/snarkVM.git?branch=testnet2#ac02953bacf6507388a37247b3888a13a4deb54f"
+source = "git+https://github.com/ABMatrix/snarkVM.git?branch=ABMatrix/testnet2#ac02953bacf6507388a37247b3888a13a4deb54f"
 dependencies = [
  "aleo-std",
  "anyhow",
