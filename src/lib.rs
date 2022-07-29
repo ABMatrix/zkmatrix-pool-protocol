@@ -4,7 +4,6 @@ extern crate lazy_static;
 
 use semver::Version;
 
-pub mod environment;
 pub mod message;
 
 pub static PROTOCOL_PREFIX: &str = "ABMatrix";
