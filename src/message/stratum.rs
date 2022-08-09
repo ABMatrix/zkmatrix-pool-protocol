@@ -13,6 +13,7 @@ pub enum StratumMessage {
     /// (id, account_name, miner_name, worker_password)
     Authorize(Id, String, String, Option<String>),
 
+    #[deprecated(since="0.2.0", note="difficulty_target will be sent with Notify")]
     /// This is the difficulty target for the next job.
     /// (difficulty_target)
     SetTarget(u64),

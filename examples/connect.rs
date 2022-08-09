@@ -87,6 +87,7 @@ async fn start_miner() {
         match framed.next().await.unwrap().unwrap() {
             StratumMessage::Notify(
                 _job_id,
+                _difficulty_target,
                 _block_header_root,
                 _hashed_leaves_1,
                 _hashed_leaves_2,
@@ -113,10 +114,6 @@ async fn start_miner() {
                 } else {
                     println!("server: received ok");
                 }
-            }
-            StratumMessage::SetTarget(target) => {
-                println!("miner: received new target");
-                println!("miner: difficulty target set to {}", target);
             }
             _ => println!("miner: unexpected msg"),
         }
@@ -147,17 +144,16 @@ async fn start_server() {
             loop {
                 tokio::select! {
                     _ = ticker.recv() => {
-                    framed.send(StratumMessage::SetTarget(1111111111)).await.unwrap();
                     framed.send(StratumMessage::Notify(
-                        "job_id".to_string(),
-                        "block_header_root".to_string(),
-                        "hashed_leaves_1".to_string(),
-                        "hashed_leaves_2".to_string(),
-                        "hashed_leaves_3".to_string(),
-                        "hashed_leaves_4".to_string(),
-                        true,
-                    )
-                    ).await.unwrap()
+                            "job_id".to_string(),
+                            u64::MAX,
+                            "block_header_root".to_string(),
+                            "hashed_leaves_1".to_string(),
+                            "hashed_leaves_2".to_string(),
+                            "hashed_leaves_3".to_string(),
+                            "hashed_leaves_4".to_string(),
+                            true,
+                        )).await.unwrap()
                     }
                     Some(Ok(msg)) = framed.next() => {
                         match msg {
@@ -166,9 +162,9 @@ async fn start_server() {
                             }
                             StratumMessage::Authorize(id, _, _, _) => {
                                 let _ = framed.send(StratumMessage::Response(id, Some(ResponseMessage::Bool(true)), None)).await;
-                                framed.send(StratumMessage::SetTarget(1111111111)).await.unwrap();
                                 framed.send(StratumMessage::Notify(
                                     "job_id".to_string(),
+                                    u64::MAX,
                                     "block_header_root".to_string(),
                                     "hashed_leaves_1".to_string(),
                                     "hashed_leaves_2".to_string(),
@@ -178,10 +174,7 @@ async fn start_server() {
                                 )
                                 ).await.unwrap()
                             }
-                            StratumMessage::SetTarget(_) => {
-                                println!("server: Unsupported msg received from client");
-                            }
-                            StratumMessage::Notify(_, _, _, _, _, _, _) => {
+                            StratumMessage::Notify(..) => {
                                 println!("server: Unsupported msg received from client");
                             }
                             StratumMessage::Submit(id, _, _, _) => {
@@ -189,8 +182,11 @@ async fn start_server() {
                                 println!("server: submit passed");
                                 let _ = framed.send(StratumMessage::Response(id, Some(ResponseMessage::Bool(true)), None)).await;
                             }
-                            StratumMessage::Response(_, _, _) => {
+                            StratumMessage::Response(..) => {
                                 println!("server: Unsupported msg received from client");
+                            }
+                            StratumMessage::SetTarget(..) => {
+                                println!("difficulty_target will be sent with Notify")
                             }
                         }
                     }
