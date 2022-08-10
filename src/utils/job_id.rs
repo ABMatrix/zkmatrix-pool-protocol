@@ -12,8 +12,8 @@ pub fn get_height(job_id: String) -> anyhow::Result<u32> {
             }
             u32::from_le_bytes([height_bytes[0], height_bytes[1], height_bytes[2], height_bytes[3]])
         }
-        Err(e) => {
-            return Err(anyhow!("decode height from job_id failed: {}", e));
+        Err(_) => {
+            return Err(anyhow!("Invalid job_id"));
         }
     };
     Ok(step2)
