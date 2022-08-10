@@ -5,6 +5,7 @@ extern crate lazy_static;
 use semver::Version;
 
 pub mod message;
+pub mod utils;
 
 pub static PROTOCOL_PREFIX: &str = "ABMatrix";
 pub static MIN_SUPPORTED_PROTOCOL_VERSION: Version = Version::new(0, 2, 0);
