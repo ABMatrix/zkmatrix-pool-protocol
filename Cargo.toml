@@ -19,6 +19,14 @@ hex = "0.4.3"
 tokio = { version = "1", features = ["sync", "net", "time", "macros", "rt", "rt-multi-thread"] }
 futures-util = { version = "0.3", features= ["sink"] }
 
+[dev-dependencies.snarkvm-dpc]
+git = "https://github.com/ABMatrix/snarkVM.git"
+branch = "ABMatrix/testnet3"
+
+[dev-dependencies.snarkvm-utilities]
+git = "https://github.com/ABMatrix/snarkVM.git"
+branch = "ABMatrix/testnet3"
+
 [build-dependencies]
 vergen = { version = "7.2.1", default-features = false, features = ["build"] }
 
