@@ -26,6 +26,13 @@ vergen = { version = "7.2.1", default-features = false, features = ["build"] }
 version = "0.7.3"
 features = ["codec"]
 
+[profile.test]
+opt-level = 3
+lto = "thin"
+incremental = true
+debug = true
+debug-assertions = true
+
 [[example]]
 name = "connect"
 path = "./examples/connect.rs"
