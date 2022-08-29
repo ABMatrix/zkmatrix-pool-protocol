@@ -23,6 +23,11 @@ pub enum StratumMessage {
     ///  hashed_leaves_4, clean_jobs)
     Notify(String, u64, String, String, String, String, String, bool),
 
+    /// New job from the mining pool.
+    /// (job_id, difficulty_target, address, epoch_info clean_jobs)
+    // todo new notify message
+    NotifyNew(String, u64, String, String, bool),
+
     /// Submit shares to the pool.
     /// (id, job_id, nonce, proof)
     Submit(Id, String, String, String),
