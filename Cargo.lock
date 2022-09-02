@@ -1426,6 +1426,7 @@ dependencies = [
  "hex",
  "json-rpc-types",
  "lazy_static",
+ "rand",
  "semver",
  "serde",
  "serde_json",

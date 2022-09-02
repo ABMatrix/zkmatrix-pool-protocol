@@ -1,4 +1,8 @@
+use std::sync::Arc;
+use std::sync::atomic::AtomicBool;
 use anyhow::anyhow;
+use rand::thread_rng;
+use tokio::time::Instant;
 
 pub fn decode_hash_leaves(leaves_string: &Vec<String>) -> anyhow::Result<Vec<Vec<u8>>> {
     let mut leaves = Vec::new();
@@ -66,5 +70,11 @@ fn test_decode() {
     let hash_leaves_u8 = decode_hash_leaves(&leaves_string).unwrap();
     let block_header_root_u8 = decode_block_header_root(&block_header_root).unwrap();
     assert_eq!(leaves_raw, hash_leaves_u8);
-    assert_eq!(header_root_raw, block_header_root_u8)
+    assert_eq!(header_root_raw, block_header_root_u8);
+    let t = AtomicBool::new(false);
+
+    let result = BlockHeader::<Testnet2>::mine_once_unchecked(&expected_template, &t, &mut thread_rng()).unwrap();
+    let start = Instant::now();
+    let _ = result.proof().to_proof_difficulty().unwrap();
+    println!("{:?}", Instant::now().saturating_duration_since(start));
 }
