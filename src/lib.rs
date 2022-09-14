@@ -8,8 +8,8 @@ pub mod message;
 pub mod utils;
 
 pub static PROTOCOL_PREFIX: &str = "ABMatrix";
-pub static MIN_SUPPORTED_PROTOCOL_VERSION: Version = Version::new(0, 2, 0);
-pub static MAX_SUPPORTED_PROTOCOL_VERSION: Version = Version::new(0, 2, 9);
+pub static MIN_SUPPORTED_PROTOCOL_VERSION: Version = Version::new(0, 3, 0);
+pub static MAX_SUPPORTED_PROTOCOL_VERSION: Version = Version::new(0, 3, 9);
 
 lazy_static! {
     pub static ref CURRENT_PROTOCOL_VERSION: Version =
