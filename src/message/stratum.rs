@@ -18,9 +18,12 @@ pub enum StratumMessage {
     ///  hashed_leaves_4, clean_jobs)
     Notify(String, u64, String, String, String, String, String, bool),
 
+    /// upload local speed, p/s
+    LocalSpeed(Id, u64),
+
     /// Submit shares to the pool.
-    /// (id, job_id, nonce, proof, ProverSpeed)
-    Submit(Id, String, String, String, String),
+    /// (id, job_id, nonce, proof)
+    Submit(Id, String, String, String),
 
     /// (id, result, error)
     Response(Id, Option<ResponseMessage>, Option<Error<()>>),
@@ -32,6 +35,7 @@ impl StratumMessage {
             StratumMessage::Subscribe(..) => "mining.subscribe",
             StratumMessage::Authorize(..) => "mining.authorize",
             StratumMessage::Notify(..) => "mining.notify",
+            StratumMessage::LocalSpeed(..) => "mining.local_speed",
             StratumMessage::Submit(..) => "mining.submit",
             StratumMessage::Response(..) => "mining.response",
         }
@@ -109,11 +113,20 @@ impl Encoder<StratumMessage> for StratumCodec {
                 };
                 serde_json::to_vec(&request).unwrap_or_default()
             }
-            StratumMessage::Submit(id, job_id, nonce, proof, prover_speed) => {
+            StratumMessage::LocalSpeed(id, speed) => {
+                let request = Request {
+                    jsonrpc: Version::V2,
+                    method: "mining.local_speed",
+                    params: Some(vec![speed]),
+                    id: Some(id),
+                };
+                serde_json::to_vec(&request).unwrap_or_default()
+            }
+            StratumMessage::Submit(id, job_id, nonce, proof) => {
                 let request = Request {
                     jsonrpc: Version::V2,
                     method: "mining.submit",
-                    params: Some(vec![job_id, nonce, proof, prover_speed]),
+                    params: Some(vec![job_id, nonce, proof]),
                     id: Some(id),
                 };
                 serde_json::to_vec(&request).unwrap_or_default()
@@ -242,17 +255,33 @@ impl Decoder for StratumCodec {
                         clean_jobs,
                     )
                 }
+                "mining.local_speed" => {
+                    if params.len() != 1 {
+                        return Err(io::Error::new(io::ErrorKind::InvalidData, "Invalid params"));
+                    }
+
+                    match &params[0] {
+                        Value::Number(speed) => {
+                            StratumMessage::LocalSpeed(id.unwrap_or(Id::Num(0)), speed.as_u64().unwrap_or_default())
+                        }
+                        _ => {
+                            return Err(io::Error::new(
+                                io::ErrorKind::InvalidData,
+                                "Invalid params",
+                            ));
+                        }
+                    }
+                }
                 "mining.submit" => {
-                    if params.len() != 4 {
+                    if params.len() != 3 {
                         return Err(io::Error::new(io::ErrorKind::InvalidData, "Invalid params"));
                     }
 
                     let job_id = unwrap_str_value(&params[0])?;
                     let nonce = unwrap_str_value(&params[1])?;
                     let proof = unwrap_str_value(&params[2])?;
-                    let prover_speed = unwrap_str_value(&params[3])?;
 
-                    StratumMessage::Submit(id.unwrap_or(Id::Num(0)), job_id, nonce, proof, prover_speed)
+                    StratumMessage::Submit(id.unwrap_or(Id::Num(0)), job_id, nonce, proof)
                 }
                 _ => {
                     return Err(io::Error::new(io::ErrorKind::InvalidData, "Unknown method"));
@@ -307,7 +336,6 @@ fn unwrap_u64_value(value: &Value) -> Result<u64, io::Error> {
 
 #[test]
 fn test_encode_decode() {
-    use crate::message::speed::ProverSpeed;
     use crate::message::error::PoolError::InvalidProof;
     use json_rpc_types::ErrorCode;
 
@@ -358,13 +386,33 @@ fn test_encode_decode() {
     codec.encode(res, &mut buf2).unwrap();
     assert_eq!(buf1, buf2);
 
+    //LocalSpeed
+    let msg = StratumMessage::LocalSpeed(
+        Id::Num(100),
+        u64::MAX / 2,
+    );
+    let mut buf1 = BytesMut::new();
+    codec.encode(msg, &mut buf1).unwrap();
+    let res = codec.decode(&mut buf1.clone()).unwrap().unwrap();
+    let res = match res {
+        StratumMessage::LocalSpeed(id, speed) => {
+            println!("id: {:?}, speed: {}", id, speed);
+            StratumMessage::LocalSpeed(id, speed)
+        }
+        _ => {
+            panic!("should not panic")
+        }
+    };
+    let mut buf2 = BytesMut::new();
+    codec.encode(res, &mut buf2).unwrap();
+    assert_eq!(buf1, buf2);
+
     // Submit
     let msg = StratumMessage::Submit(
         Id::Num(0),
         "job_id".to_string(),
         "nonce".to_string(),
         "proof".to_string(),
-        ProverSpeed::new(1, 2, 3, 4, 5).to_string(),
     );
     let mut buf1 = BytesMut::new();
     codec.encode(msg, &mut buf1).unwrap();

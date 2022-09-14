@@ -1,6 +1,7 @@
 // extern crate core;
 #[macro_use]
 extern crate lazy_static;
+extern crate core;
 
 use semver::Version;
 
