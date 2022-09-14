@@ -9,6 +9,7 @@ use tokio_util::codec::Framed;
 use zkmatrix_pool_protocol::message::response::ResponseMessage;
 use zkmatrix_pool_protocol::message::stratum::{StratumCodec, StratumMessage};
 use zkmatrix_pool_protocol::CURRENT_PROTOCOL_VERSION;
+use zkmatrix_pool_protocol::message::speed::ProverSpeed;
 
 #[tokio::main]
 async fn main() {
@@ -105,6 +106,7 @@ async fn start_miner() {
                         "job_id".to_string(),
                         "nonce".to_string(),
                         "proof".to_string(),
+                        ProverSpeed::new(1, 2, 3, 4, 5).to_string(),
                     ))
                     .await;
             }
@@ -177,16 +179,14 @@ async fn start_server() {
                             StratumMessage::Notify(..) => {
                                 println!("server: Unsupported msg received from client");
                             }
-                            StratumMessage::Submit(id, _, _, _) => {
+                            StratumMessage::Submit(id, _, _, _, speed) => {
                                 println!("server: received submit from miner");
                                 println!("server: submit passed");
+                                let _speed = ProverSpeed::from(speed);
                                 let _ = framed.send(StratumMessage::Response(id, Some(ResponseMessage::Bool(true)), None)).await;
                             }
                             StratumMessage::Response(..) => {
                                 println!("server: Unsupported msg received from client");
-                            }
-                            StratumMessage::SetTarget(..) => {
-                                println!("difficulty_target will be sent with Notify")
                             }
                         }
                     }

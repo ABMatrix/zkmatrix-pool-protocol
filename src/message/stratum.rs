@@ -5,7 +5,6 @@ use serde::{Deserialize, Serialize};
 use serde_json::Value;
 use std::io;
 use tokio_util::codec::{AnyDelimiterCodec, Decoder, Encoder};
-use crate::message::speed::ProverSpeed;
 
 pub enum StratumMessage {
     /// (id, user_agent, protocol_version, session_id)
@@ -308,6 +307,7 @@ fn unwrap_u64_value(value: &Value) -> Result<u64, io::Error> {
 
 #[test]
 fn test_encode_decode() {
+    use crate::message::speed::ProverSpeed;
     use crate::message::error::PoolError::InvalidProof;
     use json_rpc_types::ErrorCode;
 
