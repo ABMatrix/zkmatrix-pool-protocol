@@ -19,7 +19,7 @@ pub enum StratumMessage {
     Notify(String, u64, String, String, String, String, String, bool),
 
     /// upload local speed, p/s
-    LocalSpeed(Id, u64),
+    LocalSpeed(Id, String),
 
     /// Submit shares to the pool.
     /// (id, job_id, nonce, proof)
@@ -259,18 +259,8 @@ impl Decoder for StratumCodec {
                     if params.len() != 1 {
                         return Err(io::Error::new(io::ErrorKind::InvalidData, "Invalid params"));
                     }
-
-                    match &params[0] {
-                        Value::Number(speed) => {
-                            StratumMessage::LocalSpeed(id.unwrap_or(Id::Num(0)), speed.as_u64().unwrap_or_default())
-                        }
-                        _ => {
-                            return Err(io::Error::new(
-                                io::ErrorKind::InvalidData,
-                                "Invalid params",
-                            ));
-                        }
-                    }
+                    let speed = unwrap_str_value(&params[0])?;
+                    StratumMessage::LocalSpeed(id.unwrap_or(Id::Num(0)), speed)
                 }
                 "mining.submit" => {
                     if params.len() != 3 {
@@ -389,7 +379,7 @@ fn test_encode_decode() {
     //LocalSpeed
     let msg = StratumMessage::LocalSpeed(
         Id::Num(100),
-        u64::MAX / 2,
+        (u32::MAX / 2).to_string(),
     );
     let mut buf1 = BytesMut::new();
     codec.encode(msg, &mut buf1).unwrap();

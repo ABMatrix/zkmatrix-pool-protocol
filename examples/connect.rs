@@ -83,10 +83,10 @@ async fn start_miner() {
     println!("authorize ok");
 
     // step4. listening and mining
-    let mut num: u64 = 0;
+    let mut num: u32 = 0;
     loop {
         num += 1;
-        framed.send(StratumMessage::LocalSpeed(Id::Num(num), num)).await.unwrap();
+        framed.send(StratumMessage::LocalSpeed(Id::Num(num as u64), num.to_string())).await.unwrap();
         match framed.next().await.unwrap().unwrap() {
             StratumMessage::Notify(
                 _job_id,
@@ -104,7 +104,7 @@ async fn start_miner() {
                 println!("miner: sent share");
                 let _ = framed
                     .send(StratumMessage::Submit(
-                        Id::Num(num),
+                        Id::Num(num as u64),
                         "job_id".to_string(),
                         "nonce".to_string(),
                         "proof".to_string(),
