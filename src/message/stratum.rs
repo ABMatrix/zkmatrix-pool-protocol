@@ -5,6 +5,7 @@ use serde::{Deserialize, Serialize};
 use serde_json::Value;
 use std::io;
 use tokio_util::codec::{AnyDelimiterCodec, Decoder, Encoder};
+use crate::message::speed::ProverSpeed;
 
 pub enum StratumMessage {
     /// (id, user_agent, protocol_version, session_id)
@@ -13,7 +14,7 @@ pub enum StratumMessage {
     /// (id, account_name, miner_name, worker_password)
     Authorize(Id, String, String, Option<String>),
 
-    #[deprecated(since="0.2.0", note="difficulty_target will be sent with Notify")]
+    #[deprecated(since = "0.2.0", note = "difficulty_target will be sent with Notify")]
     /// This is the difficulty target for the next job.
     /// (difficulty_target)
     SetTarget(u64),
@@ -24,8 +25,8 @@ pub enum StratumMessage {
     Notify(String, u64, String, String, String, String, String, bool),
 
     /// Submit shares to the pool.
-    /// (id, job_id, nonce, proof)
-    Submit(Id, String, String, String),
+    /// (id, job_id, nonce, proof, ProverSpeed)
+    Submit(Id, String, String, String, String),
 
     /// (id, result, error)
     Response(Id, Option<ResponseMessage>, Option<Error<()>>),
@@ -124,11 +125,11 @@ impl Encoder<StratumMessage> for StratumCodec {
                 };
                 serde_json::to_vec(&request).unwrap_or_default()
             }
-            StratumMessage::Submit(id, job_id, nonce, proof) => {
+            StratumMessage::Submit(id, job_id, nonce, proof, prover_speed) => {
                 let request = Request {
                     jsonrpc: Version::V2,
                     method: "mining.submit",
-                    params: Some(vec![job_id, nonce, proof]),
+                    params: Some(vec![job_id, nonce, proof, prover_speed]),
                     id: Some(id),
                 };
                 serde_json::to_vec(&request).unwrap_or_default()
@@ -265,15 +266,16 @@ impl Decoder for StratumCodec {
                     )
                 }
                 "mining.submit" => {
-                    if params.len() != 3 {
+                    if params.len() != 4 {
                         return Err(io::Error::new(io::ErrorKind::InvalidData, "Invalid params"));
                     }
 
                     let job_id = unwrap_str_value(&params[0])?;
                     let nonce = unwrap_str_value(&params[1])?;
                     let proof = unwrap_str_value(&params[2])?;
+                    let prover_speed = unwrap_str_value(&params[3])?;
 
-                    StratumMessage::Submit(id.unwrap_or(Id::Num(0)), job_id, nonce, proof)
+                    StratumMessage::Submit(id.unwrap_or(Id::Num(0)), job_id, nonce, proof, prover_speed)
                 }
                 _ => {
                     return Err(io::Error::new(io::ErrorKind::InvalidData, "Unknown method"));
@@ -393,6 +395,7 @@ fn test_encode_decode() {
         "job_id".to_string(),
         "nonce".to_string(),
         "proof".to_string(),
+        ProverSpeed::new(1, 2, 3, 4, 5).to_string(),
     );
     let mut buf1 = BytesMut::new();
     codec.encode(msg, &mut buf1).unwrap();
