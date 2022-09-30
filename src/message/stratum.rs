@@ -299,6 +299,7 @@ fn unwrap_bool_value(value: &Value) -> Result<bool, io::Error> {
     }
 }
 
+#[allow(dead_code)]
 fn unwrap_u64_value(value: &Value) -> Result<u64, io::Error> {
     match value {
         Value::Number(n) => Ok(n
@@ -319,6 +320,7 @@ fn test_encode_decode() {
     use snarkvm_console::network::Testnet3;
     use snarkvm_console::prelude::ToBytes;
     use rand::thread_rng;
+    use rand::RngCore;
 
     let mut codec = StratumCodec::default();
     //Subscribe

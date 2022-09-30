@@ -1,8 +1,5 @@
-use std::sync::Arc;
-use std::sync::atomic::AtomicBool;
 use anyhow::anyhow;
-use rand::thread_rng;
-use tokio::time::Instant;
+
 
 pub fn decode_hash_leaves(leaves_string: &Vec<String>) -> anyhow::Result<Vec<Vec<u8>>> {
     let mut leaves = Vec::new();
@@ -31,6 +28,9 @@ pub fn decode_block_header_root(block_header_root: &str) -> anyhow::Result<Vec<u
 
 // #[test]
 // fn test_decode() {
+//     use std::sync::atomic::AtomicBool;
+//      use rand::thread_rng;
+// use tokio::time::Instant;
 //     use snarkvm_dpc::prelude::*;
 //     use snarkvm_dpc::testnet2::Testnet2;
 //     use snarkvm_utilities::ToBytes;
