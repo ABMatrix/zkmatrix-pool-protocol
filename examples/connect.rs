@@ -83,7 +83,10 @@ async fn start_miner() {
     println!("authorize ok");
 
     // step4. listening and mining
+    let mut num: f32 = 0.1;
     loop {
+        num += 1.0;
+        framed.send(StratumMessage::LocalSpeed(Id::Num(num as u64), num.to_string())).await.unwrap();
         match framed.next().await.unwrap().unwrap() {
             StratumMessage::Notify(
                 _job_id,
@@ -101,7 +104,7 @@ async fn start_miner() {
                 println!("miner: sent share");
                 let _ = framed
                     .send(StratumMessage::Submit(
-                        Id::Num(2),
+                        Id::Num(num as u64),
                         "job_id".to_string(),
                         "nonce".to_string(),
                         "proof".to_string(),
@@ -177,6 +180,9 @@ async fn start_server() {
                             StratumMessage::Notify(..) => {
                                 println!("server: Unsupported msg received from client");
                             }
+                            StratumMessage::LocalSpeed(id, speed) => {
+                                println!("server: Received local speed, id: {:?}, speed: {}", id, speed);
+                            }
                             StratumMessage::Submit(id, _, _, _) => {
                                 println!("server: received submit from miner");
                                 println!("server: submit passed");
@@ -184,9 +190,6 @@ async fn start_server() {
                             }
                             StratumMessage::Response(..) => {
                                 println!("server: Unsupported msg received from client");
-                            }
-                            StratumMessage::SetTarget(..) => {
-                                println!("difficulty_target will be sent with Notify")
                             }
                         }
                     }

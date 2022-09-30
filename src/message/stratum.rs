@@ -4,7 +4,6 @@ use json_rpc_types::{Error, Id, Request, Response, Version};
 use serde::{Deserialize, Serialize};
 use serde_json::Value;
 use std::io;
-`use rand::RngCore;
 use tokio_util::codec::{AnyDelimiterCodec, Decoder, Encoder};
 
 pub enum StratumMessage {
@@ -14,14 +13,12 @@ pub enum StratumMessage {
     /// (id, account_name, miner_name, worker_password)
     Authorize(Id, String, String, Option<String>),
 
-    #[deprecated(since = "0.2.0", note = "difficulty_target will be sent with Notify")]
-    /// This is the difficulty target for the next job.
-    /// (difficulty_target)
-    SetTarget(u64),
-
     /// New job from the mining pool.
     /// (job_id, proving_key, epoch_challenge, address, clean_jobs)
     Notify(String, String, String, String, bool),
+
+    /// upload local speed, p/s
+    LocalSpeed(Id, String),
 
     /// Submit shares to the pool.
     /// (id, job_id, nonce, proof)
@@ -36,8 +33,8 @@ impl StratumMessage {
         match self {
             StratumMessage::Subscribe(..) => "mining.subscribe",
             StratumMessage::Authorize(..) => "mining.authorize",
-            StratumMessage::SetTarget(..) => "mining.set_target",
             StratumMessage::Notify(..) => "mining.notify",
+            StratumMessage::LocalSpeed(..) => "mining.local_speed",
             StratumMessage::Submit(..) => "mining.submit",
             StratumMessage::Response(..) => "mining.response",
         }
@@ -88,15 +85,6 @@ impl Encoder<StratumMessage> for StratumCodec {
                 };
                 serde_json::to_vec(&request).unwrap_or_default()
             }
-            StratumMessage::SetTarget(difficulty_target) => {
-                let request = Request {
-                    jsonrpc: Version::V2,
-                    method: "mining.set_target",
-                    params: Some(vec![difficulty_target]),
-                    id: None,
-                };
-                serde_json::to_vec(&request).unwrap_or_default()
-            }
             StratumMessage::Notify(
                 job_id,
                 proving_key,
@@ -115,6 +103,15 @@ impl Encoder<StratumMessage> for StratumCodec {
                         clean_jobs,
                     )),
                     id: None,
+                };
+                serde_json::to_vec(&request).unwrap_or_default()
+            }
+            StratumMessage::LocalSpeed(id, speed) => {
+                let request = Request {
+                    jsonrpc: Version::V2,
+                    method: "mining.local_speed",
+                    params: Some(vec![speed]),
+                    id: Some(id),
                 };
                 serde_json::to_vec(&request).unwrap_or_default()
             }
@@ -227,13 +224,6 @@ impl Decoder for StratumCodec {
                         worker_password.cloned(),
                     )
                 }
-                "mining.set_target" => {
-                    if params.len() != 1 {
-                        return Err(io::Error::new(io::ErrorKind::InvalidData, "Invalid params"));
-                    }
-                    let difficulty_target = unwrap_u64_value(&params[0])?;
-                    StratumMessage::SetTarget(difficulty_target)
-                }
                 "mining.notify" => {
                     if params.len() != 5 {
                         return Err(io::Error::new(io::ErrorKind::InvalidData, "Invalid params"));
@@ -251,6 +241,13 @@ impl Decoder for StratumCodec {
                         address,
                         clean_jobs,
                     )
+                }
+                "mining.local_speed" => {
+                    if params.len() != 1 {
+                        return Err(io::Error::new(io::ErrorKind::InvalidData, "Invalid params"));
+                    }
+                    let speed = unwrap_str_value(&params[0])?;
+                    StratumMessage::LocalSpeed(id.unwrap_or(Id::Num(0)), speed)
                 }
                 "mining.submit" => {
                     if params.len() != 3 {
@@ -352,15 +349,6 @@ fn test_encode_decode() {
     codec.encode(res, &mut buf2).unwrap();
     assert_eq!(buf1, buf2);
 
-    // SetTarget
-    let msg = StratumMessage::SetTarget(100);
-    let mut buf1 = BytesMut::new();
-    codec.encode(msg, &mut buf1).unwrap();
-    let res = codec.decode(&mut buf1.clone()).unwrap().unwrap();
-    let mut buf2 = BytesMut::new();
-    codec.encode(res, &mut buf2).unwrap();
-    assert_eq!(buf1, buf2);
-
     let rng = &mut thread_rng();
     let private_key_raw: PrivateKey<Testnet3> = PrivateKey::new(rng).unwrap();
     let address_raw = Address::try_from(private_key_raw).unwrap();
@@ -380,6 +368,27 @@ fn test_encode_decode() {
     let mut buf1 = BytesMut::new();
     codec.encode(msg, &mut buf1).unwrap();
     let res = codec.decode(&mut buf1.clone()).unwrap().unwrap();
+    let mut buf2 = BytesMut::new();
+    codec.encode(res, &mut buf2).unwrap();
+    assert_eq!(buf1, buf2);
+
+    //LocalSpeed
+    let msg = StratumMessage::LocalSpeed(
+        Id::Num(100),
+        (u32::MAX / 2).to_string(),
+    );
+    let mut buf1 = BytesMut::new();
+    codec.encode(msg, &mut buf1).unwrap();
+    let res = codec.decode(&mut buf1.clone()).unwrap().unwrap();
+    let res = match res {
+        StratumMessage::LocalSpeed(id, speed) => {
+            println!("id: {:?}, speed: {}", id, speed);
+            StratumMessage::LocalSpeed(id, speed)
+        }
+        _ => {
+            panic!("should not panic")
+        }
+    };
     let mut buf2 = BytesMut::new();
     codec.encode(res, &mut buf2).unwrap();
     assert_eq!(buf1, buf2);

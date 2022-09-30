@@ -1,7 +1,7 @@
 use anyhow::anyhow;
 use std::str::FromStr;
 
-#[derive(Clone, Debug, PartialEq)]
+#[derive(Clone, Debug, Eq, PartialEq)]
 pub enum PoolError {
     /// StaleProof usually occurs when the height is switched and the old proof is submitted
     StaleProof,
