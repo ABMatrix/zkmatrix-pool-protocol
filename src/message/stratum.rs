@@ -4,6 +4,7 @@ use json_rpc_types::{Error, Id, Request, Response, Version};
 use serde::{Deserialize, Serialize};
 use serde_json::Value;
 use std::io;
+`use rand::RngCore;
 use tokio_util::codec::{AnyDelimiterCodec, Decoder, Encoder};
 
 pub enum StratumMessage {
@@ -13,20 +14,14 @@ pub enum StratumMessage {
     /// (id, account_name, miner_name, worker_password)
     Authorize(Id, String, String, Option<String>),
 
-    #[deprecated(since="0.2.0", note="difficulty_target will be sent with Notify")]
+    #[deprecated(since = "0.2.0", note = "difficulty_target will be sent with Notify")]
     /// This is the difficulty target for the next job.
     /// (difficulty_target)
     SetTarget(u64),
 
     /// New job from the mining pool.
-    /// (job_id, difficulty_target, block_header_root, hashed_leaves_1, hashed_leaves_2, hashed_leaves_3,
-    ///  hashed_leaves_4, clean_jobs)
-    Notify(String, u64, String, String, String, String, String, bool),
-
-    /// New job from the mining pool.
-    /// (job_id, proving_key, epoch_info, epoch_info clean_jobs)
-    // todo new notify message
-    NotifyNew(String, String, String, String, bool),
+    /// (job_id, proving_key, epoch_challenge, address, clean_jobs)
+    Notify(String, String, String, String, bool),
 
     /// Submit shares to the pool.
     /// (id, job_id, nonce, proof)
@@ -62,7 +57,7 @@ impl Default for StratumCodec {
 }
 
 #[derive(Serialize, Deserialize)]
-struct NotifyParams(String, u64, String, String, String, String, String, bool);
+struct NotifyParams(String, String, String, String, bool);
 
 #[derive(Serialize, Deserialize)]
 struct SubscribeParams(String, String, Option<String>);
@@ -104,12 +99,9 @@ impl Encoder<StratumMessage> for StratumCodec {
             }
             StratumMessage::Notify(
                 job_id,
-                difficulty_target,
-                block_header_root,
-                hashed_leaves_1,
-                hashed_leaves_2,
-                hashed_leaves_3,
-                hashed_leaves_4,
+                proving_key,
+                epoch_challenge,
+                address,
                 clean_jobs,
             ) => {
                 let request = Request {
@@ -117,12 +109,9 @@ impl Encoder<StratumMessage> for StratumCodec {
                     method: "mining.notify",
                     params: Some(NotifyParams(
                         job_id,
-                        difficulty_target,
-                        block_header_root,
-                        hashed_leaves_1,
-                        hashed_leaves_2,
-                        hashed_leaves_3,
-                        hashed_leaves_4,
+                        proving_key,
+                        epoch_challenge,
+                        address,
                         clean_jobs,
                     )),
                     id: None,
@@ -246,26 +235,20 @@ impl Decoder for StratumCodec {
                     StratumMessage::SetTarget(difficulty_target)
                 }
                 "mining.notify" => {
-                    if params.len() != 8 {
+                    if params.len() != 5 {
                         return Err(io::Error::new(io::ErrorKind::InvalidData, "Invalid params"));
                     }
                     let job_id = unwrap_str_value(&params[0])?;
-                    let difficulty_target = unwrap_u64_value(&params[1])?;
-                    let block_header_root = unwrap_str_value(&params[2])?;
-                    let hashed_leaves_1 = unwrap_str_value(&params[3])?;
-                    let hashed_leaves_2 = unwrap_str_value(&params[4])?;
-                    let hashed_leaves_3 = unwrap_str_value(&params[5])?;
-                    let hashed_leaves_4 = unwrap_str_value(&params[6])?;
-                    let clean_jobs = unwrap_bool_value(&params[7])?;
+                    let proving_key = unwrap_str_value(&params[1])?;
+                    let epoch_challenge = unwrap_str_value(&params[2])?;
+                    let address = unwrap_str_value(&params[3])?;
+                    let clean_jobs = unwrap_bool_value(&params[4])?;
 
                     StratumMessage::Notify(
                         job_id,
-                        difficulty_target,
-                        block_header_root,
-                        hashed_leaves_1,
-                        hashed_leaves_2,
-                        hashed_leaves_3,
-                        hashed_leaves_4,
+                        proving_key,
+                        epoch_challenge,
+                        address,
                         clean_jobs,
                     )
                 }
@@ -335,6 +318,10 @@ fn unwrap_u64_value(value: &Value) -> Result<u64, io::Error> {
 fn test_encode_decode() {
     use crate::message::error::PoolError::InvalidProof;
     use json_rpc_types::ErrorCode;
+    use snarkvm_console::account::{PrivateKey, Address};
+    use snarkvm_console::network::Testnet3;
+    use snarkvm_console::prelude::ToBytes;
+    use rand::thread_rng;
 
     let mut codec = StratumCodec::default();
     //Subscribe
@@ -374,15 +361,20 @@ fn test_encode_decode() {
     codec.encode(res, &mut buf2).unwrap();
     assert_eq!(buf1, buf2);
 
+    let rng = &mut thread_rng();
+    let private_key_raw: PrivateKey<Testnet3> = PrivateKey::new(rng).unwrap();
+    let address_raw = Address::try_from(private_key_raw).unwrap();
+    // let nonce = rng.next_u64();
+
+    use snarkvm_compiler::EpochChallenge;
+    let epoch_challenge: EpochChallenge<Testnet3> = EpochChallenge::new(rng.next_u64(), Default::default(), 1).unwrap();
+
     //Notify
     let msg = StratumMessage::Notify(
         "job_id".to_string(),
-        u64::MAX / 2,
-        "block_header_root".to_string(),
-        "hashed_leaves_1".to_string(),
-        "hashed_leaves_2".to_string(),
-        "hashed_leaves_3".to_string(),
-        "hashed_leaves_4".to_string(),
+        hex::encode(private_key_raw.to_bytes_le().unwrap()),
+        hex::encode(epoch_challenge.to_bytes_le().unwrap()),
+        hex::encode(address_raw.to_bytes_le().unwrap()),
         false,
     );
     let mut buf1 = BytesMut::new();
