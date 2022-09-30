@@ -1,29 +1,33 @@
 use anyhow::anyhow;
 
-
-pub fn decode_hash_leaves(leaves_string: &Vec<String>) -> anyhow::Result<Vec<Vec<u8>>> {
-    let mut leaves = Vec::new();
-    for l in leaves_string {
-        match hex::decode(l) {
-            Ok(b) => leaves.push(b),
-            Err(e) => {
-                return Err(anyhow!("decode leaves {} failed with error: {}", l, e));
-            }
-        }
-    }
-    Ok(leaves)
-}
-
-
-pub fn decode_block_header_root(block_header_root: &str) -> anyhow::Result<Vec<u8>> {
-    let block_header_root_b = match hex::decode(block_header_root) {
-        Ok(b) => b,
+pub fn proving_key_u8(pk_hex: &str) -> anyhow::Result<Vec<u8>> {
+    let pk = match hex::decode(pk_hex) {
+        Ok(p) => p,
         Err(e) => {
-            return Err(anyhow!("decode block_header_root failed with error: {}", e));
+            return Err(anyhow!("decode proving_key failed with error: {}", e));
         }
     };
+    Ok(pk)
+}
 
-    Ok(block_header_root_b)
+pub fn epoch_challenge_u8(epoch_challenge: &str) -> anyhow::Result<Vec<u8>> {
+    let challenge = match hex::decode(epoch_challenge) {
+        Ok(c) => c,
+        Err(e) => {
+            return Err(anyhow!("decode epoch_challenge failed with error: {}", e));
+        }
+    };
+    Ok(challenge)
+}
+
+pub fn address_u8(address: &str) -> anyhow::Result<Vec<u8>> {
+    let address = match hex::decode(address) {
+        Ok(a) => a,
+        Err(e) => {
+            return Err(anyhow!("decode address failed with error: {}", e));
+        }
+    };
+    Ok(address)
 }
 
 // #[test]
