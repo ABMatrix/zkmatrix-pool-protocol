@@ -21,8 +21,8 @@ pub enum StratumMessage {
     LocalSpeed(Id, String),
 
     /// Submit shares to the pool.
-    /// (id, job_id, nonce, proof)
-    Submit(Id, String, String, String),
+    /// (id, job_id, prover_solution)
+    Submit(Id, String, String),
 
     /// (id, result, error)
     Response(Id, Option<ResponseMessage>, Option<Error<()>>),
@@ -113,11 +113,11 @@ impl Encoder<StratumMessage> for StratumCodec {
                 };
                 serde_json::to_vec(&request).unwrap_or_default()
             }
-            StratumMessage::Submit(id, job_id, nonce, proof) => {
+            StratumMessage::Submit(id, job_id, prover_solution) => {
                 let request = Request {
                     jsonrpc: Version::V2,
                     method: "mining.submit",
-                    params: Some(vec![job_id, nonce, proof]),
+                    params: Some(vec![job_id, prover_solution]),
                     id: Some(id),
                 };
                 serde_json::to_vec(&request).unwrap_or_default()
@@ -246,15 +246,14 @@ impl Decoder for StratumCodec {
                     StratumMessage::LocalSpeed(id.unwrap_or(Id::Num(0)), speed)
                 }
                 "mining.submit" => {
-                    if params.len() != 3 {
+                    if params.len() != 2 {
                         return Err(io::Error::new(io::ErrorKind::InvalidData, "Invalid params"));
                     }
 
                     let job_id = unwrap_str_value(&params[0])?;
-                    let nonce = unwrap_str_value(&params[1])?;
-                    let proof = unwrap_str_value(&params[2])?;
+                    let prover_solution = unwrap_str_value(&params[1])?;
 
-                    StratumMessage::Submit(id.unwrap_or(Id::Num(0)), job_id, nonce, proof)
+                    StratumMessage::Submit(id.unwrap_or(Id::Num(0)), job_id, prover_solution)
                 }
                 _ => {
                     return Err(io::Error::new(io::ErrorKind::InvalidData, "Unknown method"));
@@ -394,8 +393,7 @@ fn test_encode_decode() {
     let msg = StratumMessage::Submit(
         Id::Num(0),
         "job_id".to_string(),
-        "nonce".to_string(),
-        "proof".to_string(),
+        "prover_solution".to_string(),
     );
     let mut buf1 = BytesMut::new();
     codec.encode(msg, &mut buf1).unwrap();

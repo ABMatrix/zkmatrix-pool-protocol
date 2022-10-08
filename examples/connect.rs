@@ -90,12 +90,8 @@ async fn start_miner() {
         match framed.next().await.unwrap().unwrap() {
             StratumMessage::Notify(
                 _job_id,
-                _difficulty_target,
-                _block_header_root,
-                _hashed_leaves_1,
-                _hashed_leaves_2,
-                _hashed_leaves_3,
-                _hashed_leaves_4,
+                _epoch_challenge,
+                _address,
                 _clean_jobs,
             ) => {
                 println!("miner: received new job");
@@ -106,8 +102,7 @@ async fn start_miner() {
                     .send(StratumMessage::Submit(
                         Id::Num(num as u64),
                         "job_id".to_string(),
-                        "nonce".to_string(),
-                        "proof".to_string(),
+                        "prover_solution".to_string(),
                     ))
                     .await;
             }
@@ -149,12 +144,8 @@ async fn start_server() {
                     _ = ticker.recv() => {
                     framed.send(StratumMessage::Notify(
                             "job_id".to_string(),
-                            u64::MAX,
-                            "block_header_root".to_string(),
-                            "hashed_leaves_1".to_string(),
-                            "hashed_leaves_2".to_string(),
-                            "hashed_leaves_3".to_string(),
-                            "hashed_leaves_4".to_string(),
+                            "epoch_challenge".to_string(),
+                            "address".to_string(),
                             true,
                         )).await.unwrap()
                     }
@@ -167,12 +158,8 @@ async fn start_server() {
                                 let _ = framed.send(StratumMessage::Response(id, Some(ResponseMessage::Bool(true)), None)).await;
                                 framed.send(StratumMessage::Notify(
                                     "job_id".to_string(),
-                                    u64::MAX,
-                                    "block_header_root".to_string(),
-                                    "hashed_leaves_1".to_string(),
-                                    "hashed_leaves_2".to_string(),
-                                    "hashed_leaves_3".to_string(),
-                                    "hashed_leaves_4".to_string(),
+                                    "epoch_challenge".to_string(),
+                                    "address".to_string(),
                                     true,
                                 )
                                 ).await.unwrap()
@@ -183,7 +170,7 @@ async fn start_server() {
                             StratumMessage::LocalSpeed(id, speed) => {
                                 println!("server: Received local speed, id: {:?}, speed: {}", id, speed);
                             }
-                            StratumMessage::Submit(id, _, _, _) => {
+                            StratumMessage::Submit(id, _, _) => {
                                 println!("server: received submit from miner");
                                 println!("server: submit passed");
                                 let _ = framed.send(StratumMessage::Response(id, Some(ResponseMessage::Bool(true)), None)).await;
