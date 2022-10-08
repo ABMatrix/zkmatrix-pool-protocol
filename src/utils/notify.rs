@@ -30,55 +30,24 @@ pub fn address_u8(address: &str) -> anyhow::Result<Vec<u8>> {
     Ok(address)
 }
 
-// #[test]
-// fn test_decode() {
-//     use std::sync::atomic::AtomicBool;
-//      use rand::thread_rng;
-// use tokio::time::Instant;
-//     use snarkvm_dpc::prelude::*;
-//     use snarkvm_dpc::testnet2::Testnet2;
-//     use snarkvm_utilities::ToBytes;
-//
-//     // Construct the block template.
-//     let block = Testnet2::genesis_block();
-//     let expected_template = BlockTemplate::new(
-//         block.previous_block_hash(),
-//         block.height(),
-//         block.timestamp(),
-//         block.difficulty_target(),
-//         block.cumulative_weight(),
-//         block.previous_ledger_root(),
-//         block.transactions().clone(),
-//         block.to_coinbase_transaction().unwrap().to_records().next().unwrap(),
-//     );
-//
-//     let header_tree = expected_template.to_header_tree().unwrap();
-//     let header_root = header_tree.root();
-//     let hashed_leaves = header_tree.hashed_leaves();
-//     let mut leaves_raw = vec![];
-//     let leaves_string = {
-//         || {
-//             let mut v = vec![];
-//             for i in hashed_leaves {
-//                 let raw = i.to_bytes_le().unwrap();
-//                 leaves_raw.push(raw.clone());
-//                 v.push(hex::encode(raw));
-//             }
-//             v
-//         }
-//     }();
-//
-//     let header_root_raw = header_root.to_bytes_le().unwrap();
-//     let block_header_root = hex::encode(header_root_raw.clone());
-//
-//     let hash_leaves_u8 = decode_hash_leaves(&leaves_string).unwrap();
-//     let block_header_root_u8 = decode_block_header_root(&block_header_root).unwrap();
-//     assert_eq!(leaves_raw, hash_leaves_u8);
-//     assert_eq!(header_root_raw, block_header_root_u8);
-//     let t = AtomicBool::new(false);
-//
-//     let result = BlockHeader::<Testnet2>::mine_once_unchecked(&expected_template, &t, &mut thread_rng()).unwrap();
-//     let start = Instant::now();
-//     let _ = result.proof().to_proof_difficulty().unwrap();
-//     println!("{:?}", Instant::now().saturating_duration_since(start));
-// }
+#[test]
+fn test_decode() {
+    use snarkvm_compiler::EpochChallenge;
+    use snarkvm_console::network::Testnet3;
+    use snarkvm_console::account::{PrivateKey,Address};
+    use rand;
+    use rand::RngCore;
+    use snarkvm_console::prelude::{ToBytes, FromBytes};
+
+    let mut rng = rand::thread_rng();
+    let degree = (1 << 5) - 1;
+    let epoch_challenge = EpochChallenge::<Testnet3>::new(rng.next_u64(), Default::default(), degree).unwrap();
+    let private_key = PrivateKey::<Testnet3>::new(&mut rng).unwrap();
+    let address = Address::try_from(private_key).unwrap();
+    let epoch_challenge_s = hex::encode(epoch_challenge.to_bytes_le().unwrap());
+    let address_s = hex::encode(address.to_bytes_le().unwrap());
+    let epoch_challenge_2 = EpochChallenge::<Testnet3>::from_bytes_le(epoch_challenge_u8(&epoch_challenge_s).unwrap().as_slice()).unwrap();
+    assert_eq!(epoch_challenge, epoch_challenge_2);
+    let address_2 = Address::<Testnet3>::from_bytes_le(address_u8(&address_s).unwrap().as_slice()).unwrap();
+    assert_eq!(address, address_2)
+}
