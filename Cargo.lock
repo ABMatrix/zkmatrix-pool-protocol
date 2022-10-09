@@ -1847,6 +1847,7 @@ dependencies = [
  "serde_json",
  "snarkvm-compiler",
  "snarkvm-console",
+ "snarkvm-utilities",
  "tokio",
  "tokio-util",
  "vergen",

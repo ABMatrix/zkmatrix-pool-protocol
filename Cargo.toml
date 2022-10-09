@@ -24,6 +24,10 @@ rand = "0.8.5"
 git = "https://github.com/ABMatrix/snarkVM.git"
 branch = "ABMatrix/new-posw-prover"
 
+[dev-dependencies.snarkvm-utilities]
+git = "https://github.com/ABMatrix/snarkVM.git"
+branch = "ABMatrix/new-posw-prover"
+
 [dev-dependencies.snarkvm-console]
 git = "https://github.com/ABMatrix/snarkVM.git"
 branch = "ABMatrix/new-posw-prover"

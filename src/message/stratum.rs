@@ -14,8 +14,8 @@ pub enum StratumMessage {
     Authorize(Id, String, String, Option<String>),
 
     /// New job from the mining pool.
-    /// (job_id, epoch_challenge, address, clean_jobs)
-    Notify(String, String, String, bool),
+    /// (job_id, difficulty_target, epoch_challenge, address, clean_jobs)
+    Notify(String, u64, String, String, bool),
 
     /// upload local speed, p/s
     LocalSpeed(Id, String),
@@ -54,7 +54,7 @@ impl Default for StratumCodec {
 }
 
 #[derive(Serialize, Deserialize)]
-struct NotifyParams(String, String, String, bool);
+struct NotifyParams(String, u64, String, String, bool);
 
 #[derive(Serialize, Deserialize)]
 struct SubscribeParams(String, String, Option<String>);
@@ -87,6 +87,7 @@ impl Encoder<StratumMessage> for StratumCodec {
             }
             StratumMessage::Notify(
                 job_id,
+                difficulty_target,
                 epoch_challenge,
                 address,
                 clean_jobs,
@@ -96,6 +97,7 @@ impl Encoder<StratumMessage> for StratumCodec {
                     method: "mining.notify",
                     params: Some(NotifyParams(
                         job_id,
+                        difficulty_target,
                         epoch_challenge,
                         address,
                         clean_jobs,
@@ -223,16 +225,18 @@ impl Decoder for StratumCodec {
                     )
                 }
                 "mining.notify" => {
-                    if params.len() != 4 {
+                    if params.len() != 5 {
                         return Err(io::Error::new(io::ErrorKind::InvalidData, "Invalid params"));
                     }
                     let job_id = unwrap_str_value(&params[0])?;
-                    let epoch_challenge = unwrap_str_value(&params[1])?;
-                    let address = unwrap_str_value(&params[2])?;
-                    let clean_jobs = unwrap_bool_value(&params[3])?;
+                    let difficulty_target = unwrap_u64_value(&params[1])?;
+                    let epoch_challenge = unwrap_str_value(&params[2])?;
+                    let address = unwrap_str_value(&params[3])?;
+                    let clean_jobs = unwrap_bool_value(&params[4])?;
 
                     StratumMessage::Notify(
                         job_id,
+                        difficulty_target,
                         epoch_challenge,
                         address,
                         clean_jobs,
@@ -357,6 +361,7 @@ fn test_encode_decode() {
     //Notify
     let msg = StratumMessage::Notify(
         "job_id".to_string(),
+        1,
         hex::encode(epoch_challenge.to_bytes_le().unwrap()),
         hex::encode(address_raw.to_bytes_le().unwrap()),
         false,

@@ -90,6 +90,7 @@ async fn start_miner() {
         match framed.next().await.unwrap().unwrap() {
             StratumMessage::Notify(
                 _job_id,
+                _difficulty,
                 _epoch_challenge,
                 _address,
                 _clean_jobs,
@@ -144,6 +145,7 @@ async fn start_server() {
                     _ = ticker.recv() => {
                     framed.send(StratumMessage::Notify(
                             "job_id".to_string(),
+                            1,
                             "epoch_challenge".to_string(),
                             "address".to_string(),
                             true,
@@ -158,6 +160,7 @@ async fn start_server() {
                                 let _ = framed.send(StratumMessage::Response(id, Some(ResponseMessage::Bool(true)), None)).await;
                                 framed.send(StratumMessage::Notify(
                                     "job_id".to_string(),
+                                    1,
                                     "epoch_challenge".to_string(),
                                     "address".to_string(),
                                     true,
