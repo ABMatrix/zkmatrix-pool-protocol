@@ -1,4 +1,6 @@
 use anyhow::anyhow;
+use snarkvm_algorithms::fft::Evaluations;
+
 
 pub enum ConvertType {
     EpochChallenge(String),
@@ -38,16 +40,14 @@ pub fn convert_to_u8(data: &ConvertType) -> anyhow::Result<Vec<u8>> {
 #[test]
 fn test_decode() {
     use snarkvm_compiler::{EpochChallenge, CoinbasePuzzle, PuzzleConfig};
-    use snarkvm_console::network::Testnet3;
-    use snarkvm_console::account::{PrivateKey, Address};
+    use snarkvm_console::{network::Testnet3, account::{PrivateKey, Address}};
     use rand;
     use rand::RngCore;
     use snarkvm_console::prelude::{ToBytes, FromBytes};
     use snarkvm_utilities::Uniform;
-    use snarkvm_algorithms::fft::DensePolynomial;
+    use snarkvm_algorithms::fft::{DensePolynomial, EvaluationDomain};
     use snarkvm_curves::bls12_377::fr;
     use std::str::FromStr;
-
 
     let max_degree = 1 << 15;
     let mut rng = rand::thread_rng();
@@ -60,9 +60,10 @@ fn test_decode() {
     let epoch_challenge = EpochChallenge::<Testnet3>::new(rng.next_u64(), Default::default(), degree).unwrap();
     println!("epoch_block_hash: {}", epoch_challenge.epoch_block_hash().to_string());
 
+    // test epoch_polynomial
     let coeffs_s = epoch_challenge.epoch_polynomial().coeffs().to_vec().iter().map(|c| c.to_string()).collect::<Vec<String>>();
 
-    let mut coeffs = vec![] ;
+    let mut coeffs = vec![];
     for c in coeffs_s {
         let data = fr::Fr::from_str(&c).unwrap();
         coeffs.push(data)
@@ -70,11 +71,32 @@ fn test_decode() {
 
     let polynomial = DensePolynomial::from_coefficients_vec(coeffs);
     assert_eq!(polynomial, epoch_challenge.epoch_polynomial().clone());
-
-
-
-    // println!("epoch_polynomial: {}", epoch_challenge.epoch_polynomial().coeffs().to_vec()[0].to_string());
-    println!("epoch_polynomial_evaluations: {:?}", epoch_challenge.epoch_polynomial_evaluations());
+    // test epoch_polynomial_evaluations
+    // println!("epoch_polynomial_evaluations: {:?}", epoch_challenge.epoch_polynomial_evaluations());
+    let evaluations_s = epoch_challenge.epoch_polynomial_evaluations().evaluations.iter().map(|e| e.to_string()).collect::<Vec<String>>();
+    let size = epoch_challenge.epoch_polynomial_evaluations().domain().size.to_string();
+    let log_size_of_group = epoch_challenge.epoch_polynomial_evaluations().domain().log_size_of_group;
+    let size_as_field_element = epoch_challenge.epoch_polynomial_evaluations().domain().size_as_field_element.to_string();
+    let size_inv = epoch_challenge.epoch_polynomial_evaluations().domain().size_inv.to_string();
+    let group_gen = epoch_challenge.epoch_polynomial_evaluations().domain().group_gen.to_string();
+    let group_gen_inv = epoch_challenge.epoch_polynomial_evaluations().domain().group_gen_inv.to_string();
+    let generator_inv = epoch_challenge.epoch_polynomial_evaluations().domain().generator_inv.to_string();
+    let e_domain = EvaluationDomain {
+        size: u64::from_str(&size).unwrap(),
+        log_size_of_group,
+        size_as_field_element: fr::Fr::from_str(&size_as_field_element).unwrap(),
+        size_inv: fr::Fr::from_str(&size_inv).unwrap(),
+        group_gen: fr::Fr::from_str(&group_gen).unwrap(),
+        group_gen_inv: fr::Fr::from_str(&group_gen_inv).unwrap(),
+        generator_inv: fr::Fr::from_str(&generator_inv).unwrap(),
+    };
+    let mut evaluations = vec![];
+    for e in evaluations_s {
+        let fp256 = fr::Fr::from_str(&e).unwrap();
+        evaluations.push(fp256);
+    }
+    let evaluations1 = Evaluations::from_vec_and_domain(evaluations, e_domain);
+    assert_eq!(evaluations1, epoch_challenge.epoch_polynomial_evaluations().clone());
 
     let private_key = PrivateKey::<Testnet3>::new(&mut rng).unwrap();
     let address = Address::try_from(private_key).unwrap();
