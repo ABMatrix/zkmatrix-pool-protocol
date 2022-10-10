@@ -44,6 +44,10 @@ fn test_decode() {
     use rand::RngCore;
     use snarkvm_console::prelude::{ToBytes, FromBytes};
     use snarkvm_utilities::Uniform;
+    use snarkvm_algorithms::fft::DensePolynomial;
+    use snarkvm_curves::bls12_377::fr;
+    use std::str::FromStr;
+
 
     let max_degree = 1 << 15;
     let mut rng = rand::thread_rng();
@@ -54,6 +58,24 @@ fn test_decode() {
     let (pk, _vk) = CoinbasePuzzle::<Testnet3>::trim(&srs, config).unwrap();
 
     let epoch_challenge = EpochChallenge::<Testnet3>::new(rng.next_u64(), Default::default(), degree).unwrap();
+    println!("epoch_block_hash: {}", epoch_challenge.epoch_block_hash().to_string());
+
+    let coeffs_s = epoch_challenge.epoch_polynomial().coeffs().to_vec().iter().map(|c| c.to_string()).collect::<Vec<String>>();
+
+    let mut coeffs = vec![] ;
+    for c in coeffs_s {
+        let data = fr::Fr::from_str(&c).unwrap();
+        coeffs.push(data)
+    }
+
+    let polynomial = DensePolynomial::from_coefficients_vec(coeffs);
+    assert_eq!(polynomial, epoch_challenge.epoch_polynomial().clone());
+
+
+
+    // println!("epoch_polynomial: {}", epoch_challenge.epoch_polynomial().coeffs().to_vec()[0].to_string());
+    println!("epoch_polynomial_evaluations: {:?}", epoch_challenge.epoch_polynomial_evaluations());
+
     let private_key = PrivateKey::<Testnet3>::new(&mut rng).unwrap();
     let address = Address::try_from(private_key).unwrap();
     let epoch_challenge_s = hex::encode(epoch_challenge.to_bytes_le().unwrap());
