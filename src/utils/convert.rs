@@ -1,6 +1,4 @@
 use anyhow::anyhow;
-use snarkvm_algorithms::fft::Evaluations;
-
 
 pub enum ConvertType {
     EpochChallenge(String),
@@ -45,7 +43,7 @@ fn test_decode() {
     use rand::RngCore;
     use snarkvm_console::prelude::{ToBytes, FromBytes};
     use snarkvm_utilities::Uniform;
-    use snarkvm_algorithms::fft::{DensePolynomial, EvaluationDomain};
+    use snarkvm_algorithms::fft::{Evaluations, DensePolynomial, EvaluationDomain};
     use snarkvm_curves::bls12_377::fr;
     use std::str::FromStr;
 
