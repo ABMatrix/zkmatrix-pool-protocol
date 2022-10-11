@@ -356,7 +356,7 @@ fn test_encode_decode() {
     // let nonce = rng.next_u64();
 
     use snarkvm_compiler::EpochChallenge;
-    let epoch_challenge: EpochChallenge<Testnet3> = EpochChallenge::new(rng.next_u64(), Default::default(), 1).unwrap();
+    let epoch_challenge: EpochChallenge<Testnet3> = EpochChallenge::new(rng.next_u32(), Default::default(), 1).unwrap();
 
     //Notify
     let msg = StratumMessage::Notify(

@@ -55,7 +55,7 @@ fn test_decode() {
     let config = PuzzleConfig { degree };
     let (pk, _vk) = CoinbasePuzzle::<Testnet3>::trim(&srs, config).unwrap();
 
-    let epoch_challenge = EpochChallenge::<Testnet3>::new(rng.next_u64(), Default::default(), degree).unwrap();
+    let epoch_challenge = EpochChallenge::<Testnet3>::new(rng.next_u32(), Default::default(), degree).unwrap();
     println!("epoch_block_hash: {}", epoch_challenge.epoch_block_hash().to_string());
 
     let d = epoch_challenge.degree().unwrap();
