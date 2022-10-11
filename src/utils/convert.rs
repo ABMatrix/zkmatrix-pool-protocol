@@ -1,4 +1,6 @@
 use anyhow::anyhow;
+use snarkvm_algorithms::polycommit::kzg10::KZGProof;
+use snarkvm_curves::bls12_377::Bls12_377;
 
 pub enum ConvertType {
     EpochChallenge(String),
@@ -112,5 +114,9 @@ fn test_decode() {
     let address_2 = Address::<Testnet3>::from_bytes_le(convert_to_u8(&ConvertType::Address(address_s)).unwrap().as_slice()).unwrap();
     assert_eq!(address, address_2);
     let result = CoinbasePuzzle::prove(&pk, &epoch_challenge, &address, u64::rand(&mut rng)).unwrap();
-    println!("{}", result.nonce())
+    println!("{}", result.nonce());
+    let proof_hex = hex::encode(result.proof().to_bytes_le().unwrap());
+    println!("{:?}", proof_hex);
+    let result1 = KZGProof::<Bls12_377>::from_bytes_le(&hex::decode(proof_hex).unwrap()).unwrap();
+    assert_eq!(result1, result.proof().clone())
 }
