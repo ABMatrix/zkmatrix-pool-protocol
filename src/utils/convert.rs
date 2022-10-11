@@ -60,6 +60,12 @@ fn test_decode() {
     let epoch_challenge = EpochChallenge::<Testnet3>::new(rng.next_u64(), Default::default(), degree).unwrap();
     println!("epoch_block_hash: {}", epoch_challenge.epoch_block_hash().to_string());
 
+    let d = epoch_challenge.degree().unwrap();
+
+    let epoch_challenge_2 = EpochChallenge::<Testnet3>::new(epoch_challenge.epoch_number(), epoch_challenge.epoch_block_hash(), d).unwrap();
+    assert_eq!(epoch_challenge, epoch_challenge_2);
+
+
     // test epoch_polynomial
     let coeffs_s = epoch_challenge.epoch_polynomial().coeffs().to_vec().iter().map(|c| c.to_string()).collect::<Vec<String>>();
 
@@ -71,6 +77,7 @@ fn test_decode() {
 
     let polynomial = DensePolynomial::from_coefficients_vec(coeffs);
     assert_eq!(polynomial, epoch_challenge.epoch_polynomial().clone());
+
     // test epoch_polynomial_evaluations
     // println!("epoch_polynomial_evaluations: {:?}", epoch_challenge.epoch_polynomial_evaluations());
     let evaluations_s = epoch_challenge.epoch_polynomial_evaluations().evaluations.iter().map(|e| e.to_string()).collect::<Vec<String>>();
