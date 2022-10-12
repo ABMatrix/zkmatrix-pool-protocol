@@ -1,6 +1,4 @@
 use anyhow::anyhow;
-use snarkvm_algorithms::polycommit::kzg10::KZGProof;
-use snarkvm_curves::bls12_377::Bls12_377;
 
 pub enum ConvertType {
     EpochChallenge(String),
@@ -48,6 +46,8 @@ fn test_decode() {
     use snarkvm_algorithms::fft::{Evaluations, DensePolynomial, EvaluationDomain};
     use snarkvm_curves::bls12_377::fr;
     use std::str::FromStr;
+    use snarkvm_algorithms::polycommit::kzg10::KZGProof;
+    use snarkvm_curves::bls12_377::Bls12_377;
 
     let max_degree = 1 << 15;
     let mut rng = rand::thread_rng();
