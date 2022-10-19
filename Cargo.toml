@@ -23,6 +23,7 @@ rand = "0.8.5"
 [dev-dependencies.snarkvm-compiler]
 git = "https://github.com/ABMatrix/snarkVM.git"
 branch = "ABMatrix/new-posw-prover"
+features = ["setup"]
 
 [dev-dependencies.snarkvm-curves]
 git = "https://github.com/ABMatrix/snarkVM.git"

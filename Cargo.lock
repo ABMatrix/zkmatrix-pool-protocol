@@ -65,9 +65,9 @@ version = "0.1.2"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "6118baab6285accf088b31d5ea5029c37bbf9d98e62b4d8720a0a5a66bc2e427"
 dependencies = [
- "proc-macro2 1.0.40",
- "quote 1.0.20",
- "syn 1.0.98",
+ "proc-macro2 1.0.47",
+ "quote 1.0.21",
+ "syn 1.0.102",
 ]
 
 [[package]]
@@ -113,9 +113,9 @@ checksum = "d468802bab17cbc0cc575e9b053f41e72aa36bfa6b7f55e3529ffa43161b97fa"
 
 [[package]]
 name = "bech32"
-version = "0.9.0"
+version = "0.9.1"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "c5738be7561b0eeb501ef1d5c5db3f24e01ceb55fededd9b00039aada34966ad"
+checksum = "d86b93f97252c47b41663388e6d155714a9d0c398b99f1005cbc5f978b29f445"
 
 [[package]]
 name = "bincode"
@@ -154,9 +154,9 @@ dependencies = [
 
 [[package]]
 name = "block-buffer"
-version = "0.10.2"
+version = "0.10.3"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "0bf7fe51849ea569fd452f37822f606a5cabb684dc918707a0193fd4664ff324"
+checksum = "69cce20737498f97b993470a6e536b8523f0af7892a4f928cceb1ac5e52ebe7e"
 dependencies = [
  "generic-array",
 ]
@@ -175,9 +175,9 @@ checksum = "14c189c53d098945499cdfa7ecc63567cf3886b3332b312a5b4585d8d3a6a610"
 
 [[package]]
 name = "bytes"
-version = "1.2.0"
+version = "1.2.1"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "f0b3de4a0c5e67e16066a0715723abd91edc2f9001d09c46e1dca929351e130e"
+checksum = "ec8a7b6a70fde80372154c65702f00a0f56f3e1c36abbc6c440484be248856db"
 
 [[package]]
 name = "cc"
@@ -210,9 +210,9 @@ checksum = "245097e9a4535ee1e3e3931fcfcd55a796a44c643e8596ff6566d68f09b87bbc"
 
 [[package]]
 name = "cpufeatures"
-version = "0.2.2"
+version = "0.2.5"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "59a6001667ab124aebae2a495118e11d30984c3a653e99d86d58971708cf5e4b"
+checksum = "28d997bd5e24a5928dd43e46dc529867e207907fe0b239c3477d924f7f2ca320"
 dependencies = [
  "libc",
 ]
@@ -240,26 +240,24 @@ dependencies = [
 
 [[package]]
 name = "crossbeam-epoch"
-version = "0.9.10"
+version = "0.9.11"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "045ebe27666471bb549370b4b0b3e51b07f56325befa4284db65fc89c02511b1"
+checksum = "f916dfc5d356b0ed9dae65f1db9fc9770aa2851d2662b988ccf4fe3516e86348"
 dependencies = [
  "autocfg",
  "cfg-if",
  "crossbeam-utils",
  "memoffset",
- "once_cell",
  "scopeguard",
 ]
 
 [[package]]
 name = "crossbeam-utils"
-version = "0.8.11"
+version = "0.8.12"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "51887d4adc7b564537b15adcfb307936f8075dfcd5f00dde9a9f1d29383682bc"
+checksum = "edbafec5fa1f196ca66527c1b12c2ec4745ca14b50f1ad8f9f6f720b55d11fac"
 dependencies = [
  "cfg-if",
- "once_cell",
 ]
 
 [[package]]
@@ -308,16 +306,16 @@ version = "2.2.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "fcc3dd5e9e9c0b295d6e1e4d811fb6f157d5ffd784b8d202fc62eac8035a770b"
 dependencies = [
- "proc-macro2 1.0.40",
- "quote 1.0.20",
- "syn 1.0.98",
+ "proc-macro2 1.0.47",
+ "quote 1.0.21",
+ "syn 1.0.102",
 ]
 
 [[package]]
 name = "digest"
-version = "0.10.3"
+version = "0.10.5"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "f2fb860ca6fafa5552fb6d0e816a69c8e49f0908bf524e30a90d97c85892d506"
+checksum = "adfbc57365a37acbd2ebf2b64d7e69bb766e2fea813521ed536f5d0520dcf86c"
 dependencies = [
  "block-buffer",
  "crypto-common",
@@ -346,9 +344,9 @@ dependencies = [
 
 [[package]]
 name = "either"
-version = "1.7.0"
+version = "1.8.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "3f107b87b6afc2a64fd13cac55fe06d6c8859f12d4b14cbcdd2c67d0976781be"
+checksum = "90e5c1c8368803113bf0c9584fc495a58b86dc8a29edbf8fe877d21d9507e797"
 
 [[package]]
 name = "enum-iterator"
@@ -365,9 +363,9 @@ version = "1.1.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "828de45d0ca18782232dfb8f3ea9cc428e8ced380eb26a520baaacfc70de39ce"
 dependencies = [
- "proc-macro2 1.0.40",
- "quote 1.0.20",
- "syn 1.0.98",
+ "proc-macro2 1.0.47",
+ "quote 1.0.21",
+ "syn 1.0.102",
 ]
 
 [[package]]
@@ -388,47 +386,47 @@ dependencies = [
 
 [[package]]
 name = "erased-serde"
-version = "0.3.21"
+version = "0.3.23"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "81d013529d5574a60caeda29e179e695125448e5de52e3874f7b4c1d7360e18e"
+checksum = "54558e0ba96fbe24280072642eceb9d7d442e32c7ec0ea9e7ecd7b4ea2cf4e11"
 dependencies = [
  "serde",
 ]
 
 [[package]]
 name = "futures-core"
-version = "0.3.21"
+version = "0.3.24"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "0c09fd04b7e4073ac7156a9539b57a484a8ea920f79c7c675d05d289ab6110d3"
+checksum = "4e5aa3de05362c3fb88de6531e6296e85cde7739cccad4b9dfeeb7f6ebce56bf"
 
 [[package]]
 name = "futures-macro"
-version = "0.3.21"
+version = "0.3.24"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "33c1e13800337f4d4d7a316bf45a567dbcb6ffe087f16424852d97e97a91f512"
+checksum = "42cd15d1c7456c04dbdf7e88bcd69760d74f3a798d6444e16974b505b0e62f17"
 dependencies = [
- "proc-macro2 1.0.40",
- "quote 1.0.20",
- "syn 1.0.98",
+ "proc-macro2 1.0.47",
+ "quote 1.0.21",
+ "syn 1.0.102",
 ]
 
 [[package]]
 name = "futures-sink"
-version = "0.3.21"
+version = "0.3.24"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "21163e139fa306126e6eedaf49ecdb4588f939600f0b1e770f4205ee4b7fa868"
+checksum = "21b20ba5a92e727ba30e72834706623d94ac93a725410b6a6b6fbc1b07f7ba56"
 
 [[package]]
 name = "futures-task"
-version = "0.3.21"
+version = "0.3.24"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "57c66a976bf5909d801bbef33416c41372779507e7a6b3a5e25e4749c58f776a"
+checksum = "a6508c467c73851293f390476d4491cf4d227dbabcd4170f3bb6044959b294f1"
 
 [[package]]
 name = "futures-util"
-version = "0.3.21"
+version = "0.3.24"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "d8b7abd5d659d9b90c8cba917f6ec750a74e2dc23902ef9cd4cc8c8b22e6036a"
+checksum = "44fb6cb1be61cc1d2e43b262516aafcf63b241cffdb1d3fa115f91d9c7b09c90"
 dependencies = [
  "futures-core",
  "futures-macro",
@@ -476,9 +474,9 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "e45727250e75cc04ff2846a66397da8ef2b3db8e40e0cef4df67950a07621eb9"
 dependencies = [
  "proc-macro-error",
- "proc-macro2 1.0.40",
- "quote 1.0.20",
- "syn 1.0.98",
+ "proc-macro2 1.0.47",
+ "quote 1.0.21",
+ "syn 1.0.102",
 ]
 
 [[package]]
@@ -519,24 +517,24 @@ dependencies = [
 
 [[package]]
 name = "itertools"
-version = "0.10.3"
+version = "0.10.5"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "a9a9d19fa1e79b6215ff29b9d6880b706147f16e9b1dbb1e4e5947b5b02bc5e3"
+checksum = "b0fd2260e829bddf4cb6ea802289de2f86d6a7a690192fbe91b3f46e0f2c8473"
 dependencies = [
  "either",
 ]
 
 [[package]]
 name = "itoa"
-version = "1.0.2"
+version = "1.0.4"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "112c678d4050afce233f4f2852bb2eb519230b3cf12f33585275537d7e41578d"
+checksum = "4217ad341ebadf8d8e724e264f13e593e0648f5b3e94b3896a5df283be015ecc"
 
 [[package]]
 name = "json-rpc-types"
-version = "1.0.3"
+version = "1.2.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "543f54304c4e48524e11cfa5134178eccce769ca376eb26aecf49f08202bf77d"
+checksum = "e4b9d43517af17dbf7fd76b7d52a7735f5aa403d5b58de0fa72535ba7e773ecd"
 dependencies = [
  "serde",
  "str-buf",
@@ -550,9 +548,9 @@ checksum = "e2abad23fbc42b3700f2f279844dc832adb2b2eb069b2df918f455c4e18cc646"
 
 [[package]]
 name = "libc"
-version = "0.2.126"
+version = "0.2.135"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "349d5a591cd28b49e1d1037471617a32ddcda5731b99419008085f72d5a53836"
+checksum = "68783febc7782c6c5cb401fbda4de5a9898be1762314da0bb2c10ced61f18b0c"
 
 [[package]]
 name = "libz-sys"
@@ -568,9 +566,9 @@ dependencies = [
 
 [[package]]
 name = "lock_api"
-version = "0.4.7"
+version = "0.4.9"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "327fa5b6a6940e4699ec49a9beae1ea4845c6bab9314e4f84ac68742139d8c53"
+checksum = "435011366fe56583b16cf956f9df0095b405b82d76425bc8981c0e22e60ec4df"
 dependencies = [
  "autocfg",
  "scopeguard",
@@ -645,9 +643,9 @@ version = "0.3.3"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "876a53fff98e03a936a674b29568b0e605f06b29372c2489ff4de23f1949743d"
 dependencies = [
- "proc-macro2 1.0.40",
- "quote 1.0.20",
- "syn 1.0.98",
+ "proc-macro2 1.0.47",
+ "quote 1.0.21",
+ "syn 1.0.102",
 ]
 
 [[package]]
@@ -702,9 +700,9 @@ checksum = "ff011a302c396a5197692431fc1948019154afc178baf7d8e37367442a4601cf"
 
 [[package]]
 name = "openssl-sys"
-version = "0.9.75"
+version = "0.9.76"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "e5f9bd0c2710541a3cda73d6f9ac4f1b240de4ae261065d309dbe73d9dceb42f"
+checksum = "5230151e44c0f05157effb743e8d517472843121cf9243e8b81393edb5acd9ce"
 dependencies = [
  "autocfg",
  "cc",
@@ -773,9 +771,9 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "da25490ff9892aab3fcf7c36f08cfb902dd3e71ca0f9f9517bea02a73a5ce38c"
 dependencies = [
  "proc-macro-error-attr",
- "proc-macro2 1.0.40",
- "quote 1.0.20",
- "syn 1.0.98",
+ "proc-macro2 1.0.47",
+ "quote 1.0.21",
+ "syn 1.0.102",
  "version_check",
 ]
 
@@ -785,8 +783,8 @@ version = "1.0.4"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "a1be40180e52ecc98ad80b184934baf3d0d29f979574e439af5a55274b35f869"
 dependencies = [
- "proc-macro2 1.0.40",
- "quote 1.0.20",
+ "proc-macro2 1.0.47",
+ "quote 1.0.21",
  "version_check",
 ]
 
@@ -801,9 +799,9 @@ dependencies = [
 
 [[package]]
 name = "proc-macro2"
-version = "1.0.40"
+version = "1.0.47"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "dd96a1e8ed2596c337f8eae5f24924ec83f5ad5ab21ea8e455d3566c69fbcaf7"
+checksum = "5ea3d908b0e36316caf9e9e2c4625cdde190a7e6f440d794667ed17a1855e725"
 dependencies = [
  "unicode-ident",
 ]
@@ -825,11 +823,11 @@ dependencies = [
 
 [[package]]
 name = "quote"
-version = "1.0.20"
+version = "1.0.21"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "3bcdf212e9776fbcb2d23ab029360416bb1706b1aea2d1a5ba002727cbcab804"
+checksum = "bbe448f377a7d6961e30f5955f9b8d106c3f5e449d493ee1b125c1d43c2b5179"
 dependencies = [
- "proc-macro2 1.0.40",
+ "proc-macro2 1.0.47",
 ]
 
 [[package]]
@@ -855,9 +853,9 @@ dependencies = [
 
 [[package]]
 name = "rand_core"
-version = "0.6.3"
+version = "0.6.4"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "d34f1408f55294453790c48b2f1ebbb1c5b4b7563eb1f418bcfcfdbb06ebb4e7"
+checksum = "ec0be4795e2f6a28069bec0b5ff3e2ac9bafc99e6a9a7dc3547996c5c816922c"
 dependencies = [
  "getrandom",
 ]
@@ -932,9 +930,9 @@ checksum = "97477e48b4cf8603ad5f7aaf897467cf42ab4218a38ef76fb14c2d6773a6d6a8"
 
 [[package]]
 name = "ryu"
-version = "1.0.10"
+version = "1.0.11"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "f3f6f92acf49d1b98f7a81226834412ada05458b7364277387724a237f062695"
+checksum = "4501abdff3ae82a1c1b477a17252eb69cee9e66eb915c1abaa4f44d873df9f09"
 
 [[package]]
 name = "schannel"
@@ -954,9 +952,9 @@ checksum = "d29ab0c6d3fc0ee92fe66e2d99f700eab17a8d57d1c1d3b748380fb20baa78cd"
 
 [[package]]
 name = "semver"
-version = "1.0.12"
+version = "1.0.14"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "a2333e6df6d6598f2b1974829f853c2b4c5f4a6e503c10af918081aa6f8564e1"
+checksum = "e25dfac463d778e353db5be2449d1cce89bd6fd23c9f1ea21310ce6e5a1b29c4"
 
 [[package]]
 name = "serde"
@@ -973,16 +971,16 @@ version = "1.0.145"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "81fa1584d3d1bcacd84c277a0dfe21f5b0f6accf4a23d04d4c6d61f1af522b4c"
 dependencies = [
- "proc-macro2 1.0.40",
- "quote 1.0.20",
- "syn 1.0.98",
+ "proc-macro2 1.0.47",
+ "quote 1.0.21",
+ "syn 1.0.102",
 ]
 
 [[package]]
 name = "serde_json"
-version = "1.0.82"
+version = "1.0.86"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "82c2c1fdcd807d1098552c5b9a36e425e42e9fbd7c6a37a8425f390f781f7fa7"
+checksum = "41feea4228a6f1cd09ec7a3593a682276702cd67b5273544757dae23c096f074"
 dependencies = [
  "itoa",
  "ryu",
@@ -991,9 +989,9 @@ dependencies = [
 
 [[package]]
 name = "sha2"
-version = "0.10.2"
+version = "0.10.6"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "55deaec60f81eefe3cce0dc50bda92d6d8e88f2a27df7c5033b42afeb1ed2676"
+checksum = "82e6b795fe2e3b1e845bafcb27aa35405c4d47cdfc92af5fc8d3002f76cebdc0"
 dependencies = [
  "cfg-if",
  "cpufeatures",
@@ -1018,7 +1016,7 @@ checksum = "a507befe795404456341dfab10cef66ead4c041f62b8b11bbb92bffe5d0953e0"
 [[package]]
 name = "snarkvm-algorithms"
 version = "0.9.0"
-source = "git+https://github.com/ABMatrix/snarkVM.git?branch=ABMatrix/new-posw-prover#04a5ae737ad024ddbd408198ce784db8d1b87f1e"
+source = "git+https://github.com/ABMatrix/snarkVM.git?branch=ABMatrix/new-posw-prover#7463e8ab662de99d06d3e0d25169601ee7632aaa"
 dependencies = [
  "aleo-std",
  "anyhow",
@@ -1044,7 +1042,7 @@ dependencies = [
 [[package]]
 name = "snarkvm-circuit"
 version = "0.9.0"
-source = "git+https://github.com/ABMatrix/snarkVM.git?branch=ABMatrix/new-posw-prover#04a5ae737ad024ddbd408198ce784db8d1b87f1e"
+source = "git+https://github.com/ABMatrix/snarkVM.git?branch=ABMatrix/new-posw-prover#7463e8ab662de99d06d3e0d25169601ee7632aaa"
 dependencies = [
  "snarkvm-circuit-account",
  "snarkvm-circuit-algorithms",
@@ -1058,7 +1056,7 @@ dependencies = [
 [[package]]
 name = "snarkvm-circuit-account"
 version = "0.9.0"
-source = "git+https://github.com/ABMatrix/snarkVM.git?branch=ABMatrix/new-posw-prover#04a5ae737ad024ddbd408198ce784db8d1b87f1e"
+source = "git+https://github.com/ABMatrix/snarkVM.git?branch=ABMatrix/new-posw-prover#7463e8ab662de99d06d3e0d25169601ee7632aaa"
 dependencies = [
  "snarkvm-circuit-algorithms",
  "snarkvm-circuit-network",
@@ -1069,7 +1067,7 @@ dependencies = [
 [[package]]
 name = "snarkvm-circuit-algorithms"
 version = "0.9.0"
-source = "git+https://github.com/ABMatrix/snarkVM.git?branch=ABMatrix/new-posw-prover#04a5ae737ad024ddbd408198ce784db8d1b87f1e"
+source = "git+https://github.com/ABMatrix/snarkVM.git?branch=ABMatrix/new-posw-prover#7463e8ab662de99d06d3e0d25169601ee7632aaa"
 dependencies = [
  "snarkvm-circuit-types",
  "snarkvm-console-algorithms",
@@ -1079,7 +1077,7 @@ dependencies = [
 [[package]]
 name = "snarkvm-circuit-collections"
 version = "0.9.0"
-source = "git+https://github.com/ABMatrix/snarkVM.git?branch=ABMatrix/new-posw-prover#04a5ae737ad024ddbd408198ce784db8d1b87f1e"
+source = "git+https://github.com/ABMatrix/snarkVM.git?branch=ABMatrix/new-posw-prover#7463e8ab662de99d06d3e0d25169601ee7632aaa"
 dependencies = [
  "snarkvm-circuit-algorithms",
  "snarkvm-circuit-types",
@@ -1089,7 +1087,7 @@ dependencies = [
 [[package]]
 name = "snarkvm-circuit-environment"
 version = "0.9.0"
-source = "git+https://github.com/ABMatrix/snarkVM.git?branch=ABMatrix/new-posw-prover#04a5ae737ad024ddbd408198ce784db8d1b87f1e"
+source = "git+https://github.com/ABMatrix/snarkVM.git?branch=ABMatrix/new-posw-prover#7463e8ab662de99d06d3e0d25169601ee7632aaa"
 dependencies = [
  "indexmap",
  "itertools",
@@ -1107,12 +1105,12 @@ dependencies = [
 [[package]]
 name = "snarkvm-circuit-environment-witness"
 version = "0.9.0"
-source = "git+https://github.com/ABMatrix/snarkVM.git?branch=ABMatrix/new-posw-prover#04a5ae737ad024ddbd408198ce784db8d1b87f1e"
+source = "git+https://github.com/ABMatrix/snarkVM.git?branch=ABMatrix/new-posw-prover#7463e8ab662de99d06d3e0d25169601ee7632aaa"
 
 [[package]]
 name = "snarkvm-circuit-network"
 version = "0.9.0"
-source = "git+https://github.com/ABMatrix/snarkVM.git?branch=ABMatrix/new-posw-prover#04a5ae737ad024ddbd408198ce784db8d1b87f1e"
+source = "git+https://github.com/ABMatrix/snarkVM.git?branch=ABMatrix/new-posw-prover#7463e8ab662de99d06d3e0d25169601ee7632aaa"
 dependencies = [
  "snarkvm-circuit-algorithms",
  "snarkvm-circuit-collections",
@@ -1123,7 +1121,7 @@ dependencies = [
 [[package]]
 name = "snarkvm-circuit-program"
 version = "0.9.0"
-source = "git+https://github.com/ABMatrix/snarkVM.git?branch=ABMatrix/new-posw-prover#04a5ae737ad024ddbd408198ce784db8d1b87f1e"
+source = "git+https://github.com/ABMatrix/snarkVM.git?branch=ABMatrix/new-posw-prover#7463e8ab662de99d06d3e0d25169601ee7632aaa"
 dependencies = [
  "snarkvm-circuit-account",
  "snarkvm-circuit-network",
@@ -1135,7 +1133,7 @@ dependencies = [
 [[package]]
 name = "snarkvm-circuit-types"
 version = "0.9.0"
-source = "git+https://github.com/ABMatrix/snarkVM.git?branch=ABMatrix/new-posw-prover#04a5ae737ad024ddbd408198ce784db8d1b87f1e"
+source = "git+https://github.com/ABMatrix/snarkVM.git?branch=ABMatrix/new-posw-prover#7463e8ab662de99d06d3e0d25169601ee7632aaa"
 dependencies = [
  "snarkvm-circuit-environment",
  "snarkvm-circuit-types-address",
@@ -1150,7 +1148,7 @@ dependencies = [
 [[package]]
 name = "snarkvm-circuit-types-address"
 version = "0.9.0"
-source = "git+https://github.com/ABMatrix/snarkVM.git?branch=ABMatrix/new-posw-prover#04a5ae737ad024ddbd408198ce784db8d1b87f1e"
+source = "git+https://github.com/ABMatrix/snarkVM.git?branch=ABMatrix/new-posw-prover#7463e8ab662de99d06d3e0d25169601ee7632aaa"
 dependencies = [
  "snarkvm-circuit-environment",
  "snarkvm-circuit-types-boolean",
@@ -1163,7 +1161,7 @@ dependencies = [
 [[package]]
 name = "snarkvm-circuit-types-boolean"
 version = "0.9.0"
-source = "git+https://github.com/ABMatrix/snarkVM.git?branch=ABMatrix/new-posw-prover#04a5ae737ad024ddbd408198ce784db8d1b87f1e"
+source = "git+https://github.com/ABMatrix/snarkVM.git?branch=ABMatrix/new-posw-prover#7463e8ab662de99d06d3e0d25169601ee7632aaa"
 dependencies = [
  "snarkvm-circuit-environment",
  "snarkvm-console-types-boolean",
@@ -1172,7 +1170,7 @@ dependencies = [
 [[package]]
 name = "snarkvm-circuit-types-field"
 version = "0.9.0"
-source = "git+https://github.com/ABMatrix/snarkVM.git?branch=ABMatrix/new-posw-prover#04a5ae737ad024ddbd408198ce784db8d1b87f1e"
+source = "git+https://github.com/ABMatrix/snarkVM.git?branch=ABMatrix/new-posw-prover#7463e8ab662de99d06d3e0d25169601ee7632aaa"
 dependencies = [
  "snarkvm-circuit-environment",
  "snarkvm-circuit-types-boolean",
@@ -1182,7 +1180,7 @@ dependencies = [
 [[package]]
 name = "snarkvm-circuit-types-group"
 version = "0.9.0"
-source = "git+https://github.com/ABMatrix/snarkVM.git?branch=ABMatrix/new-posw-prover#04a5ae737ad024ddbd408198ce784db8d1b87f1e"
+source = "git+https://github.com/ABMatrix/snarkVM.git?branch=ABMatrix/new-posw-prover#7463e8ab662de99d06d3e0d25169601ee7632aaa"
 dependencies = [
  "snarkvm-circuit-environment",
  "snarkvm-circuit-types-boolean",
@@ -1194,7 +1192,7 @@ dependencies = [
 [[package]]
 name = "snarkvm-circuit-types-integers"
 version = "0.9.0"
-source = "git+https://github.com/ABMatrix/snarkVM.git?branch=ABMatrix/new-posw-prover#04a5ae737ad024ddbd408198ce784db8d1b87f1e"
+source = "git+https://github.com/ABMatrix/snarkVM.git?branch=ABMatrix/new-posw-prover#7463e8ab662de99d06d3e0d25169601ee7632aaa"
 dependencies = [
  "snarkvm-circuit-environment",
  "snarkvm-circuit-types-boolean",
@@ -1205,7 +1203,7 @@ dependencies = [
 [[package]]
 name = "snarkvm-circuit-types-scalar"
 version = "0.9.0"
-source = "git+https://github.com/ABMatrix/snarkVM.git?branch=ABMatrix/new-posw-prover#04a5ae737ad024ddbd408198ce784db8d1b87f1e"
+source = "git+https://github.com/ABMatrix/snarkVM.git?branch=ABMatrix/new-posw-prover#7463e8ab662de99d06d3e0d25169601ee7632aaa"
 dependencies = [
  "snarkvm-circuit-environment",
  "snarkvm-circuit-types-boolean",
@@ -1216,7 +1214,7 @@ dependencies = [
 [[package]]
 name = "snarkvm-circuit-types-string"
 version = "0.9.0"
-source = "git+https://github.com/ABMatrix/snarkVM.git?branch=ABMatrix/new-posw-prover#04a5ae737ad024ddbd408198ce784db8d1b87f1e"
+source = "git+https://github.com/ABMatrix/snarkVM.git?branch=ABMatrix/new-posw-prover#7463e8ab662de99d06d3e0d25169601ee7632aaa"
 dependencies = [
  "snarkvm-circuit-environment",
  "snarkvm-circuit-types-boolean",
@@ -1228,7 +1226,7 @@ dependencies = [
 [[package]]
 name = "snarkvm-compiler"
 version = "0.9.0"
-source = "git+https://github.com/ABMatrix/snarkVM.git?branch=ABMatrix/new-posw-prover#04a5ae737ad024ddbd408198ce784db8d1b87f1e"
+source = "git+https://github.com/ABMatrix/snarkVM.git?branch=ABMatrix/new-posw-prover#7463e8ab662de99d06d3e0d25169601ee7632aaa"
 dependencies = [
  "anyhow",
  "blake2",
@@ -1255,7 +1253,7 @@ dependencies = [
 [[package]]
 name = "snarkvm-console"
 version = "0.9.0"
-source = "git+https://github.com/ABMatrix/snarkVM.git?branch=ABMatrix/new-posw-prover#04a5ae737ad024ddbd408198ce784db8d1b87f1e"
+source = "git+https://github.com/ABMatrix/snarkVM.git?branch=ABMatrix/new-posw-prover#7463e8ab662de99d06d3e0d25169601ee7632aaa"
 dependencies = [
  "snarkvm-console-account",
  "snarkvm-console-algorithms",
@@ -1268,7 +1266,7 @@ dependencies = [
 [[package]]
 name = "snarkvm-console-account"
 version = "0.9.0"
-source = "git+https://github.com/ABMatrix/snarkVM.git?branch=ABMatrix/new-posw-prover#04a5ae737ad024ddbd408198ce784db8d1b87f1e"
+source = "git+https://github.com/ABMatrix/snarkVM.git?branch=ABMatrix/new-posw-prover#7463e8ab662de99d06d3e0d25169601ee7632aaa"
 dependencies = [
  "bs58",
  "snarkvm-console-network",
@@ -1278,7 +1276,7 @@ dependencies = [
 [[package]]
 name = "snarkvm-console-algorithms"
 version = "0.9.0"
-source = "git+https://github.com/ABMatrix/snarkVM.git?branch=ABMatrix/new-posw-prover#04a5ae737ad024ddbd408198ce784db8d1b87f1e"
+source = "git+https://github.com/ABMatrix/snarkVM.git?branch=ABMatrix/new-posw-prover#7463e8ab662de99d06d3e0d25169601ee7632aaa"
 dependencies = [
  "blake2s_simd",
  "smallvec",
@@ -1290,7 +1288,7 @@ dependencies = [
 [[package]]
 name = "snarkvm-console-collections"
 version = "0.9.0"
-source = "git+https://github.com/ABMatrix/snarkVM.git?branch=ABMatrix/new-posw-prover#04a5ae737ad024ddbd408198ce784db8d1b87f1e"
+source = "git+https://github.com/ABMatrix/snarkVM.git?branch=ABMatrix/new-posw-prover#7463e8ab662de99d06d3e0d25169601ee7632aaa"
 dependencies = [
  "aleo-std",
  "rayon",
@@ -1301,7 +1299,7 @@ dependencies = [
 [[package]]
 name = "snarkvm-console-network"
 version = "0.9.0"
-source = "git+https://github.com/ABMatrix/snarkVM.git?branch=ABMatrix/new-posw-prover#04a5ae737ad024ddbd408198ce784db8d1b87f1e"
+source = "git+https://github.com/ABMatrix/snarkVM.git?branch=ABMatrix/new-posw-prover#7463e8ab662de99d06d3e0d25169601ee7632aaa"
 dependencies = [
  "anyhow",
  "itertools",
@@ -1320,7 +1318,7 @@ dependencies = [
 [[package]]
 name = "snarkvm-console-network-environment"
 version = "0.9.0"
-source = "git+https://github.com/ABMatrix/snarkVM.git?branch=ABMatrix/new-posw-prover#04a5ae737ad024ddbd408198ce784db8d1b87f1e"
+source = "git+https://github.com/ABMatrix/snarkVM.git?branch=ABMatrix/new-posw-prover#7463e8ab662de99d06d3e0d25169601ee7632aaa"
 dependencies = [
  "anyhow",
  "bech32",
@@ -1337,7 +1335,7 @@ dependencies = [
 [[package]]
 name = "snarkvm-console-program"
 version = "0.9.0"
-source = "git+https://github.com/ABMatrix/snarkVM.git?branch=ABMatrix/new-posw-prover#04a5ae737ad024ddbd408198ce784db8d1b87f1e"
+source = "git+https://github.com/ABMatrix/snarkVM.git?branch=ABMatrix/new-posw-prover#7463e8ab662de99d06d3e0d25169601ee7632aaa"
 dependencies = [
  "enum_index",
  "enum_index_derive",
@@ -1354,7 +1352,7 @@ dependencies = [
 [[package]]
 name = "snarkvm-console-types"
 version = "0.9.0"
-source = "git+https://github.com/ABMatrix/snarkVM.git?branch=ABMatrix/new-posw-prover#04a5ae737ad024ddbd408198ce784db8d1b87f1e"
+source = "git+https://github.com/ABMatrix/snarkVM.git?branch=ABMatrix/new-posw-prover#7463e8ab662de99d06d3e0d25169601ee7632aaa"
 dependencies = [
  "snarkvm-console-network-environment",
  "snarkvm-console-types-address",
@@ -1369,7 +1367,7 @@ dependencies = [
 [[package]]
 name = "snarkvm-console-types-address"
 version = "0.9.0"
-source = "git+https://github.com/ABMatrix/snarkVM.git?branch=ABMatrix/new-posw-prover#04a5ae737ad024ddbd408198ce784db8d1b87f1e"
+source = "git+https://github.com/ABMatrix/snarkVM.git?branch=ABMatrix/new-posw-prover#7463e8ab662de99d06d3e0d25169601ee7632aaa"
 dependencies = [
  "snarkvm-console-network-environment",
  "snarkvm-console-types-boolean",
@@ -1380,7 +1378,7 @@ dependencies = [
 [[package]]
 name = "snarkvm-console-types-boolean"
 version = "0.9.0"
-source = "git+https://github.com/ABMatrix/snarkVM.git?branch=ABMatrix/new-posw-prover#04a5ae737ad024ddbd408198ce784db8d1b87f1e"
+source = "git+https://github.com/ABMatrix/snarkVM.git?branch=ABMatrix/new-posw-prover#7463e8ab662de99d06d3e0d25169601ee7632aaa"
 dependencies = [
  "snarkvm-console-network-environment",
 ]
@@ -1388,7 +1386,7 @@ dependencies = [
 [[package]]
 name = "snarkvm-console-types-field"
 version = "0.9.0"
-source = "git+https://github.com/ABMatrix/snarkVM.git?branch=ABMatrix/new-posw-prover#04a5ae737ad024ddbd408198ce784db8d1b87f1e"
+source = "git+https://github.com/ABMatrix/snarkVM.git?branch=ABMatrix/new-posw-prover#7463e8ab662de99d06d3e0d25169601ee7632aaa"
 dependencies = [
  "snarkvm-console-network-environment",
  "snarkvm-console-types-boolean",
@@ -1397,7 +1395,7 @@ dependencies = [
 [[package]]
 name = "snarkvm-console-types-group"
 version = "0.9.0"
-source = "git+https://github.com/ABMatrix/snarkVM.git?branch=ABMatrix/new-posw-prover#04a5ae737ad024ddbd408198ce784db8d1b87f1e"
+source = "git+https://github.com/ABMatrix/snarkVM.git?branch=ABMatrix/new-posw-prover#7463e8ab662de99d06d3e0d25169601ee7632aaa"
 dependencies = [
  "snarkvm-console-network-environment",
  "snarkvm-console-types-boolean",
@@ -1408,7 +1406,7 @@ dependencies = [
 [[package]]
 name = "snarkvm-console-types-integers"
 version = "0.9.0"
-source = "git+https://github.com/ABMatrix/snarkVM.git?branch=ABMatrix/new-posw-prover#04a5ae737ad024ddbd408198ce784db8d1b87f1e"
+source = "git+https://github.com/ABMatrix/snarkVM.git?branch=ABMatrix/new-posw-prover#7463e8ab662de99d06d3e0d25169601ee7632aaa"
 dependencies = [
  "snarkvm-console-network-environment",
  "snarkvm-console-types-boolean",
@@ -1418,7 +1416,7 @@ dependencies = [
 [[package]]
 name = "snarkvm-console-types-scalar"
 version = "0.9.0"
-source = "git+https://github.com/ABMatrix/snarkVM.git?branch=ABMatrix/new-posw-prover#04a5ae737ad024ddbd408198ce784db8d1b87f1e"
+source = "git+https://github.com/ABMatrix/snarkVM.git?branch=ABMatrix/new-posw-prover#7463e8ab662de99d06d3e0d25169601ee7632aaa"
 dependencies = [
  "snarkvm-console-network-environment",
  "snarkvm-console-types-boolean",
@@ -1428,7 +1426,7 @@ dependencies = [
 [[package]]
 name = "snarkvm-console-types-string"
 version = "0.9.0"
-source = "git+https://github.com/ABMatrix/snarkVM.git?branch=ABMatrix/new-posw-prover#04a5ae737ad024ddbd408198ce784db8d1b87f1e"
+source = "git+https://github.com/ABMatrix/snarkVM.git?branch=ABMatrix/new-posw-prover#7463e8ab662de99d06d3e0d25169601ee7632aaa"
 dependencies = [
  "snarkvm-console-network-environment",
  "snarkvm-console-types-boolean",
@@ -1439,7 +1437,7 @@ dependencies = [
 [[package]]
 name = "snarkvm-curves"
 version = "0.9.0"
-source = "git+https://github.com/ABMatrix/snarkVM.git?branch=ABMatrix/new-posw-prover#04a5ae737ad024ddbd408198ce784db8d1b87f1e"
+source = "git+https://github.com/ABMatrix/snarkVM.git?branch=ABMatrix/new-posw-prover#7463e8ab662de99d06d3e0d25169601ee7632aaa"
 dependencies = [
  "rand",
  "rustc_version",
@@ -1452,7 +1450,7 @@ dependencies = [
 [[package]]
 name = "snarkvm-fields"
 version = "0.9.0"
-source = "git+https://github.com/ABMatrix/snarkVM.git?branch=ABMatrix/new-posw-prover#04a5ae737ad024ddbd408198ce784db8d1b87f1e"
+source = "git+https://github.com/ABMatrix/snarkVM.git?branch=ABMatrix/new-posw-prover#7463e8ab662de99d06d3e0d25169601ee7632aaa"
 dependencies = [
  "aleo-std",
  "anyhow",
@@ -1469,7 +1467,7 @@ dependencies = [
 [[package]]
 name = "snarkvm-parameters"
 version = "0.9.0"
-source = "git+https://github.com/ABMatrix/snarkVM.git?branch=ABMatrix/new-posw-prover#04a5ae737ad024ddbd408198ce784db8d1b87f1e"
+source = "git+https://github.com/ABMatrix/snarkVM.git?branch=ABMatrix/new-posw-prover#7463e8ab662de99d06d3e0d25169601ee7632aaa"
 dependencies = [
  "aleo-std",
  "anyhow",
@@ -1492,7 +1490,7 @@ dependencies = [
 [[package]]
 name = "snarkvm-r1cs"
 version = "0.9.0"
-source = "git+https://github.com/ABMatrix/snarkVM.git?branch=ABMatrix/new-posw-prover#04a5ae737ad024ddbd408198ce784db8d1b87f1e"
+source = "git+https://github.com/ABMatrix/snarkVM.git?branch=ABMatrix/new-posw-prover#7463e8ab662de99d06d3e0d25169601ee7632aaa"
 dependencies = [
  "anyhow",
  "cfg-if",
@@ -1508,7 +1506,7 @@ dependencies = [
 [[package]]
 name = "snarkvm-utilities"
 version = "0.9.0"
-source = "git+https://github.com/ABMatrix/snarkVM.git?branch=ABMatrix/new-posw-prover#04a5ae737ad024ddbd408198ce784db8d1b87f1e"
+source = "git+https://github.com/ABMatrix/snarkVM.git?branch=ABMatrix/new-posw-prover#7463e8ab662de99d06d3e0d25169601ee7632aaa"
 dependencies = [
  "aleo-std",
  "anyhow",
@@ -1526,18 +1524,18 @@ dependencies = [
 [[package]]
 name = "snarkvm-utilities-derives"
 version = "0.9.0"
-source = "git+https://github.com/ABMatrix/snarkVM.git?branch=ABMatrix/new-posw-prover#04a5ae737ad024ddbd408198ce784db8d1b87f1e"
+source = "git+https://github.com/ABMatrix/snarkVM.git?branch=ABMatrix/new-posw-prover#7463e8ab662de99d06d3e0d25169601ee7632aaa"
 dependencies = [
- "proc-macro2 1.0.40",
- "quote 1.0.20",
- "syn 1.0.98",
+ "proc-macro2 1.0.47",
+ "quote 1.0.21",
+ "syn 1.0.102",
 ]
 
 [[package]]
 name = "socket2"
-version = "0.4.4"
+version = "0.4.7"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "66d72b759436ae32898a2af0a14218dbf55efde3feeb170eb623637db85ee1e0"
+checksum = "02e2d2db9033d13a1567121ddd7a095ee144db4e1ca1b1bda3419bc0da294ebd"
 dependencies = [
  "libc",
  "winapi",
@@ -1545,9 +1543,9 @@ dependencies = [
 
 [[package]]
 name = "str-buf"
-version = "2.0.5"
+version = "3.0.1"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "0873cb29201126440dcc78d0b1f5a13d917e78831778429a7920ca9c7f3dae1e"
+checksum = "4632e2900cdc0ad204560deadf59707586fc69c87e7452107e57030d140aec4a"
 dependencies = [
  "serde",
 ]
@@ -1582,12 +1580,12 @@ dependencies = [
 
 [[package]]
 name = "syn"
-version = "1.0.98"
+version = "1.0.102"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "c50aef8a904de4c23c788f104b7dddc7d6f79c647c7c8ce4cc8f73eb0ca773dd"
+checksum = "3fcd952facd492f9be3ef0d0b7032a6e442ee9b361d4acc2b1d0c4aaa5f613a1"
 dependencies = [
- "proc-macro2 1.0.40",
- "quote 1.0.20",
+ "proc-macro2 1.0.47",
+ "quote 1.0.21",
  "unicode-ident",
 ]
 
@@ -1615,9 +1613,9 @@ version = "1.0.37"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "982d17546b47146b28f7c22e3d08465f6b8903d0ea13c1660d9d84a6e7adcdbb"
 dependencies = [
- "proc-macro2 1.0.40",
- "quote 1.0.20",
- "syn 1.0.98",
+ "proc-macro2 1.0.47",
+ "quote 1.0.21",
+ "syn 1.0.102",
 ]
 
 [[package]]
@@ -1633,15 +1631,14 @@ dependencies = [
 
 [[package]]
 name = "tokio"
-version = "1.20.0"
+version = "1.21.2"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "57aec3cfa4c296db7255446efb4928a6be304b431a806216105542a67b6ca82e"
+checksum = "a9e03c497dc955702ba729190dc4aac6f2a0ce97f913e5b1b5912fc5039d9099"
 dependencies = [
  "autocfg",
  "libc",
  "mio",
  "num_cpus",
- "once_cell",
  "pin-project-lite",
  "socket2",
  "tokio-macros",
@@ -1654,16 +1651,16 @@ version = "1.8.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "9724f9a975fb987ef7a3cd9be0350edcbe130698af5b8f7a631e23d42d052484"
 dependencies = [
- "proc-macro2 1.0.40",
- "quote 1.0.20",
- "syn 1.0.98",
+ "proc-macro2 1.0.47",
+ "quote 1.0.21",
+ "syn 1.0.102",
 ]
 
 [[package]]
 name = "tokio-util"
-version = "0.7.3"
+version = "0.7.4"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "cc463cd8deddc3770d20f9852143d50bf6094e640b485cb2e189a2099085ff45"
+checksum = "0bb2e075f03b3d66d8d8785356224ba688d2906a371015e225beeb65ca92c740"
 dependencies = [
  "bytes",
  "futures-core",
@@ -1675,9 +1672,9 @@ dependencies = [
 
 [[package]]
 name = "tracing"
-version = "0.1.35"
+version = "0.1.37"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "a400e31aa60b9d44a52a8ee0343b5b18566b03a8321e0d321f695cf56e940160"
+checksum = "8ce8c33a8d48bd45d624a6e523445fd21ec13d3653cd51f681abf67418f54eb8"
 dependencies = [
  "cfg-if",
  "pin-project-lite",
@@ -1687,20 +1684,20 @@ dependencies = [
 
 [[package]]
 name = "tracing-attributes"
-version = "0.1.22"
+version = "0.1.23"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "11c75893af559bc8e10716548bdef5cb2b983f8e637db9d0e15126b61b484ee2"
+checksum = "4017f8f45139870ca7e672686113917c71c7a6e02d4924eda67186083c03081a"
 dependencies = [
- "proc-macro2 1.0.40",
- "quote 1.0.20",
- "syn 1.0.98",
+ "proc-macro2 1.0.47",
+ "quote 1.0.21",
+ "syn 1.0.102",
 ]
 
 [[package]]
 name = "tracing-core"
-version = "0.1.28"
+version = "0.1.30"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "7b7358be39f2f274f322d2aaed611acc57f382e8eb1e5b48cb9ae30933495ce7"
+checksum = "24eb03ba0eab1fd845050058ce5e616558e8f8d8fca633e6b163fe25c797213a"
 dependencies = [
  "once_cell",
 ]
@@ -1713,9 +1710,9 @@ checksum = "dcf81ac59edc17cc8697ff311e8f5ef2d99fcbd9817b34cec66f90b6c3dfd987"
 
 [[package]]
 name = "unicode-ident"
-version = "1.0.2"
+version = "1.0.5"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "15c61ba63f9235225a22310255a29b806b907c9b8c964bcbd0a2c70f3f2deea7"
+checksum = "6ceab39d59e4c9499d4e5a8ee0e2735b891bb7308ac83dfb4e80cad195c9f6f3"
 
 [[package]]
 name = "unicode-xid"

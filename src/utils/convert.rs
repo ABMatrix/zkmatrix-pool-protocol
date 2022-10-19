@@ -55,7 +55,7 @@ fn test_decode() {
     let srs = CoinbasePuzzle::<Testnet3>::setup(max_config, &mut rng).unwrap();
     let degree = (1 << 5) - 1;
     let config = PuzzleConfig { degree };
-    let (pk, _vk) = CoinbasePuzzle::<Testnet3>::trim(&srs, config).unwrap();
+    let puzzle= CoinbasePuzzle::<Testnet3>::trim(&srs, config).unwrap();
 
     let epoch_challenge = EpochChallenge::<Testnet3>::new(rng.next_u32(), Default::default(), degree).unwrap();
     println!("epoch_block_hash: {}", epoch_challenge.epoch_block_hash().to_string());
@@ -113,7 +113,7 @@ fn test_decode() {
     assert_eq!(epoch_challenge, epoch_challenge_2);
     let address_2 = Address::<Testnet3>::from_bytes_le(convert_to_u8(&ConvertType::Address(address_s)).unwrap().as_slice()).unwrap();
     assert_eq!(address, address_2);
-    let result = CoinbasePuzzle::prove(&pk, &epoch_challenge, &address, u64::rand(&mut rng)).unwrap();
+    let result = CoinbasePuzzle::prove(&puzzle, &epoch_challenge, address, u64::rand(&mut rng)).unwrap();
     println!("{}", result.nonce());
     let proof_hex = hex::encode(result.proof().to_bytes_le().unwrap());
     println!("{:?}", proof_hex);
