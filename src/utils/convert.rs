@@ -60,7 +60,7 @@ fn test_decode() {
     let epoch_challenge = EpochChallenge::<Testnet3>::new(rng.next_u32(), Default::default(), degree).unwrap();
     println!("epoch_block_hash: {}", epoch_challenge.epoch_block_hash().to_string());
 
-    let d = epoch_challenge.degree().unwrap();
+    let d = epoch_challenge.degree();
 
     let epoch_challenge_2 = EpochChallenge::<Testnet3>::new(epoch_challenge.epoch_number(), epoch_challenge.epoch_block_hash(), d).unwrap();
     assert_eq!(epoch_challenge, epoch_challenge_2);
