@@ -958,18 +958,18 @@ checksum = "e25dfac463d778e353db5be2449d1cce89bd6fd23c9f1ea21310ce6e5a1b29c4"
 
 [[package]]
 name = "serde"
-version = "1.0.145"
+version = "1.0.146"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "728eb6351430bccb993660dfffc5a72f91ccc1295abaa8ce19b27ebe4f75568b"
+checksum = "6df50b7a60a0ad48e1b42eb38373eac8ff785d619fb14db917b4e63d5439361f"
 dependencies = [
  "serde_derive",
 ]
 
 [[package]]
 name = "serde_derive"
-version = "1.0.145"
+version = "1.0.146"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "81fa1584d3d1bcacd84c277a0dfe21f5b0f6accf4a23d04d4c6d61f1af522b4c"
+checksum = "a714fd32ba1d66047ce7d53dabd809e9922d538f9047de13cc4cffca47b36205"
 dependencies = [
  "proc-macro2 1.0.47",
  "quote 1.0.21",
@@ -1016,7 +1016,7 @@ checksum = "a507befe795404456341dfab10cef66ead4c041f62b8b11bbb92bffe5d0953e0"
 [[package]]
 name = "snarkvm-algorithms"
 version = "0.9.0"
-source = "git+https://github.com/ABMatrix/snarkVM.git?branch=ABMatrix/new-posw-prover#386c0a3fa0bbde9bb9a31c58fbea4c96b040ff69"
+source = "git+https://github.com/ABMatrix/snarkVM.git?branch=ABMatrix/new-posw-prover#316c005eb79c6085ac35b8fd412b32c685c5b060"
 dependencies = [
  "aleo-std",
  "anyhow",
@@ -1042,7 +1042,7 @@ dependencies = [
 [[package]]
 name = "snarkvm-circuit"
 version = "0.9.0"
-source = "git+https://github.com/ABMatrix/snarkVM.git?branch=ABMatrix/new-posw-prover#386c0a3fa0bbde9bb9a31c58fbea4c96b040ff69"
+source = "git+https://github.com/ABMatrix/snarkVM.git?branch=ABMatrix/new-posw-prover#316c005eb79c6085ac35b8fd412b32c685c5b060"
 dependencies = [
  "snarkvm-circuit-account",
  "snarkvm-circuit-algorithms",
@@ -1056,7 +1056,7 @@ dependencies = [
 [[package]]
 name = "snarkvm-circuit-account"
 version = "0.9.0"
-source = "git+https://github.com/ABMatrix/snarkVM.git?branch=ABMatrix/new-posw-prover#386c0a3fa0bbde9bb9a31c58fbea4c96b040ff69"
+source = "git+https://github.com/ABMatrix/snarkVM.git?branch=ABMatrix/new-posw-prover#316c005eb79c6085ac35b8fd412b32c685c5b060"
 dependencies = [
  "snarkvm-circuit-algorithms",
  "snarkvm-circuit-network",
@@ -1067,7 +1067,7 @@ dependencies = [
 [[package]]
 name = "snarkvm-circuit-algorithms"
 version = "0.9.0"
-source = "git+https://github.com/ABMatrix/snarkVM.git?branch=ABMatrix/new-posw-prover#386c0a3fa0bbde9bb9a31c58fbea4c96b040ff69"
+source = "git+https://github.com/ABMatrix/snarkVM.git?branch=ABMatrix/new-posw-prover#316c005eb79c6085ac35b8fd412b32c685c5b060"
 dependencies = [
  "snarkvm-circuit-types",
  "snarkvm-console-algorithms",
@@ -1077,7 +1077,7 @@ dependencies = [
 [[package]]
 name = "snarkvm-circuit-collections"
 version = "0.9.0"
-source = "git+https://github.com/ABMatrix/snarkVM.git?branch=ABMatrix/new-posw-prover#386c0a3fa0bbde9bb9a31c58fbea4c96b040ff69"
+source = "git+https://github.com/ABMatrix/snarkVM.git?branch=ABMatrix/new-posw-prover#316c005eb79c6085ac35b8fd412b32c685c5b060"
 dependencies = [
  "snarkvm-circuit-algorithms",
  "snarkvm-circuit-types",
@@ -1087,7 +1087,7 @@ dependencies = [
 [[package]]
 name = "snarkvm-circuit-environment"
 version = "0.9.0"
-source = "git+https://github.com/ABMatrix/snarkVM.git?branch=ABMatrix/new-posw-prover#386c0a3fa0bbde9bb9a31c58fbea4c96b040ff69"
+source = "git+https://github.com/ABMatrix/snarkVM.git?branch=ABMatrix/new-posw-prover#316c005eb79c6085ac35b8fd412b32c685c5b060"
 dependencies = [
  "indexmap",
  "itertools",
@@ -1105,12 +1105,12 @@ dependencies = [
 [[package]]
 name = "snarkvm-circuit-environment-witness"
 version = "0.9.0"
-source = "git+https://github.com/ABMatrix/snarkVM.git?branch=ABMatrix/new-posw-prover#386c0a3fa0bbde9bb9a31c58fbea4c96b040ff69"
+source = "git+https://github.com/ABMatrix/snarkVM.git?branch=ABMatrix/new-posw-prover#316c005eb79c6085ac35b8fd412b32c685c5b060"
 
 [[package]]
 name = "snarkvm-circuit-network"
 version = "0.9.0"
-source = "git+https://github.com/ABMatrix/snarkVM.git?branch=ABMatrix/new-posw-prover#386c0a3fa0bbde9bb9a31c58fbea4c96b040ff69"
+source = "git+https://github.com/ABMatrix/snarkVM.git?branch=ABMatrix/new-posw-prover#316c005eb79c6085ac35b8fd412b32c685c5b060"
 dependencies = [
  "snarkvm-circuit-algorithms",
  "snarkvm-circuit-collections",
@@ -1121,7 +1121,7 @@ dependencies = [
 [[package]]
 name = "snarkvm-circuit-program"
 version = "0.9.0"
-source = "git+https://github.com/ABMatrix/snarkVM.git?branch=ABMatrix/new-posw-prover#386c0a3fa0bbde9bb9a31c58fbea4c96b040ff69"
+source = "git+https://github.com/ABMatrix/snarkVM.git?branch=ABMatrix/new-posw-prover#316c005eb79c6085ac35b8fd412b32c685c5b060"
 dependencies = [
  "snarkvm-circuit-account",
  "snarkvm-circuit-network",
@@ -1133,7 +1133,7 @@ dependencies = [
 [[package]]
 name = "snarkvm-circuit-types"
 version = "0.9.0"
-source = "git+https://github.com/ABMatrix/snarkVM.git?branch=ABMatrix/new-posw-prover#386c0a3fa0bbde9bb9a31c58fbea4c96b040ff69"
+source = "git+https://github.com/ABMatrix/snarkVM.git?branch=ABMatrix/new-posw-prover#316c005eb79c6085ac35b8fd412b32c685c5b060"
 dependencies = [
  "snarkvm-circuit-environment",
  "snarkvm-circuit-types-address",
@@ -1148,7 +1148,7 @@ dependencies = [
 [[package]]
 name = "snarkvm-circuit-types-address"
 version = "0.9.0"
-source = "git+https://github.com/ABMatrix/snarkVM.git?branch=ABMatrix/new-posw-prover#386c0a3fa0bbde9bb9a31c58fbea4c96b040ff69"
+source = "git+https://github.com/ABMatrix/snarkVM.git?branch=ABMatrix/new-posw-prover#316c005eb79c6085ac35b8fd412b32c685c5b060"
 dependencies = [
  "snarkvm-circuit-environment",
  "snarkvm-circuit-types-boolean",
@@ -1161,7 +1161,7 @@ dependencies = [
 [[package]]
 name = "snarkvm-circuit-types-boolean"
 version = "0.9.0"
-source = "git+https://github.com/ABMatrix/snarkVM.git?branch=ABMatrix/new-posw-prover#386c0a3fa0bbde9bb9a31c58fbea4c96b040ff69"
+source = "git+https://github.com/ABMatrix/snarkVM.git?branch=ABMatrix/new-posw-prover#316c005eb79c6085ac35b8fd412b32c685c5b060"
 dependencies = [
  "snarkvm-circuit-environment",
  "snarkvm-console-types-boolean",
@@ -1170,7 +1170,7 @@ dependencies = [
 [[package]]
 name = "snarkvm-circuit-types-field"
 version = "0.9.0"
-source = "git+https://github.com/ABMatrix/snarkVM.git?branch=ABMatrix/new-posw-prover#386c0a3fa0bbde9bb9a31c58fbea4c96b040ff69"
+source = "git+https://github.com/ABMatrix/snarkVM.git?branch=ABMatrix/new-posw-prover#316c005eb79c6085ac35b8fd412b32c685c5b060"
 dependencies = [
  "snarkvm-circuit-environment",
  "snarkvm-circuit-types-boolean",
@@ -1180,7 +1180,7 @@ dependencies = [
 [[package]]
 name = "snarkvm-circuit-types-group"
 version = "0.9.0"
-source = "git+https://github.com/ABMatrix/snarkVM.git?branch=ABMatrix/new-posw-prover#386c0a3fa0bbde9bb9a31c58fbea4c96b040ff69"
+source = "git+https://github.com/ABMatrix/snarkVM.git?branch=ABMatrix/new-posw-prover#316c005eb79c6085ac35b8fd412b32c685c5b060"
 dependencies = [
  "snarkvm-circuit-environment",
  "snarkvm-circuit-types-boolean",
@@ -1192,7 +1192,7 @@ dependencies = [
 [[package]]
 name = "snarkvm-circuit-types-integers"
 version = "0.9.0"
-source = "git+https://github.com/ABMatrix/snarkVM.git?branch=ABMatrix/new-posw-prover#386c0a3fa0bbde9bb9a31c58fbea4c96b040ff69"
+source = "git+https://github.com/ABMatrix/snarkVM.git?branch=ABMatrix/new-posw-prover#316c005eb79c6085ac35b8fd412b32c685c5b060"
 dependencies = [
  "snarkvm-circuit-environment",
  "snarkvm-circuit-types-boolean",
@@ -1203,7 +1203,7 @@ dependencies = [
 [[package]]
 name = "snarkvm-circuit-types-scalar"
 version = "0.9.0"
-source = "git+https://github.com/ABMatrix/snarkVM.git?branch=ABMatrix/new-posw-prover#386c0a3fa0bbde9bb9a31c58fbea4c96b040ff69"
+source = "git+https://github.com/ABMatrix/snarkVM.git?branch=ABMatrix/new-posw-prover#316c005eb79c6085ac35b8fd412b32c685c5b060"
 dependencies = [
  "snarkvm-circuit-environment",
  "snarkvm-circuit-types-boolean",
@@ -1214,7 +1214,7 @@ dependencies = [
 [[package]]
 name = "snarkvm-circuit-types-string"
 version = "0.9.0"
-source = "git+https://github.com/ABMatrix/snarkVM.git?branch=ABMatrix/new-posw-prover#386c0a3fa0bbde9bb9a31c58fbea4c96b040ff69"
+source = "git+https://github.com/ABMatrix/snarkVM.git?branch=ABMatrix/new-posw-prover#316c005eb79c6085ac35b8fd412b32c685c5b060"
 dependencies = [
  "snarkvm-circuit-environment",
  "snarkvm-circuit-types-boolean",
@@ -1226,7 +1226,7 @@ dependencies = [
 [[package]]
 name = "snarkvm-compiler"
 version = "0.9.0"
-source = "git+https://github.com/ABMatrix/snarkVM.git?branch=ABMatrix/new-posw-prover#386c0a3fa0bbde9bb9a31c58fbea4c96b040ff69"
+source = "git+https://github.com/ABMatrix/snarkVM.git?branch=ABMatrix/new-posw-prover#316c005eb79c6085ac35b8fd412b32c685c5b060"
 dependencies = [
  "anyhow",
  "blake2",
@@ -1252,7 +1252,7 @@ dependencies = [
 [[package]]
 name = "snarkvm-console"
 version = "0.9.0"
-source = "git+https://github.com/ABMatrix/snarkVM.git?branch=ABMatrix/new-posw-prover#386c0a3fa0bbde9bb9a31c58fbea4c96b040ff69"
+source = "git+https://github.com/ABMatrix/snarkVM.git?branch=ABMatrix/new-posw-prover#316c005eb79c6085ac35b8fd412b32c685c5b060"
 dependencies = [
  "snarkvm-console-account",
  "snarkvm-console-algorithms",
@@ -1265,7 +1265,7 @@ dependencies = [
 [[package]]
 name = "snarkvm-console-account"
 version = "0.9.0"
-source = "git+https://github.com/ABMatrix/snarkVM.git?branch=ABMatrix/new-posw-prover#386c0a3fa0bbde9bb9a31c58fbea4c96b040ff69"
+source = "git+https://github.com/ABMatrix/snarkVM.git?branch=ABMatrix/new-posw-prover#316c005eb79c6085ac35b8fd412b32c685c5b060"
 dependencies = [
  "bs58",
  "snarkvm-console-network",
@@ -1275,7 +1275,7 @@ dependencies = [
 [[package]]
 name = "snarkvm-console-algorithms"
 version = "0.9.0"
-source = "git+https://github.com/ABMatrix/snarkVM.git?branch=ABMatrix/new-posw-prover#386c0a3fa0bbde9bb9a31c58fbea4c96b040ff69"
+source = "git+https://github.com/ABMatrix/snarkVM.git?branch=ABMatrix/new-posw-prover#316c005eb79c6085ac35b8fd412b32c685c5b060"
 dependencies = [
  "blake2s_simd",
  "smallvec",
@@ -1287,7 +1287,7 @@ dependencies = [
 [[package]]
 name = "snarkvm-console-collections"
 version = "0.9.0"
-source = "git+https://github.com/ABMatrix/snarkVM.git?branch=ABMatrix/new-posw-prover#386c0a3fa0bbde9bb9a31c58fbea4c96b040ff69"
+source = "git+https://github.com/ABMatrix/snarkVM.git?branch=ABMatrix/new-posw-prover#316c005eb79c6085ac35b8fd412b32c685c5b060"
 dependencies = [
  "aleo-std",
  "rayon",
@@ -1298,7 +1298,7 @@ dependencies = [
 [[package]]
 name = "snarkvm-console-network"
 version = "0.9.0"
-source = "git+https://github.com/ABMatrix/snarkVM.git?branch=ABMatrix/new-posw-prover#386c0a3fa0bbde9bb9a31c58fbea4c96b040ff69"
+source = "git+https://github.com/ABMatrix/snarkVM.git?branch=ABMatrix/new-posw-prover#316c005eb79c6085ac35b8fd412b32c685c5b060"
 dependencies = [
  "anyhow",
  "itertools",
@@ -1319,7 +1319,7 @@ dependencies = [
 [[package]]
 name = "snarkvm-console-network-environment"
 version = "0.9.0"
-source = "git+https://github.com/ABMatrix/snarkVM.git?branch=ABMatrix/new-posw-prover#386c0a3fa0bbde9bb9a31c58fbea4c96b040ff69"
+source = "git+https://github.com/ABMatrix/snarkVM.git?branch=ABMatrix/new-posw-prover#316c005eb79c6085ac35b8fd412b32c685c5b060"
 dependencies = [
  "anyhow",
  "bech32",
@@ -1336,7 +1336,7 @@ dependencies = [
 [[package]]
 name = "snarkvm-console-program"
 version = "0.9.0"
-source = "git+https://github.com/ABMatrix/snarkVM.git?branch=ABMatrix/new-posw-prover#386c0a3fa0bbde9bb9a31c58fbea4c96b040ff69"
+source = "git+https://github.com/ABMatrix/snarkVM.git?branch=ABMatrix/new-posw-prover#316c005eb79c6085ac35b8fd412b32c685c5b060"
 dependencies = [
  "enum_index",
  "enum_index_derive",
@@ -1353,7 +1353,7 @@ dependencies = [
 [[package]]
 name = "snarkvm-console-types"
 version = "0.9.0"
-source = "git+https://github.com/ABMatrix/snarkVM.git?branch=ABMatrix/new-posw-prover#386c0a3fa0bbde9bb9a31c58fbea4c96b040ff69"
+source = "git+https://github.com/ABMatrix/snarkVM.git?branch=ABMatrix/new-posw-prover#316c005eb79c6085ac35b8fd412b32c685c5b060"
 dependencies = [
  "snarkvm-console-network-environment",
  "snarkvm-console-types-address",
@@ -1368,7 +1368,7 @@ dependencies = [
 [[package]]
 name = "snarkvm-console-types-address"
 version = "0.9.0"
-source = "git+https://github.com/ABMatrix/snarkVM.git?branch=ABMatrix/new-posw-prover#386c0a3fa0bbde9bb9a31c58fbea4c96b040ff69"
+source = "git+https://github.com/ABMatrix/snarkVM.git?branch=ABMatrix/new-posw-prover#316c005eb79c6085ac35b8fd412b32c685c5b060"
 dependencies = [
  "snarkvm-console-network-environment",
  "snarkvm-console-types-boolean",
@@ -1379,7 +1379,7 @@ dependencies = [
 [[package]]
 name = "snarkvm-console-types-boolean"
 version = "0.9.0"
-source = "git+https://github.com/ABMatrix/snarkVM.git?branch=ABMatrix/new-posw-prover#386c0a3fa0bbde9bb9a31c58fbea4c96b040ff69"
+source = "git+https://github.com/ABMatrix/snarkVM.git?branch=ABMatrix/new-posw-prover#316c005eb79c6085ac35b8fd412b32c685c5b060"
 dependencies = [
  "snarkvm-console-network-environment",
 ]
@@ -1387,7 +1387,7 @@ dependencies = [
 [[package]]
 name = "snarkvm-console-types-field"
 version = "0.9.0"
-source = "git+https://github.com/ABMatrix/snarkVM.git?branch=ABMatrix/new-posw-prover#386c0a3fa0bbde9bb9a31c58fbea4c96b040ff69"
+source = "git+https://github.com/ABMatrix/snarkVM.git?branch=ABMatrix/new-posw-prover#316c005eb79c6085ac35b8fd412b32c685c5b060"
 dependencies = [
  "snarkvm-console-network-environment",
  "snarkvm-console-types-boolean",
@@ -1396,7 +1396,7 @@ dependencies = [
 [[package]]
 name = "snarkvm-console-types-group"
 version = "0.9.0"
-source = "git+https://github.com/ABMatrix/snarkVM.git?branch=ABMatrix/new-posw-prover#386c0a3fa0bbde9bb9a31c58fbea4c96b040ff69"
+source = "git+https://github.com/ABMatrix/snarkVM.git?branch=ABMatrix/new-posw-prover#316c005eb79c6085ac35b8fd412b32c685c5b060"
 dependencies = [
  "snarkvm-console-network-environment",
  "snarkvm-console-types-boolean",
@@ -1407,7 +1407,7 @@ dependencies = [
 [[package]]
 name = "snarkvm-console-types-integers"
 version = "0.9.0"
-source = "git+https://github.com/ABMatrix/snarkVM.git?branch=ABMatrix/new-posw-prover#386c0a3fa0bbde9bb9a31c58fbea4c96b040ff69"
+source = "git+https://github.com/ABMatrix/snarkVM.git?branch=ABMatrix/new-posw-prover#316c005eb79c6085ac35b8fd412b32c685c5b060"
 dependencies = [
  "snarkvm-console-network-environment",
  "snarkvm-console-types-boolean",
@@ -1417,7 +1417,7 @@ dependencies = [
 [[package]]
 name = "snarkvm-console-types-scalar"
 version = "0.9.0"
-source = "git+https://github.com/ABMatrix/snarkVM.git?branch=ABMatrix/new-posw-prover#386c0a3fa0bbde9bb9a31c58fbea4c96b040ff69"
+source = "git+https://github.com/ABMatrix/snarkVM.git?branch=ABMatrix/new-posw-prover#316c005eb79c6085ac35b8fd412b32c685c5b060"
 dependencies = [
  "snarkvm-console-network-environment",
  "snarkvm-console-types-boolean",
@@ -1427,7 +1427,7 @@ dependencies = [
 [[package]]
 name = "snarkvm-console-types-string"
 version = "0.9.0"
-source = "git+https://github.com/ABMatrix/snarkVM.git?branch=ABMatrix/new-posw-prover#386c0a3fa0bbde9bb9a31c58fbea4c96b040ff69"
+source = "git+https://github.com/ABMatrix/snarkVM.git?branch=ABMatrix/new-posw-prover#316c005eb79c6085ac35b8fd412b32c685c5b060"
 dependencies = [
  "snarkvm-console-network-environment",
  "snarkvm-console-types-boolean",
@@ -1438,7 +1438,7 @@ dependencies = [
 [[package]]
 name = "snarkvm-curves"
 version = "0.9.0"
-source = "git+https://github.com/ABMatrix/snarkVM.git?branch=ABMatrix/new-posw-prover#386c0a3fa0bbde9bb9a31c58fbea4c96b040ff69"
+source = "git+https://github.com/ABMatrix/snarkVM.git?branch=ABMatrix/new-posw-prover#316c005eb79c6085ac35b8fd412b32c685c5b060"
 dependencies = [
  "rand",
  "rustc_version",
@@ -1451,7 +1451,7 @@ dependencies = [
 [[package]]
 name = "snarkvm-fields"
 version = "0.9.0"
-source = "git+https://github.com/ABMatrix/snarkVM.git?branch=ABMatrix/new-posw-prover#386c0a3fa0bbde9bb9a31c58fbea4c96b040ff69"
+source = "git+https://github.com/ABMatrix/snarkVM.git?branch=ABMatrix/new-posw-prover#316c005eb79c6085ac35b8fd412b32c685c5b060"
 dependencies = [
  "aleo-std",
  "anyhow",
@@ -1468,7 +1468,7 @@ dependencies = [
 [[package]]
 name = "snarkvm-parameters"
 version = "0.9.0"
-source = "git+https://github.com/ABMatrix/snarkVM.git?branch=ABMatrix/new-posw-prover#386c0a3fa0bbde9bb9a31c58fbea4c96b040ff69"
+source = "git+https://github.com/ABMatrix/snarkVM.git?branch=ABMatrix/new-posw-prover#316c005eb79c6085ac35b8fd412b32c685c5b060"
 dependencies = [
  "aleo-std",
  "anyhow",
@@ -1491,7 +1491,7 @@ dependencies = [
 [[package]]
 name = "snarkvm-r1cs"
 version = "0.9.0"
-source = "git+https://github.com/ABMatrix/snarkVM.git?branch=ABMatrix/new-posw-prover#386c0a3fa0bbde9bb9a31c58fbea4c96b040ff69"
+source = "git+https://github.com/ABMatrix/snarkVM.git?branch=ABMatrix/new-posw-prover#316c005eb79c6085ac35b8fd412b32c685c5b060"
 dependencies = [
  "anyhow",
  "cfg-if",
@@ -1507,7 +1507,7 @@ dependencies = [
 [[package]]
 name = "snarkvm-utilities"
 version = "0.9.0"
-source = "git+https://github.com/ABMatrix/snarkVM.git?branch=ABMatrix/new-posw-prover#386c0a3fa0bbde9bb9a31c58fbea4c96b040ff69"
+source = "git+https://github.com/ABMatrix/snarkVM.git?branch=ABMatrix/new-posw-prover#316c005eb79c6085ac35b8fd412b32c685c5b060"
 dependencies = [
  "aleo-std",
  "anyhow",
@@ -1525,7 +1525,7 @@ dependencies = [
 [[package]]
 name = "snarkvm-utilities-derives"
 version = "0.9.0"
-source = "git+https://github.com/ABMatrix/snarkVM.git?branch=ABMatrix/new-posw-prover#386c0a3fa0bbde9bb9a31c58fbea4c96b040ff69"
+source = "git+https://github.com/ABMatrix/snarkVM.git?branch=ABMatrix/new-posw-prover#316c005eb79c6085ac35b8fd412b32c685c5b060"
 dependencies = [
  "proc-macro2 1.0.47",
  "quote 1.0.21",
