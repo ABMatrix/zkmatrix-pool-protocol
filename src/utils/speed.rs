@@ -7,7 +7,7 @@ pub fn convert_speed_from_msg(speed_msg: &StratumMessage) -> anyhow::Result<f32>
     match speed_msg {
         StratumMessage::LocalSpeed(_, speed) => {
             match f32::from_str(speed.as_str()) {
-                Ok(speed) => Ok(f32::from_str(format!("{:.2}", speed).as_str()).unwrap()),
+                Ok(speed) => Ok(f32::from_str(format!("{:.2}", speed).as_str()).unwrap_or_default()),
                 Err(e) => Err(anyhow!("{}, speed should be f32", e))
             }
         }
