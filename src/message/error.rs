@@ -20,7 +20,7 @@ impl ToString for PoolError {
                 if reason.is_none() {
                     "InvalidProof".to_string()
                 } else {
-                    format!("InvalidProof{}", reason.clone().unwrap())
+                    format!("InvalidProof {}", reason.clone().unwrap())
                 }
             }
             PoolError::ServerNotReady => "ServerNotReady".to_string(),
