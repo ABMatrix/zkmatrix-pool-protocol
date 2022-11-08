@@ -315,11 +315,9 @@ fn unwrap_u64_value(value: &Value) -> Result<u64, io::Error> {
 fn test_encode_decode() {
     use crate::message::error::PoolError::InvalidProof;
     use json_rpc_types::ErrorCode;
-    use snarkvm_console::account::{PrivateKey, Address};
-    use snarkvm_console::network::Testnet3;
-    use snarkvm_console::prelude::ToBytes;
     use rand::thread_rng;
     use rand::RngCore;
+    use snarkvm::prelude::{Address, EpochChallenge, PrivateKey, Testnet3, ToBytes};
 
     let mut codec = StratumCodec::default();
     //Subscribe
@@ -355,7 +353,6 @@ fn test_encode_decode() {
     let address_raw = Address::try_from(private_key_raw).unwrap();
     // let nonce = rng.next_u64();
 
-    use snarkvm_compiler::EpochChallenge;
     let epoch_challenge: EpochChallenge<Testnet3> = EpochChallenge::new(rng.next_u32(), Default::default(), 1).unwrap();
 
     //Notify

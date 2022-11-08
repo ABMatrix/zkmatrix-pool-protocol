@@ -37,10 +37,17 @@ impl FromStr for PoolError {
             Ok(Self::StaleProof)
         } else if s.starts_with(&Self::InvalidProof(None).name()) {
             if let Some(msg) = s.strip_prefix(&Self::InvalidProof(None).name()) {
-                if msg.is_empty() {
-                    Ok(Self::InvalidProof(None))
-                } else {
-                    Ok(Self::InvalidProof(Some(msg.to_string())))
+                match msg.strip_prefix(" ") {
+                    Some(msg) => {
+                        if msg.is_empty() {
+                            Ok(Self::InvalidProof(None))
+                        } else {
+                            Ok(Self::InvalidProof(Some(msg.to_string())))
+                        }
+                    }
+                    None => {
+                        Ok(Self::InvalidProof(None))
+                    }
                 }
             } else {
                 Ok(Self::InvalidProof(None))
@@ -91,9 +98,11 @@ fn test_pool_errors() {
 
     let e3 = PoolError::InvalidProof(Some("test error".to_string()));
     let m3 = e3.to_string();
+    println!("m2: {}", &m2);
     let e3_r = PoolError::from_str(&m3).unwrap();
+    println!("{:?}", e3_r);
     assert_eq!(e3, e3_r);
-    assert_eq!(&m3, &format!("{}test error", e3.name()));
+    assert_eq!(&m3, &format!("{} test error", e3.name()));
 
     let e4 = PoolError::StaleProof;
     let m4 = e4.to_string();

@@ -37,25 +37,21 @@ pub fn convert_to_u8(data: &ConvertType) -> anyhow::Result<Vec<u8>> {
 
 #[test]
 fn test_decode() {
-    use snarkvm_compiler::{EpochChallenge, CoinbasePuzzle, PuzzleConfig};
-    use snarkvm_console::{network::Testnet3, account::{PrivateKey, Address}};
+    use snarkvm_synthesizer::CoinbasePuzzle;
+    use snarkvm::prelude::{Address, EpochChallenge, FromBytes, PrivateKey, PuzzleConfig, Testnet3, ToBytes, Uniform};
+    use snarkvm::curves::bls12_377::{fr, Bls12_377};
+    use snarkvm::algorithms::{polycommit::kzg10::KZGProof, fft::{DensePolynomial, EvaluationDomain, Evaluations}};
     use rand;
     use rand::RngCore;
-    use snarkvm_console::prelude::{ToBytes, FromBytes};
-    use snarkvm_utilities::Uniform;
-    use snarkvm_algorithms::fft::{Evaluations, DensePolynomial, EvaluationDomain};
-    use snarkvm_curves::bls12_377::fr;
     use std::str::FromStr;
-    use snarkvm_algorithms::polycommit::kzg10::KZGProof;
-    use snarkvm_curves::bls12_377::Bls12_377;
 
     let max_degree = 1 << 15;
     let mut rng = rand::thread_rng();
     let max_config = PuzzleConfig { degree: max_degree };
-    let srs = CoinbasePuzzle::<Testnet3>::setup(max_config, &mut rng).unwrap();
+    let srs = CoinbasePuzzle::<Testnet3>::setup(max_config).unwrap();
     let degree = (1 << 5) - 1;
     let config = PuzzleConfig { degree };
-    let puzzle= CoinbasePuzzle::<Testnet3>::trim(&srs, config).unwrap();
+    let puzzle = CoinbasePuzzle::<Testnet3>::trim(&srs, config).unwrap();
 
     let epoch_challenge = EpochChallenge::<Testnet3>::new(rng.next_u32(), Default::default(), degree).unwrap();
     println!("epoch_block_hash: {}", epoch_challenge.epoch_block_hash().to_string());
@@ -118,5 +114,6 @@ fn test_decode() {
     let proof_hex = hex::encode(result.proof().to_bytes_le().unwrap());
     println!("{:?}", proof_hex);
     let result1 = KZGProof::<Bls12_377>::from_bytes_le(&hex::decode(proof_hex).unwrap()).unwrap();
+
     assert_eq!(result1, result.proof().clone())
 }
