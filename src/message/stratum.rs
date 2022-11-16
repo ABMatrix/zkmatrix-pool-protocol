@@ -353,7 +353,8 @@ fn test_encode_decode() {
     let address_raw = Address::try_from(private_key_raw).unwrap();
     // let nonce = rng.next_u64();
 
-    let epoch_challenge: EpochChallenge<Testnet3> = EpochChallenge::new(rng.next_u32(), Default::default(), 1).unwrap();
+    let epoch_challenge: EpochChallenge<Testnet3> =
+        EpochChallenge::new(rng.next_u32(), Default::default(), 1).unwrap();
 
     //Notify
     let msg = StratumMessage::Notify(
@@ -371,10 +372,7 @@ fn test_encode_decode() {
     assert_eq!(buf1, buf2);
 
     //LocalSpeed
-    let msg = StratumMessage::LocalSpeed(
-        Id::Num(100),
-        (u32::MAX / 2).to_string(),
-    );
+    let msg = StratumMessage::LocalSpeed(Id::Num(100), (u32::MAX / 2).to_string());
     let mut buf1 = BytesMut::new();
     codec.encode(msg, &mut buf1).unwrap();
     let res = codec.decode(&mut buf1.clone()).unwrap().unwrap();

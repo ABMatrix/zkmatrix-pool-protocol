@@ -37,7 +37,7 @@ impl FromStr for PoolError {
             Ok(Self::StaleProof)
         } else if s.starts_with(&Self::InvalidProof(None).name()) {
             if let Some(msg) = s.strip_prefix(&Self::InvalidProof(None).name()) {
-                match msg.strip_prefix(" ") {
+                match msg.strip_prefix(' ') {
                     Some(msg) => {
                         if msg.is_empty() {
                             Ok(Self::InvalidProof(None))
@@ -45,9 +45,7 @@ impl FromStr for PoolError {
                             Ok(Self::InvalidProof(Some(msg.to_string())))
                         }
                     }
-                    None => {
-                        Ok(Self::InvalidProof(None))
-                    }
+                    None => Ok(Self::InvalidProof(None)),
                 }
             } else {
                 Ok(Self::InvalidProof(None))

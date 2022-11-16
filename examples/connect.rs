@@ -86,7 +86,13 @@ async fn start_miner() {
     let mut num: f32 = 0.1;
     loop {
         num += 1.0;
-        framed.send(StratumMessage::LocalSpeed(Id::Num(num as u64), num.to_string())).await.unwrap();
+        framed
+            .send(StratumMessage::LocalSpeed(
+                Id::Num(num as u64),
+                num.to_string(),
+            ))
+            .await
+            .unwrap();
         match framed.next().await.unwrap().unwrap() {
             StratumMessage::Notify(
                 _job_id,
