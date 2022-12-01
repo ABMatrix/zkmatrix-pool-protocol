@@ -18,7 +18,7 @@ pub fn new_job_id(
 
 /// return server_agent, block_height, epoch_num and server_id
 #[must_use]
-pub fn get_height_and_epoch_num(job_id: String) -> anyhow::Result<(String, u32, u32, String)> {
+pub fn parse_job_id(job_id: String) -> anyhow::Result<(String, u32, u32, String)> {
     // step1: split server_agent
     let step1 = job_id.split('/').collect::<Vec<&str>>();
     let (server_agent, remains) = if step1.len() == 2 && !step1[0].trim().is_empty() {
@@ -90,7 +90,7 @@ fn test_get_height_and_epoch_num() {
     );
     println!("{}", &job_id);
     let (server_agent_r, height, epoch_num, server_id_r) =
-        get_height_and_epoch_num(job_id).unwrap();
+        parse_job_id(job_id).unwrap();
     assert_eq!(height, height_raw);
     assert_eq!(epoch_num, epoch_num_raw);
     assert_eq!(server_agent_r, server_agent);
