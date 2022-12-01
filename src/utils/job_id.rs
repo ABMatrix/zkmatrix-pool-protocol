@@ -1,6 +1,6 @@
 use anyhow::anyhow;
 
-/// job_id should contains server_agent, block_height, epoch_num and  server_id
+/// job_id should contains block_height, epoch_num and  server_id
 #[must_use]
 pub fn new_job_id(block_height: u32, epoch_num: u32, server_id: String) -> String {
     let height_s = hex::encode(block_height.to_le_bytes());
@@ -8,7 +8,7 @@ pub fn new_job_id(block_height: u32, epoch_num: u32, server_id: String) -> Strin
     format!("{}_{}_{}", height_s, epoch_num_s, server_id)
 }
 
-/// return server_agent, block_height, epoch_num and server_id
+/// return block_height, epoch_num and server_id
 pub fn parse_job_id(job_id: String) -> anyhow::Result<(u32, u32, String)> {
     // split block_height, epoch_num and server_id
     let step1 = job_id.split('_').collect::<Vec<&str>>();
